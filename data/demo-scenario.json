@@ -1,0 +1,24 @@
+{
+  "productName": "Herbal Repair Shampoo (demo)",
+  "category": "shampoo",
+  "ph": 5.5,
+  "hasSurfactants": true,
+  "hasFragrance": true,
+  "ingredients": "Aqua, Sodium Laureth Sulfate, Cocamidopropyl Betaine, Glycerin, Parfum, Citric Acid, Sodium Benzoate",
+  "current": {
+    "bottleMaterial": "HDPE",
+    "closureType": "pump_metal_spring",
+    "labelType": "shrink_sleeve",
+    "hasCarton": true,
+    "recycledContentPct": 0,
+    "fillMl": 250,
+    "bottleG": 28,
+    "closureG": 12,
+    "labelG": 2,
+    "cartonG": 18
+  },
+  "manufacturingCountry": "Pakistan",
+  "destination": "EU",
+  "budgetBand": "medium",
+  "priority": "recyclability"
+}

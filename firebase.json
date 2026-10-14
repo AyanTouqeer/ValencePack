@@ -1,0 +1,9 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      { "source": "/api/**", "run": { "serviceId": "packaging-advisor", "region": "europe-west1" } }
+    ]
+  }
+}

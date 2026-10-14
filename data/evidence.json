@@ -1,0 +1,38 @@
+{
+  "_note": "Evidence pack. status 'verify' = real source, but the 'supports' summary must be checked against the actual text by Mamuna/Aleena. status 'to_collect' = placeholder; no source collected yet. The UI shows these honestly as pending.",
+  "sources": [
+    {
+      "id": "EU-PPWR",
+      "type": "regulation",
+      "title": "Regulation (EU) 2025/40 on packaging and packaging waste (PPWR)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2025/40/oj",
+      "supports": "EU framework covering packaging minimisation, design-for-recycling, recycled-content and labelling obligations. General application starts 12 Aug 2026; many specific obligations phase in later (largely 2030). Exact articles and dates to be confirmed per obligation.",
+      "status": "verify"
+    },
+    {
+      "id": "EU-COSMETICS",
+      "type": "regulation",
+      "title": "Regulation (EC) No 1223/2009 on cosmetic products",
+      "url": "https://eur-lex.europa.eu/eli/reg/2009/1223/oj",
+      "supports": "Cosmetic product safety and labelling obligations; relevant to packaging via labelling and product-safety assessment. Packaging-product interaction requirements to be confirmed.",
+      "status": "verify"
+    },
+    {
+      "id": "EU-ECGT",
+      "type": "regulation",
+      "title": "Directive (EU) 2024/825 empowering consumers for the green transition",
+      "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj",
+      "supports": "Restricts generic environmental claims (e.g. 'eco-friendly') unless substantiated. Basis for claim-discipline rules in this tool. Application dates to be confirmed.",
+      "status": "verify"
+    },
+    { "id": "TECH-RECYCLABILITY-RIGID-PLASTIC", "type": "technical", "title": "TO COLLECT: recyclability of HDPE/PP/PET rigid bottles in EU sorting streams (e.g. RecyClass guidance)", "url": null, "supports": "Recyclability evidence for mono-material rigid plastic bottles and the effect of labels/closures.", "status": "to_collect" },
+    { "id": "TECH-SLEEVE-LABEL", "type": "technical", "title": "TO COLLECT: effect of full-body shrink sleeves on sortability/recycling", "url": null, "supports": "Whether shrink sleeves interfere with sorting and recycling of bottles.", "status": "to_collect" },
+    { "id": "TECH-PUMP-METAL", "type": "technical", "title": "TO COLLECT: metal-spring pumps and recyclability", "url": null, "supports": "Impact of metal springs in dispensing pumps on recycling streams.", "status": "to_collect" },
+    { "id": "TECH-PCR-AVAILABILITY", "type": "technical", "title": "TO COLLECT: availability and suitability of post-consumer recycled resin for cosmetic bottles", "url": null, "supports": "PCR grades, colour/odour limits, supplier availability.", "status": "to_collect" },
+    { "id": "TECH-FLEX-POUCH", "type": "technical", "title": "TO COLLECT: recyclability of flexible refill pouches in the EU", "url": null, "supports": "Whether flexible/multilayer pouches have established recycling routes.", "status": "to_collect" },
+    { "id": "TECH-ALU-LINING", "type": "technical", "title": "TO COLLECT: aluminium containers for low-pH / surfactant products (internal lacquer requirements)", "url": null, "supports": "Corrosion risk and lining needs for aluminium packaging with cosmetic formulations.", "status": "to_collect" },
+    { "id": "TECH-GLASS-TRANSPORT", "type": "technical", "title": "TO COLLECT: glass packaging weight and transport trade-offs; recycling rates", "url": null, "supports": "Glass recyclability vs. weight/transport impact.", "status": "to_collect" },
+    { "id": "TECH-PLA-EOL", "type": "technical", "title": "TO COLLECT: end-of-life routes for PLA rigid containers in the EU", "url": null, "supports": "Availability of collection/recycling/composting routes for PLA bottles.", "status": "to_collect" },
+    { "id": "TECH-CARTON-REMOVAL", "type": "technical", "title": "TO COLLECT: secondary packaging minimisation and product-protection evidence", "url": null, "supports": "When outer cartons can be removed without raising damage rates.", "status": "to_collect" }
+  ]
+}

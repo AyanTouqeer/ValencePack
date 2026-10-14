@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sustainable Packaging Decision Advisor</title>
+<style>
+  :root { --bg:#f7f8f5; --card:#fff; --ink:#1d2a22; --muted:#5d6b62; --line:#dde3dc; --accent:#2f6b4f; --warn:#9a5b00; --bad:#a33a2a; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141a16; --card:#1d251f; --ink:#e8efe9; --muted:#9fb0a4; --line:#2e3a31; --accent:#6fc79c; --warn:#e0a24a; --bad:#e07a68; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.5 system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; } h2 { font-size: 1.15rem; margin: 28px 0 10px; } h3 { font-size: 1rem; margin: 0 0 6px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  form { display: grid; gap: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  label { display: grid; gap: 4px; font-size: .9rem; color: var(--muted); }
+  input, select, textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+  .check { display: flex; gap: 8px; align-items: center; color: var(--ink); }
+  .check input { width: auto; }
+  button { font: inherit; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+  button.ghost { background: transparent; color: var(--accent); }
+  button:disabled { opacity: .6; cursor: wait; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { display:inline-block; font-size:.75rem; padding:2px 8px; border-radius:99px; border:1px solid var(--line); color:var(--muted); margin-right:6px; }
+  .pill.low { color: var(--warn); border-color: var(--warn); }
+  .bar { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; margin: 4px 0 10px; }
+  .bar > span { display:block; height:100%; background: var(--accent); }
+  .score { font-size: 1.6rem; font-weight: 600; color: var(--accent); float: right; }
+  .muted { color: var(--muted); font-size: .9rem; }
+  .warn { color: var(--warn); } .bad { color: var(--bad); }
+  ul { margin: 6px 0 6px 18px; padding: 0; }
+  table { width:100%; border-collapse: collapse; font-size:.85rem; } td, th { text-align:left; padding:4px 6px; border-bottom:1px solid var(--line); }
+  .scroll { overflow-x: auto; }
+  #err { color: var(--bad); }
+  @media print { form, .noprint { display:none; } body { background:#fff; color:#000; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Sustainable Packaging Decision Advisor</h1>
+  <p class="sub">Assess an existing personal-care package for the EU market and get a ranked, evidence-linked shortlist of improvements.</p>
+
+  <form id="f" class="card">
+    <div class="grid">
+      <label>Product name <input name="productName" required></label>
+      <label>Destination market <select name="destination"><option value="EU">European Union</option></select></label>
+      <label>Manufacturing country <input name="manufacturingCountry"></label>
+    </div>
+    <div class="grid">
+      <label>Formulation pH (if known) <input name="ph" type="number" step="0.1"></label>
+      <label class="check"><input type="checkbox" name="hasSurfactants"> Contains surfactants</label>
+      <label class="check"><input type="checkbox" name="hasFragrance"> Contains fragrance / essential oils</label>
+    </div>
+    <label>Ingredients (INCI list, optional) <textarea name="ingredients" rows="2"></textarea></label>
+    <div class="grid">
+      <label>Bottle material <select name="bottleMaterial"><option>HDPE</option><option>PET</option><option>PP</option><option>glass</option><option>other</option></select></label>
+      <label>Closure <select name="closureType"><option value="pump_metal_spring">Pump with metal spring</option><option value="mono_pump">Mono-material pump</option><option value="screw_cap">Screw / flip cap</option></select></label>
+      <label>Label <select name="labelType"><option value="shrink_sleeve">Full-body shrink sleeve</option><option value="paper">Paper label</option><option value="film_label">Film label</option><option value="direct_print">Direct print</option></select></label>
+      <label class="check"><input type="checkbox" name="hasCarton"> Has outer carton</label>
+    </div>
+    <div class="grid">
+      <label>Fill volume (ml) <input name="fillMl" type="number" min="1" required></label>
+      <label>Bottle (g) <input name="bottleG" type="number" min="0"></label>
+      <label>Closure (g) <input name="closureG" type="number" min="0"></label>
+      <label>Label (g) <input name="labelG" type="number" min="0"></label>
+      <label>Carton (g) <input name="cartonG" type="number" min="0"></label>
+      <label>Recycled content (%) <input name="recycledContentPct" type="number" min="0" max="100"></label>
+    </div>
+    <div class="grid">
+      <label>Budget band <select name="budgetBand"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></label>
+      <label>Priority <select name="priority"><option value="recyclability">Recyclability</option><option value="material_reduction">Material reduction</option><option value="recycled_content">Recycled content</option><option value="cost">Cost</option></select></label>
+    </div>
+    <div class="row">
+      <button id="go" type="submit">Assess packaging</button>
+      <button id="demo" type="button" class="ghost">Load demo scenario</button>
+    </div>
+    <div id="err" role="alert"></div>
+  </form>
+
+  <div id="out"></div>
+</main>
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+function list(items, cls) { const ul = el("ul"); (items || []).forEach(t => ul.appendChild(el("li", cls, t))); return ul; }
+
+const f = $("#f");
+function fill(d) {
+  const set = (n, v) => { const i = f.elements[n]; if (!i) return; i.type === "checkbox" ? (i.checked = !!v) : (i.value = v ?? ""); };
+  ["productName","destination","manufacturingCountry","ph","hasSurfactants","hasFragrance","ingredients","budgetBand","priority"].forEach(n => set(n, d[n]));
+  const c = d.current || {};
+  ["bottleMaterial","closureType","labelType","hasCarton","fillMl","bottleG","closureG","labelG","cartonG","recycledContentPct"].forEach(n => set(n, c[n]));
+}
+function read() {
+  const v = n => f.elements[n].value, b = n => f.elements[n].checked, num = n => v(n) === "" ? undefined : Number(v(n));
+  return {
+    productName: v("productName"), category: "personal_care", destination: v("destination"), manufacturingCountry: v("manufacturingCountry"),
+    ph: num("ph"), hasSurfactants: b("hasSurfactants"), hasFragrance: b("hasFragrance"), ingredients: v("ingredients"),
+    budgetBand: v("budgetBand"), priority: v("priority"),
+    current: { bottleMaterial: v("bottleMaterial"), closureType: v("closureType"), labelType: v("labelType"), hasCarton: b("hasCarton"),
+      fillMl: num("fillMl"), bottleG: num("bottleG"), closureG: num("closureG"), labelG: num("labelG"), cartonG: num("cartonG"), recycledContentPct: num("recycledContentPct") }
+  };
+}
+
+$("#demo").onclick = async () => { fill(await (await fetch("/api/demo")).json()); };
+
+f.onsubmit = async (e) => {
+  e.preventDefault();
+  $("#err").textContent = ""; const btn = $("#go"); btn.disabled = true; btn.textContent = "Assessing…";
+  try {
+    const res = await fetch("/api/assess", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(read()) });
+    const data = await res.json();
+    if (!res.ok) throw new Error((data.error || ["Request failed"]).join("; "));
+    render(data);
+  } catch (err) { $("#err").textContent = err.message; }
+  finally { btn.disabled = false; btn.textContent = "Assess packaging"; }
+};
+
+function render(d) {
+  const out = $("#out"); out.replaceChildren();
+  const expl = d.explanation || {};
+  const byId = Object.fromEntries((expl.options || []).map(o => [o.id, o]));
+  const srcById = Object.fromEntries((d.sources || []).map(s => [s.id, s]));
+
+  out.appendChild(el("h2", "", "Recommendation"));
+  const sum = el("div", "card");
+  sum.appendChild(el("p", "", expl.summary || "No eligible options after screening."));
+  if (d.baseline) sum.appendChild(el("p", "muted", `Current packaging: ${d.baseline.totalGrams} g total, ${d.baseline.gramsPer100ml} g per 100 ml of product.`));
+  if (expl.nextAction) { const p = el("p"); p.appendChild(el("strong", "", "Next action: ")); p.appendChild(document.createTextNode(expl.nextAction)); sum.appendChild(p); }
+  sum.appendChild(el("span", "pill", "Explanations: " + (expl.generatedBy || "n/a")));
+  out.appendChild(sum);
+
+  out.appendChild(el("h2", "", "Compliance screening (" + d.input.destination + ")"));
+  const sc = el("div", "card"); sc.appendChild(list(d.screening.market.notes));
+  if (d.screening.excluded.length) {
+    sc.appendChild(el("h3", "", "Options removed by rules"));
+    const t = el("table"); const hr = el("tr"); ["Option", "Rule", "Reason"].forEach(h => hr.appendChild(el("th", "", h))); t.appendChild(hr);
+    d.screening.excluded.forEach(x => { const tr = el("tr"); [x.name, x.ruleId, x.reason].forEach(c => tr.appendChild(el("td", "", c))); t.appendChild(tr); });
+    const w = el("div", "scroll"); w.appendChild(t); sc.appendChild(w);
+  }
+  out.appendChild(sc);
+
+  out.appendChild(el("h2", "", "Ranked options"));
+  d.ranked.forEach((r, i) => {
+    const c = el("div", "card");
+    c.appendChild(el("span", "score", r.score.toFixed(0) + "/100"));
+    c.appendChild(el("h3", "", `${i + 1}. ${r.name}`));
+    const meta = el("div"); meta.appendChild(el("span", "pill", r.changeType)); meta.appendChild(el("span", "pill", "cost band " + r.costBand));
+    meta.appendChild(el("span", "pill low", "confidence: " + r.confidence)); c.appendChild(meta);
+    c.appendChild(el("p", "muted", r.summary));
+    r.breakdown.forEach(b => {
+      c.appendChild(el("div", "muted", `${b.label} (weight ${Math.round(b.weight * 100)}%): ${b.score}/3`));
+      const bar = el("div", "bar"); const s = el("span"); s.style.width = (b.score / 3 * 100) + "%"; bar.appendChild(s); c.appendChild(bar);
+    });
+    if (r.massImpact) c.appendChild(el("p", "muted", "Mass: " + (r.massImpact.newGramsPer100ml ? `${r.massImpact.newTotalGrams} g total, ${r.massImpact.newGramsPer100ml} g per 100 ml. ` : "") + r.massImpact.basis));
+    const e = byId[r.id];
+    if (e) {
+      c.appendChild(el("h3", "", "Why"));
+      const ul = el("ul");
+      (e.why || []).forEach(w => {
+        const li = el("li", "", w.claim + " ");
+        li.appendChild(el("span", "pill", w.type));
+        (w.sourceIds || []).forEach(id => { const s = srcById[id]; const a = el(s && s.url ? "a" : "span", "pill", id + (s && s.status === "to_collect" ? " (source pending)" : "")); if (s && s.url) { a.href = s.url; a.target = "_blank"; a.rel = "noopener"; } li.appendChild(a); });
+        ul.appendChild(li);
+      });
+      c.appendChild(ul);
+      if ((e.tradeoffs || []).length) { c.appendChild(el("h3", "", "Trade-offs")); c.appendChild(list(e.tradeoffs)); }
+      if ((e.uncertainties || []).length) { c.appendChild(el("h3", "", "Evidence gaps")); c.appendChild(list(e.uncertainties, "warn")); }
+    }
+    out.appendChild(c);
+  });
+  if (d.alsoConsidered.length) out.appendChild(el("p", "muted", "Also eligible, ranked lower: " + d.alsoConsidered.map(x => `${x.name} (${x.score.toFixed(0)})`).join("; ")));
+
+  if ((expl.verificationSteps || []).length) { out.appendChild(el("h2", "", "Verify before implementing")); const c = el("div", "card"); c.appendChild(list(expl.verificationSteps)); out.appendChild(c); }
+
+  out.appendChild(el("h2", "", "Assumptions & sources"));
+  const a = el("div", "card");
+  a.appendChild(list([
+    "Scores are 0–3 ratings from a draft evidence base and weighted by your stated priority; they are not measured values.",
+    "Compatibility is screened, never verified. Laboratory testing is required before any change.",
+    d.disclaimer
+  ]));
+  (d.sources || []).forEach(s => {
+    const p = el("p", "muted", ""); const t = s.url ? el("a", "", s.title) : el("span", "", s.title);
+    if (s.url) { t.href = s.url; t.target = "_blank"; t.rel = "noopener"; }
+    p.appendChild(t); p.appendChild(document.createTextNode(` [${s.status === "to_collect" ? "source pending" : "to be verified against text"}]`)); a.appendChild(p);
+  });
+  out.appendChild(a);
+  const pb = el("button", "ghost noprint", "Print / save as PDF"); pb.onclick = () => window.print(); out.appendChild(pb);
+  out.scrollIntoView({ behavior: "smooth" });
+}
+</script>
+</body>
+</html>

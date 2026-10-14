@@ -1,12 +1,20 @@
+require("dotenv").config();
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
-delete process.env.GEMINI_API_KEY; // test deterministic path only
 const { assess } = require("../lib/assess");
+const { saveReport } = require("../lib/store");
+
+delete process.env.GEMINI_API_KEY; // test deterministic path only
 const demo = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", "demo-scenario.json"), "utf8"));
 
 (async () => {
   const r = await assess(demo);
+  
+  // Step 2: Trigger the database write
+  const docId = await saveReport(r);
+  console.log("Saved report to Firestore with ID:", docId);
+
   console.log("Top 3:", r.ranked.map(x => `${x.name} (${x.score})`));
   console.log("Excluded:", r.screening.excluded.map(x => `${x.id}:${x.ruleId}`));
   console.log("Baseline:", r.baseline);

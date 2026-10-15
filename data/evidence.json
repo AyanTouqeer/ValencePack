@@ -6,25 +6,35 @@
       "type": "regulation",
       "title": "Regulation (EU) 2025/40 on packaging and packaging waste (PPWR)",
       "url": "https://eur-lex.europa.eu/eli/reg/2025/40/oj",
-      "supports": "EU framework covering packaging minimisation, design-for-recycling, recycled-content and labelling obligations. General application starts 12 Aug 2026; many specific obligations phase in later (largely 2030). Exact articles and dates to be confirmed per obligation.",
-      "status": "verify"
+      "supports": "EU framework covering packaging minimisation, design-for-recycling, recycled-content and labelling obligations.",
+      "status": "verify",
+      "citation": null,
+      "effective_date": "12 Aug 2026",
+      "compat": null
     },
     {
       "id": "EU-COSMETICS",
       "type": "regulation",
       "title": "Regulation (EC) No 1223/2009 on cosmetic products",
       "url": "https://eur-lex.europa.eu/eli/reg/2009/1223/oj",
-      "supports": "Cosmetic product safety and labelling obligations; relevant to packaging via labelling and product-safety assessment. Packaging-product interaction requirements to be confirmed.",
-      "status": "verify"
+      "supports": "Cosmetic product safety and labelling obligations; relevant to packaging via labelling and product-safety assessment.",
+      "status": "verify",
+      "citation": null,
+      "effective_date": null,
+      "compat": null
     },
     {
       "id": "EU-ECGT",
       "type": "regulation",
       "title": "Directive (EU) 2024/825 empowering consumers for the green transition",
       "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj",
-      "supports": "Restricts generic environmental claims (e.g. 'eco-friendly') unless substantiated. Basis for claim-discipline rules in this tool. Application dates to be confirmed.",
-      "status": "verify"
+      "supports": "Restricts generic environmental claims (e.g. 'eco-friendly') unless substantiated.",
+      "status": "verify",
+      "citation": null,
+      "effective_date": null,
+      "compat": null
     },
+    
     { "id": "TECH-RECYCLABILITY-RIGID-PLASTIC", "type": "technical", "title": "TO COLLECT: recyclability of HDPE/PP/PET rigid bottles in EU sorting streams (e.g. RecyClass guidance)", "url": null, "supports": "Recyclability evidence for mono-material rigid plastic bottles and the effect of labels/closures.", "status": "to_collect" },
     { "id": "TECH-SLEEVE-LABEL", "type": "technical", "title": "TO COLLECT: effect of full-body shrink sleeves on sortability/recycling", "url": null, "supports": "Whether shrink sleeves interfere with sorting and recycling of bottles.", "status": "to_collect" },
     { "id": "TECH-PUMP-METAL", "type": "technical", "title": "TO COLLECT: metal-spring pumps and recyclability", "url": null, "supports": "Impact of metal springs in dispensing pumps on recycling streams.", "status": "to_collect" },

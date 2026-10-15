@@ -2,11 +2,29 @@ require("dotenv").config();
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
-const { assess } = require("../lib/assess");
+// Added 'evidence' to the import so we can validate it
+const { assess, evidence } = require("../lib/assess"); 
 const { saveReport } = require("../lib/store");
 
 delete process.env.GEMINI_API_KEY; // test deterministic path only
 const demo = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", "demo-scenario.json"), "utf8"));
+
+// --- NEW OPTION B SCHEMA CHECK ---
+console.log("Validating Option B schema...");
+evidence.forEach(card => {
+  if ('citation' in card) {
+    assert(typeof card.citation === 'string' || card.citation === null, `citation must be string or null in ${card.id}`);
+  }
+  if ('effective_date' in card) {
+    assert(typeof card.effective_date === 'string' || card.effective_date === null, `effective_date must be string or null in ${card.id}`);
+  }
+  if ('compat' in card) {
+    const validCompat = [null, 'supported', 'conditional', 'unknown', 'known_concern'];
+    assert(validCompat.includes(card.compat), `Invalid compat value in ${card.id}`);
+  }
+});
+console.log("Schema validation passed.");
+// ---------------------------------
 
 (async () => {
   const r = await assess(demo);

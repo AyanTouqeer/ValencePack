@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const { assess } = require("./lib/assess");
+const { assess, evidenceById } = require("./lib/assess");
 const { saveReport, getReport } = require("./lib/store");
+const { handleChat } = require("./lib/chat");
 
 const app = express();
 app.use(express.json({ limit: "100kb" }));
@@ -25,6 +26,18 @@ app.post("/api/assess", async (req, res) => {
   } catch (e) {
     console.error("Assessment Error:", e);
     res.status(500).json({ error: ["Assessment failed. Please try again."] });
+  }
+});
+
+// The chat endpoint
+app.post("/api/chat", async (req, res) => {
+  try {
+    const { question, contextData } = req.body;
+    const result = await handleChat(question, contextData, evidenceById);
+    res.json(result);
+  } catch (e) {
+    console.error("Chat Error:", e);
+    res.status(500).json({ error: ["Chat request failed."] });
   }
 });
 

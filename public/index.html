@@ -39,7 +39,7 @@
 </head>
 <body>
 <main>
-  <h1>Sustainable Packaging Decision Advisor</h1>
+  <h1>ValencePack</h1>
   <p class="sub">Assess an existing personal-care package for the EU market and get a ranked, evidence-linked shortlist of improvements.</p>
 
   <form id="f" class="card">
@@ -120,6 +120,21 @@ f.onsubmit = async (e) => {
 
 function render(d) {
   const out = $("#out"); out.replaceChildren();
+
+  // --- NEW: What We Understood Card ---
+  out.appendChild(el("h2", "", "What we understood"));
+  const understoodCard = el("div", "card");
+  const understoodItems = [
+    `Product: ${d.input.productName || 'Not specified'}`,
+    `Current Bottle Material: ${d.input.current?.bottleMaterial || 'Not specified'}`,
+    `Target Market: ${d.input.destination || 'Not specified'}`,
+    `Budget Band: ${d.input.budgetBand || 'Not specified'}`,
+    `Optimization Priority: ${d.input.priority || 'Not specified'}`
+  ];
+  understoodCard.appendChild(list(understoodItems));
+  out.appendChild(understoodCard);
+  // ------------------------------------
+
   const expl = d.explanation || {};
   const byId = Object.fromEntries((expl.options || []).map(o => [o.id, o]));
   const srcById = Object.fromEntries((d.sources || []).map(s => [s.id, s]));

@@ -4,7 +4,7 @@ Input: product + current packaging + EU destination + budget + priority.
 Output: rules-based screening, ranked top 3 changes with transparent scores, Gemini explanations restricted to the evidence pack, evidence gaps, verification steps.
 
 ## How it works
-1. `lib/screen.js` removes unsuitable options (rule ids: R-APPLICABLE, R-REFORMULATION, R-END-OF-LIFE, R-BUDGET). No AI.
+1. `lib/screen.js` removes unsuitable options (rule ids: R-REFORMULATION, R-END-OF-LIFE, R-BUDGET). No AI.
 2. `lib/rank.js` scores 5 criteria (0-3) with weights set by the user's priority.
 3. `lib/gemini.js` asks Gemini to explain ONLY the supplied facts, cite only supplied source ids, and label each claim type. Invented citation ids are stripped. Falls back to rules text if Gemini fails.
 4. `lib/store.js` saves the report to Firestore when `ENABLE_FIRESTORE=true`.

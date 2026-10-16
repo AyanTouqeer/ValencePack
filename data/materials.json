@@ -1,0 +1,279 @@
+{
+  "materials": [
+    {
+      "Material_or_Cost_Bucket": "HDPE blow-moulding resin",
+      "Material_Grade": "HDPE",
+      "Indicative_Price_Hint": "~€1.60/kg",
+      "Evidence_Type": "Market benchmark",
+      "Basis_and_Date": "Central Europe, Oct 2026; raw resin only",
+      "Use_Cases": "Rigid bottles",
+      "Limitations_and_Compatibility": "Not finished bottle price; grade, contract, additives and conversion extra",
+      "Source_IDs": "PK09",
+      "Confidence": "Medium for raw-resin benchmark"
+    },
+    {
+      "Material_or_Cost_Bucket": "PP resin",
+      "Material_Grade": "PP grades",
+      "Indicative_Price_Hint": "~€1.56–1.61/kg",
+      "Evidence_Type": "Market benchmark",
+      "Basis_and_Date": "Central Europe, Oct 2026; raw resin only",
+      "Use_Cases": "Caps, jars, pump/trigger parts",
+      "Limitations_and_Compatibility": "Does not include moulding, assembly, decoration or tooling",
+      "Source_IDs": "PK09",
+      "Confidence": "Medium for raw-resin benchmark"
+    },
+    {
+      "Material_or_Cost_Bucket": "PE flexible-film resin",
+      "Material_Grade": "HDPE/LDPE film grades",
+      "Indicative_Price_Hint": "~€1.43–1.63/kg",
+      "Evidence_Type": "Market benchmark",
+      "Basis_and_Date": "Central Europe, Oct 2026; raw resin only",
+      "Use_Cases": "PE-rich refill pouch/sachet film",
+      "Limitations_and_Compatibility": "Barrier layers, adhesives, printing, fitments and converting cost extra",
+      "Source_IDs": "PK09",
+      "Confidence": "Medium for raw-resin benchmark"
+    },
+    {
+      "Material_or_Cost_Bucket": "PCR-HDPE",
+      "Material_Grade": "Post-consumer HDPE",
+      "Indicative_Price_Hint": "€1.80–3.20/kg (planning estimate)",
+      "Evidence_Type": "Planning estimate",
+      "Basis_and_Date": "Indicative range; exact grade quote needed",
+      "Use_Cases": "PCR bottles",
+      "Limitations_and_Compatibility": "Need declared PCR %, odour/colour/melt/mechanical spec and compatibility evidence",
+      "Source_IDs": "PK14",
+      "Confidence": "Low"
+    },
+    {
+      "Material_or_Cost_Bucket": "PCR-PET",
+      "Material_Grade": "Bottle-grade PCR-PET",
+      "Indicative_Price_Hint": "€2.00–3.50/kg (planning estimate)",
+      "Evidence_Type": "Planning estimate",
+      "Basis_and_Date": "Indicative range; exact bottle-grade supplier quote needed",
+      "Use_Cases": "PCR-PET bottles",
+      "Limitations_and_Compatibility": "Quality, odour, haze, grade, performance and recycling-route requirements affect price",
+      "Source_IDs": "PK14",
+      "Confidence": "Low"
+    },
+    {
+      "Material_or_Cost_Bucket": "PCR-PP",
+      "Material_Grade": "Post-consumer PP",
+      "Indicative_Price_Hint": "€1.80–3.20/kg (planning estimate)",
+      "Evidence_Type": "Planning estimate",
+      "Basis_and_Date": "Indicative range; exact grade quote needed",
+      "Use_Cases": "PCR-PP jars/caps/components",
+      "Limitations_and_Compatibility": "PCR content and grade must be documented; performance varies",
+      "Source_IDs": "PK14",
+      "Confidence": "Low"
+    },
+    {
+      "Material_or_Cost_Bucket": "PET packaging-grade resin",
+      "Material_Grade": "PET",
+      "Indicative_Price_Hint": "Quote required; provisional proxy €1.60–2.40/kg only if needed",
+      "Evidence_Type": "Planning assumption",
+      "Basis_and_Date": "No package-grade supplier price verified in this dataset",
+      "Use_Cases": "PET bottle body",
+      "Limitations_and_Compatibility": "Replace with a current resin/converter quote before decisions",
+      "Source_IDs": "PK01; PK04",
+      "Confidence": "Low"
+    },
+    {
+      "Material_or_Cost_Bucket": "Paperboard / kraft stock",
+      "Material_Grade": "Kraft/paperboard",
+      "Indicative_Price_Hint": "€1.20–1.80/kg (planning estimate)",
+      "Evidence_Type": "Market commentary proxy",
+      "Basis_and_Date": "Material stock only; Oct 2026 planning range",
+      "Use_Cases": "Bar sleeves/cartons/sachets",
+      "Limitations_and_Compatibility": "Converted printed cartons, coated board and laminated structures cost more",
+      "Source_IDs": "PK16",
+      "Confidence": "Low"
+    },
+    {
+      "Material_or_Cost_Bucket": "Aluminium raw metal",
+      "Material_Grade": "Aluminium",
+      "Indicative_Price_Hint": "€2.70–4.50/kg (planning estimate)",
+      "Evidence_Type": "Raw-metal proxy",
+      "Basis_and_Date": "Indicative market benchmark converted to planning range",
+      "Use_Cases": "Reusable bottles and balm tins",
+      "Limitations_and_Compatibility": "Finished pack includes forming, lacquer, neck/closure, decoration and freight; quote required",
+      "Source_IDs": "PK17",
+      "Confidence": "Low"
+    },
+    {
+      "Material_or_Cost_Bucket": "PE/EVOH pouch laminate",
+      "Material_Grade": "PE with barrier/tie layers",
+      "Indicative_Price_Hint": "No reliable finished-laminate €/kg here; PE base film ~€1.43–1.63/kg",
+      "Evidence_Type": "Mixed-material basis",
+      "Basis_and_Date": "Use supplier-specific price per converted pouch",
+      "Use_Cases": "Refill pouches",
+      "Limitations_and_Compatibility": "Do not treat base resin price as finished pouch price",
+      "Source_IDs": "PK08; PK09",
+      "Confidence": "Low"
+    },
+    {
+      "Material_or_Cost_Bucket": "Complete packaging components",
+      "Material_Grade": "Bottle/tube/pump/trigger/pouch",
+      "Indicative_Price_Hint": "Use per-unit RFQ; see configuration price bands",
+      "Evidence_Type": "Quotation needed",
+      "Basis_and_Date": "Costs depend on MOQ, conversion, closures, print, tooling, freight and grade",
+      "Use_Cases": "All formats",
+      "Limitations_and_Compatibility": "Unit price and raw-material €/kg are different measures",
+      "Source_IDs": "PK02; PK03; PK05; PK07; PK08",
+      "Confidence": "Planning only"
+    }
+  ],
+  "sources": [
+    {
+      "Source_ID": "PK01",
+      "Publisher": "ALPLA",
+      "Information_Used": "250 mL PET cosmetic bottle, supplier-listed mass around 17.2 g; PCR option subject to exact product",
+      "Evidence_Type": "Supplier specification",
+      "Source_URL": "https://product-catalogue.alpla.com/product/250-ml-cosmetics-bottle",
+      "Limitations": "Exact SKU only; not a universal 250 mL bottle mass."
+    },
+    {
+      "Source_ID": "PK02",
+      "Publisher": "Amcor",
+      "Information_Used": "500 mL HDPE bottle, supplier-listed body mass 30 g; PCR option",
+      "Evidence_Type": "Supplier specification",
+      "Source_URL": "https://packagingsolutions.amcor.com/en/product/product-item/500ml-bottle-hdpe-pe-13469224",
+      "Limitations": "Body only; cap and label are separate."
+    },
+    {
+      "Source_ID": "PK03",
+      "Publisher": "Amcor",
+      "Information_Used": "24/410 PP flip-top closure, supplier-listed mass 4.3 g",
+      "Evidence_Type": "Supplier specification",
+      "Source_URL": "https://packagingsolutions.amcor.com/en/product/product-item/24410-flip-top-dispensing-closure-14507508",
+      "Limitations": "Must be matched to neck finish and product dose."
+    },
+    {
+      "Source_ID": "PK04",
+      "Publisher": "MCH Packaging",
+      "Information_Used": "250 mL PET bottle supplier example around 23 g",
+      "Evidence_Type": "Supplier catalogue",
+      "Source_URL": "https://www.mch.com.pl/en/produkt/bu-0629/",
+      "Limitations": "Specific design, not representative of all bottle geometries."
+    },
+    {
+      "Source_ID": "PK05",
+      "Publisher": "Rixius",
+      "Information_Used": "All-plastic PP pump example around 8.6 g",
+      "Evidence_Type": "Supplier specification",
+      "Source_URL": "https://www.rixius.com/en/lotion-pump-pp-all-plastic-24-410-black-without-cap-clear-smooth-0-25ml-dip-tube-180mm-below-gasket/8-2311-24-410-sch",
+      "Limitations": "Small 0.25 mL treatment pump may not suit shampoo/lotion; select a proper output SKU."
+    },
+    {
+      "Source_ID": "PK06",
+      "Publisher": "The Jar Factory",
+      "Information_Used": "100 mL PP jar body 15.7 g, lid 6.9 g and seal disc 3.85 g supplier-listed",
+      "Evidence_Type": "Supplier specification",
+      "Source_URL": "https://www.thejarfactory.com/en_US/jar-factory/p/standard-serie",
+      "Limitations": "Confirm exact SKU and seal material."
+    },
+    {
+      "Source_ID": "PK07",
+      "Publisher": "Nexus Packaging",
+      "Information_Used": "750 mL HDPE trigger bottle body 45 g ±3 g",
+      "Evidence_Type": "Supplier specification",
+      "Source_URL": "https://www.nexuspackaging.co.uk/plastic-750ml-45g-trigger-bottle.html",
+      "Limitations": "Bottle body only; trigger assembly mass is separate."
+    },
+    {
+      "Source_ID": "PK08",
+      "Publisher": "DaklaPack",
+      "Information_Used": "330 mL PE/EVOH pouch example; published small-order price tier used as a price anchor",
+      "Evidence_Type": "Supplier catalogue and public price",
+      "Source_URL": "https://www.daklapack.eu/laminated-packaging/view-all-pouches/shaped-refill-pouch-monopolymer-110-mm-x-185-mm/8712963037451",
+      "Limitations": "A related 330 mL price anchor is not a quote for a custom 500 mL pouch."
+    },
+    {
+      "Source_ID": "PK09",
+      "Publisher": "PlasticPortal / Plastech",
+      "Information_Used": "October 2026 Central Europe polymer benchmarks for HDPE blow-moulding, PE films and PP grades",
+      "Evidence_Type": "Market benchmark",
+      "Source_URL": "https://www.plasticportal.eu/polymer-prices",
+      "Limitations": "Raw resin, not finished packaging."
+    },
+    {
+      "Source_ID": "PK10",
+      "Publisher": "RecyClass",
+      "Information_Used": "Design-for-recycling guidelines for plastic bottles, containers, flexible packaging, closures, labels, adhesives, inks/barriers",
+      "Evidence_Type": "Technical guideline",
+      "Source_URL": "https://recyclass.eu/protocols-guidelines/design-for-recycling-guidelines/packaging/",
+      "Limitations": "Evaluate complete decorated packaging and destination context; guidelines may update."
+    },
+    {
+      "Source_ID": "PK11",
+      "Publisher": "EUR-Lex",
+      "Information_Used": "Regulation (EU) 2025/40 on packaging and packaging waste (PPWR)",
+      "Evidence_Type": "Binding legal text",
+      "Source_URL": "https://eur-lex.europa.eu/eli/reg/2025/40/oj/eng",
+      "Limitations": "Applies from 12 August 2026 generally, but specific provisions have different dates and conditions."
+    },
+    {
+      "Source_ID": "PK12",
+      "Publisher": "EUR-Lex",
+      "Information_Used": "Regulation (EU) 2026/405 on detergents and surfactants",
+      "Evidence_Type": "Binding legal text",
+      "Source_URL": "https://eur-lex.europa.eu/eli/reg/2026/405/oj",
+      "Limitations": "Generally applies from 23 September 2029 subject to exceptions/transitions."
+    },
+    {
+      "Source_ID": "PK13",
+      "Publisher": "Hyunpack",
+      "Information_Used": "General technical discussion of PET/PP/HDPE material selection and formulation compatibility",
+      "Evidence_Type": "Supplier/industry technical article",
+      "Source_URL": "https://www.hyunpack.com/news/pet-vs-pp-vs-hdpe-bottle-materials-a-cosmetic-packaging-guide-1/",
+      "Limitations": "Screening aid only; supplier-specific resistance data/testing outrank generic advice."
+    },
+    {
+      "Source_ID": "PK14",
+      "Publisher": "Vella Packaging",
+      "Information_Used": "PCR cosmetic packaging offerings and recycled-content options",
+      "Evidence_Type": "Supplier offering",
+      "Source_URL": "https://www.vellapack.com/pcr-cosmetic-packaging",
+      "Limitations": "Does not establish exact price, grade or compatibility for a chosen SKU."
+    },
+    {
+      "Source_ID": "PK15",
+      "Publisher": "Norse Packaging",
+      "Information_Used": "All-plastic / mono-material PP lotion pump options",
+      "Evidence_Type": "Supplier product catalogue",
+      "Source_URL": "https://www.norsepackaging.com/all-products/mono-material-pump",
+      "Limitations": "Confirm exact BOM, dosage, seals and formulation suitability."
+    },
+    {
+      "Source_ID": "PK16",
+      "Publisher": "Expert Market Research",
+      "Information_Used": "Kraft-paper price commentary used as a raw-stock proxy",
+      "Evidence_Type": "Market commentary",
+      "Source_URL": "https://www.expertmarketresearch.com/price-forecast/kraft-paper-price-trends",
+      "Limitations": "Not a converted carton quotation; workbook range is a low-confidence planning estimate."
+    },
+    {
+      "Source_ID": "PK17",
+      "Publisher": "Reuters",
+      "Information_Used": "October 2026 aluminium market commentary used as an indicative raw-metal benchmark",
+      "Evidence_Type": "Market commentary",
+      "Source_URL": "https://www.reuters.com/commentary/reuters-open-interest/aluminiums-calm-belies-lingering-supply-chain-stress-2026-10-14/",
+      "Limitations": "Raw metal only; fabricated bottle/tin costs require quote."
+    },
+    {
+      "Source_ID": "PK18",
+      "Publisher": "EUR-Lex",
+      "Information_Used": "Biocidal Products Regulation (EU) No 528/2012",
+      "Evidence_Type": "Binding legal text",
+      "Source_URL": "https://eur-lex.europa.eu/eli/reg/2012/528/oj/eng",
+      "Limitations": "Relevant to surface cleaners with qualifying biocidal claims/intended uses; not a packaging-material standard."
+    },
+    {
+      "Source_ID": "PK19",
+      "Publisher": "Richmond Group",
+      "Information_Used": "All-plastic polyolefin lotion pump example around 12.3 g",
+      "Evidence_Type": "Supplier specification",
+      "Source_URL": "https://www.richmondgroup.com/dispenser-pumps-sprays/treatment--serum-lotion-pumps/24-410-black-210mm-dip-tube-240lp011",
+      "Limitations": "Check exact output, wetted BOM and suitable viscosity range."
+    }
+  ]
+}

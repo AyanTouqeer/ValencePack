@@ -6,62 +6,153 @@
       "name": "Remove the outer carton",
       "changeType": "eliminate",
       "summary": "Drop secondary packaging where the bottle can be sold and shipped without it.",
-      "applicableWhen": { "hasCarton": true },
+      "applicableWhen": {
+        "hasCarton": true
+      },
       "costBand": 1,
-      "scores": { "reduction": 3, "recyclability": 3, "recycledContent": 0, "feasibility": 3 },
+      "scores": {
+        "reduction": 3,
+        "recyclability": 3,
+        "recycledContent": 0,
+        "feasibility": 3
+      },
       "recyclabilityLevel": "strong",
       "massEffect": "remove:carton",
       "compatWarnings": [],
-      "extraGaps": ["Transit damage and retailer shelf requirements not assessed."],
-      "sourceIds": ["PPWR-MINIMISATION", "PPWR-LABELLING", "PPWR-RECYCLABILITY", "TECH-CARTON-REMOVAL", "EU-COSMETICS", "EU-ECGT"],
-      "nextSteps": ["Check retailer / e-commerce shipping requirements.", "Run a small transit-damage trial without the carton."]
+      "extraGaps": [
+        "Transit damage and retailer shelf requirements not assessed."
+      ],
+      "sourceIds": [
+        "PPWR-MINIMISATION",
+        "PPWR-LABELLING",
+        "PPWR-RECYCLABILITY",
+        "TECH-CARTON-REMOVAL",
+        "EU-COSMETICS",
+        "EU-ECGT"
+      ],
+      "nextSteps": [
+        "Check retailer / e-commerce shipping requirements.",
+        "Run a small transit-damage trial without the carton."
+      ]
     },
     {
       "id": "swap-shrink-sleeve",
       "name": "Replace full-body shrink sleeve with a compatible label or direct print",
       "changeType": "design-for-recycling",
       "summary": "Reduce material and remove a component that can interfere with sorting/recycling.",
-      "applicableWhen": { "labelTypeIn": ["shrink_sleeve"] },
+      "applicableWhen": {
+        "labelTypeIn": [
+          "shrink_sleeve"
+        ]
+      },
       "costBand": 1,
-      "scores": { "reduction": 2, "recyclability": 2, "recycledContent": 0, "feasibility": 3 },
+      "scores": {
+        "reduction": 2,
+        "recyclability": 2,
+        "recycledContent": 0,
+        "feasibility": 3
+      },
       "recyclabilityLevel": "moderate",
       "massEffect": "unknown",
-      "compatWarnings": [],
-      "extraGaps": ["Label adhesive and ink compatibility with the bottle recycling stream not verified."],
-      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-SLEEVE-LABEL", "EU-COSMETICS"],
-      "nextSteps": ["Ask the label supplier for a recyclability-tested label/adhesive spec.", "Check brand/legal text still fits the smaller label area."]
+      "compatWarnings": [
+        {
+          "riskId": "CR-14",
+          "trigger": "Dark/opaque colour, full-body sleeve, adhesive, ink, barrier or many mixed materials",
+          "warning": "Full-body sleeves can disrupt optical sorting facilities, reducing overall recyclability."
+        }
+      ],
+      "extraGaps": [
+        "Label adhesive and ink compatibility with the bottle recycling stream not verified."
+      ],
+      "sourceIds": [
+        "PPWR-RECYCLABILITY",
+        "TECH-SLEEVE-LABEL",
+        "EU-COSMETICS"
+      ],
+      "nextSteps": [
+        "Ask the label supplier for a recyclability-tested label/adhesive spec.",
+        "Check brand/legal text still fits the smaller label area."
+      ]
     },
     {
       "id": "mono-material-pump",
       "name": "Switch to a mono-material pump (no metal spring)",
       "changeType": "design-for-recycling",
       "summary": "Remove mixed-material parts from the closure/dispenser.",
-      "applicableWhen": { "closureTypeIn": ["pump_metal_spring"] },
+      "applicableWhen": {
+        "closureTypeIn": [
+          "pump_metal_spring"
+        ]
+      },
       "costBand": 2,
-      "scores": { "reduction": 1, "recyclability": 2, "recycledContent": 0, "feasibility": 2 },
+      "scores": {
+        "reduction": 1,
+        "recyclability": 2,
+        "recycledContent": 0,
+        "feasibility": 2
+      },
       "recyclabilityLevel": "moderate",
       "massEffect": "unknown",
-      "compatWarnings": [],
-      "extraGaps": ["Dispensing performance and supplier MOQ not verified."],
-      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-PUMP-METAL"],
-      "nextSteps": ["Request mono-material pump samples and test dosing/viscosity fit."]
+      "compatWarnings": [
+        {
+          "riskId": "CR-13",
+          "trigger": "Corrosive, oxidizing, salt-rich, acidic/alkaline or solvent formula",
+          "warning": "Metal spring inside pump may fail if it contacts the formula."
+        }
+      ],
+      "extraGaps": [
+        "Dispensing performance and supplier MOQ not verified."
+      ],
+      "sourceIds": [
+        "PPWR-RECYCLABILITY",
+        "TECH-PUMP-METAL"
+      ],
+      "nextSteps": [
+        "Request mono-material pump samples and test dosing/viscosity fit."
+      ]
     },
     {
       "id": "pcr-resin",
       "name": "Use post-consumer recycled (PCR) resin in the existing bottle",
       "changeType": "recycled-content",
       "summary": "Keep the bottle format, raise recycled content.",
-      "applicableWhen": { "bottleMaterialIn": ["HDPE", "PP", "PET"] },
+      "applicableWhen": {
+        "bottleMaterialIn": [
+          "HDPE",
+          "PP",
+          "PET"
+        ]
+      },
       "costBand": 2,
-      "scores": { "reduction": 0, "recyclability": 2, "recycledContent": 3, "feasibility": 2 },
+      "scores": {
+        "reduction": 0,
+        "recyclability": 2,
+        "recycledContent": 3,
+        "feasibility": 2
+      },
       "recyclabilityLevel": "moderate",
-      "massEffect": "none",
+      "massEffect": "+5.5%",
       "compatWarnings": [
-        { "when": { "hasFragrance": true }, "text": "Fragranced products: PCR odour and stress-cracking behaviour need testing." }
+        {
+          "when": {
+            "hasFragrance": true
+          },
+          "text": "Fragranced products: PCR odour and stress-cracking behaviour need testing."
+        }
       ],
-      "extraGaps": ["Cosmetic-suitable PCR grade availability and recycled-content proof not verified."],
-      "sourceIds": ["PPWR-RECYCLED-CONTENT", "PPWR-RECYCLABILITY", "TECH-PCR-AVAILABILITY", "EU-ECGT"],
-      "nextSteps": ["Ask the bottle supplier for PCR grades and recycled-content documentation.", "Run compatibility / stability testing on PCR samples."]
+      "extraGaps": [
+        "Cosmetic-suitable PCR grade availability and recycled-content proof not verified."
+      ],
+      "sourceIds": [
+        "PPWR-RECYCLED-CONTENT",
+        "PPWR-RECYCLABILITY",
+        "TECH-PCR-AVAILABILITY",
+        "EU-ECGT"
+      ],
+      "nextSteps": [
+        "Ask the bottle supplier for PCR grades and recycled-content documentation.",
+        "Run compatibility / stability testing on PCR samples."
+      ]
     },
     {
       "id": "refill-pouch",
@@ -70,15 +161,36 @@
       "summary": "Largest potential material reduction per use, but flexible packaging has weaker recycling evidence.",
       "applicableWhen": {},
       "costBand": 2,
-      "scores": { "reduction": 3, "recyclability": 1, "recycledContent": 1, "feasibility": 2 },
+      "scores": {
+        "reduction": 3,
+        "recyclability": 1,
+        "recycledContent": 1,
+        "feasibility": 2
+      },
       "recyclabilityLevel": "weak",
-      "massEffect": "unknown",
+      "massEffect": "-62.8%",
       "compatWarnings": [
-        { "when": { "hasFragrance": true }, "text": "Fragrance/oil permeation through pouch film needs verification." }
+        {
+          "when": {
+            "hasFragrance": true
+          },
+          "text": "Fragrance/oil permeation through pouch film needs verification."
+        }
       ],
-      "extraGaps": ["EU recycling route for the specific pouch structure unverified.", "Consumer refill behaviour and hygiene not assessed."],
-      "sourceIds": ["PPWR-MINIMISATION", "PPWR-RECYCLABILITY", "TECH-FLEX-POUCH", "EU-ECGT"],
-      "nextSteps": ["Get pouch structure and recyclability data from the supplier.", "Define the refill hygiene/dosing instructions."]
+      "extraGaps": [
+        "EU recycling route for the specific pouch structure unverified.",
+        "Consumer refill behaviour and hygiene not assessed."
+      ],
+      "sourceIds": [
+        "PPWR-MINIMISATION",
+        "PPWR-RECYCLABILITY",
+        "TECH-FLEX-POUCH",
+        "EU-ECGT"
+      ],
+      "nextSteps": [
+        "Get pouch structure and recyclability data from the supplier.",
+        "Define the refill hygiene/dosing instructions."
+      ]
     },
     {
       "id": "aluminium-bottle",
@@ -87,16 +199,39 @@
       "summary": "Strong metal-recycling story, but compatibility with the formulation needs checking.",
       "applicableWhen": {},
       "costBand": 3,
-      "scores": { "reduction": 1, "recyclability": 3, "recycledContent": 2, "feasibility": 1 },
+      "scores": {
+        "reduction": 1,
+        "recyclability": 3,
+        "recycledContent": 2,
+        "feasibility": 1
+      },
       "recyclabilityLevel": "strong",
-      "massEffect": "unknown",
+      "massEffect": "+212.7%",
       "compatWarnings": [
-        { "when": { "phBelow": 5 }, "text": "Low-pH formulation: corrosion risk, internal lining and lab compatibility testing required." },
-        { "when": { "hasSurfactants": true }, "text": "Surfactant/salt systems can corrode unlined aluminium: confirm lining spec with the supplier." }
+        {
+          "when": {
+            "phBelow": 5
+          },
+          "text": "Low-pH formulation: corrosion risk, internal lining and lab compatibility testing required."
+        },
+        {
+          "when": {
+            "hasSurfactants": true
+          },
+          "text": "Surfactant/salt systems can corrode unlined aluminium: confirm lining spec with the supplier."
+        }
       ],
-      "extraGaps": ["Lining material recyclability and compatibility are unverified."],
-      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-ALU-LINING", "EU-ECGT"],
-      "nextSteps": ["Request lined-aluminium specs and run compatibility testing before any commitment."]
+      "extraGaps": [
+        "Lining material recyclability and compatibility are unverified."
+      ],
+      "sourceIds": [
+        "PPWR-RECYCLABILITY",
+        "TECH-ALU-LINING",
+        "EU-ECGT"
+      ],
+      "nextSteps": [
+        "Request lined-aluminium specs and run compatibility testing before any commitment."
+      ]
     },
     {
       "id": "glass-bottle",
@@ -105,13 +240,28 @@
       "summary": "Good recyclability and inertness, with weight, transport and breakage trade-offs.",
       "applicableWhen": {},
       "costBand": 3,
-      "scores": { "reduction": 0, "recyclability": 3, "recycledContent": 2, "feasibility": 2 },
+      "scores": {
+        "reduction": 0,
+        "recyclability": 3,
+        "recycledContent": 2,
+        "feasibility": 2
+      },
       "recyclabilityLevel": "strong",
       "massEffect": "unknown",
       "compatWarnings": [],
-      "extraGaps": ["Transport-weight impact not quantified.", "Breakage risk in wet bathroom use not assessed."],
-      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-RECYCLABILITY-RIGID-PLASTIC", "TECH-GLASS-TRANSPORT"],
-      "nextSteps": ["Quantify added weight per unit and shipping cost.", "Review consumer-safety implications of glass in bathrooms."]
+      "extraGaps": [
+        "Transport-weight impact not quantified.",
+        "Breakage risk in wet bathroom use not assessed."
+      ],
+      "sourceIds": [
+        "PPWR-RECYCLABILITY",
+        "TECH-RECYCLABILITY-RIGID-PLASTIC",
+        "TECH-GLASS-TRANSPORT"
+      ],
+      "nextSteps": [
+        "Quantify added weight per unit and shipping cost.",
+        "Review consumer-safety implications of glass in bathrooms."
+      ]
     },
     {
       "id": "solid-bar",
@@ -119,14 +269,21 @@
       "changeType": "format",
       "summary": "Avoids bottles entirely, but needs a new formulation.",
       "applicableWhen": {},
-      "costBand": 2,
+      "costBand": 1,
       "requiresReformulation": true,
-      "scores": { "reduction": 3, "recyclability": 3, "recycledContent": 0, "feasibility": 0 },
+      "scores": {
+        "reduction": 3,
+        "recyclability": 3,
+        "recycledContent": 0,
+        "feasibility": 0
+      },
       "recyclabilityLevel": "strong",
-      "massEffect": "unknown",
+      "massEffect": "-84.8%",
       "compatWarnings": [],
       "extraGaps": [],
-      "sourceIds": ["PPWR-MINIMISATION"],
+      "sourceIds": [
+        "PPWR-MINIMISATION"
+      ],
       "nextSteps": []
     },
     {
@@ -136,13 +293,21 @@
       "summary": "Bio-based, but end-of-life routes for rigid PLA bottles are unclear.",
       "applicableWhen": {},
       "costBand": 2,
-      "scores": { "reduction": 0, "recyclability": 0, "recycledContent": 0, "feasibility": 1 },
+      "scores": {
+        "reduction": 0,
+        "recyclability": 0,
+        "recycledContent": 0,
+        "feasibility": 1
+      },
       "recyclabilityLevel": "none",
       "massEffect": "unknown",
       "knownUnsuitable": "Insufficient evidence to confirm a mainstream EU collection/recycling route for rigid PLA bottles; validation required before commitment.",
       "compatWarnings": [],
       "extraGaps": [],
-      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-PLA-EOL"],
+      "sourceIds": [
+        "PPWR-RECYCLABILITY",
+        "TECH-PLA-EOL"
+      ],
       "nextSteps": []
     }
   ]

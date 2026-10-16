@@ -1,48 +1,170 @@
 {
-  "_note": "Evidence pack. status 'verify' = real source, but the 'supports' summary must be checked against the actual text by Mamuna/Aleena. status 'to_collect' = placeholder; no source collected yet. The UI shows these honestly as pending.",
+  "_note": "Evidence pack. status 'verified' = Aleena read the actual source and the 'supports' summary reflects it. status 'to_collect' = honest gap: no source collected yet, url is null on purpose and the UI shows it as source pending. (Legacy status 'verify' is still accepted by the test but no card uses it.) compat: not_applicable (legal source), supported, conditional, unknown, known_concern, or null.",
   "sources": [
     {
-      "id": "EU-PPWR",
+      "id": "PPWR-MINIMISATION",
       "type": "regulation",
-      "title": "Regulation (EU) 2025/40 on packaging and packaging waste (PPWR)",
-      "url": "https://eur-lex.europa.eu/eli/reg/2025/40/oj",
-      "supports": "EU framework covering packaging minimisation, design-for-recycling, recycled-content and labelling obligations.",
-      "status": "verify",
-      "citation": null,
-      "effective_date": "12 Aug 2026",
-      "compat": null
+      "title": "PPWR - Packaging minimisation",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32025R0040",
+      "supports": "PPWR Article 10(1) requires packaging weight and volume to be reduced to the minimum necessary for functionality, taking account of the packaging's shape and material.",
+      "citation": "Article 10(1), Packaging minimisation",
+      "effective_date": "1 January 2030",
+      "compat": "not_applicable",
+      "status": "verified"
     },
     {
-      "id": "EU-COSMETICS",
+      "id": "PPWR-RECYCLED-CONTENT",
       "type": "regulation",
-      "title": "Regulation (EC) No 1223/2009 on cosmetic products",
-      "url": "https://eur-lex.europa.eu/eli/reg/2009/1223/oj",
-      "supports": "Cosmetic product safety and labelling obligations; relevant to packaging via labelling and product-safety assessment.",
-      "status": "verify",
-      "citation": null,
-      "effective_date": null,
-      "compat": null
+      "title": "PPWR - Minimum recycled content",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32025R0040",
+      "supports": "PPWR Article 7 establishes minimum recycled-content requirements for plastic packaging according to the relevant packaging type and format; the threshold must be selected from the legal category rather than assumed to be uniform for all cosmetic bottles.",
+      "citation": "Article 7(1) and Article 7(8); Annex II, Table 1",
+      "effective_date": "1 January 2030 or 3 years after entry into force of the implementing act referred to in Article 7(8), whichever is later",
+      "compat": "not_applicable",
+      "status": "verified"
+    },
+    {
+      "id": "PPWR-LABELLING",
+      "type": "regulation",
+      "title": "PPWR - Packaging material labelling",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32025R0040",
+      "supports": "Article 12(1) provides for a harmonised label identifying packaging material composition to facilitate consumer sorting, subject to the statutory start date and implementing acts.",
+      "citation": "Article 12(1), Article 12(6)-(7), Labelling of packaging",
+      "effective_date": "12 August 2028 or 24 months after entry into force of implementing acts under Article 12(6) or (7), whichever is later",
+      "compat": "not_applicable",
+      "status": "verified"
+    },
+    {
+      "id": "PPWR-RECYCLABILITY",
+      "type": "regulation",
+      "title": "PPWR - Design for recycling",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32025R0040",
+      "supports": "Article 6 establishes the recyclability framework, including design-for-recycling criteria and recycling-at-scale milestones; the criteria and grades are phased in rather than applying as one undifferentiated deadline.",
+      "citation": "Article 6(1)-(5) and Article 6(8), Recyclable packaging",
+      "effective_date": "Generally from 1 January 2030 or 24 months after the relevant delegated acts enter into force, whichever is later; further recycling-at-scale milestone in 2035; grades A or B required from 1 January 2038, subject to the regulation's details and exceptions",
+      "compat": "not_applicable",
+      "status": "verified"
     },
     {
       "id": "EU-ECGT",
       "type": "regulation",
-      "title": "Directive (EU) 2024/825 empowering consumers for the green transition",
-      "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj",
-      "supports": "Restricts generic environmental claims (e.g. 'eco-friendly') unless substantiated.",
-      "status": "verify",
+      "title": "Directive (EU) 2024/825 - Generic environmental claims and offsetting claims",
+      "url": "https://eur-lex.europa.eu/eli/dir/2024/825/oj/eng",
+      "supports": "The Directive targets generic environmental claims that cannot be substantiated by relevant recognised excellent environmental performance, and separately prohibits product greenhouse-gas neutrality, reduction, or positivity claims based on offsetting.",
+      "citation": "Article 1(4), amending Annex I to Directive 2005/29/EC, points 2a and 4a-4c; Recital 9 for examples of generic claims",
+      "effective_date": "Applies from 27 September 2026; check national implementation for the intended market",
+      "compat": "not_applicable",
+      "status": "verified"
+    },
+    {
+      "id": "EU-COSMETICS",
+      "type": "regulation",
+      "title": "Cosmetics Regulation - Safety and packaging labelling",
+      "url": "https://eur-lex.europa.eu/eli/reg/2009/1223/oj/eng",
+      "supports": "Article 19 requires specified product and consumer information on cosmetic-product containers and packaging, while Article 3 establishes the general cosmetics safety requirement under normal or reasonably foreseeable conditions of use.",
+      "citation": "Article 3, Safety; Article 19, Labelling",
+      "effective_date": "General application date 11 July 2013, subject to subsequent amendments and current applicable text",
+      "compat": "not_applicable",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-CARTON-REMOVAL",
+      "type": "technical",
+      "title": "Outer-carton removal - Transit damage validation",
+      "url": "https://www.ista.org/test_procedures.php",
+      "supports": "ISTA Procedure 3A is a general simulation performance test for packaged products shipped individually through parcel-delivery systems; it does not establish a universal rule that a shampoo bottle is safe to ship without an outer carton.",
+      "citation": "ISTA Test Procedures page, General Simulation Tests, Procedure 3A: Parcel Delivery System Shipments 150 lb (70 kg) or Less",
+      "effective_date": null,
+      "compat": "unknown",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-SLEEVE-LABEL",
+      "type": "technical",
+      "title": "Full-body shrink sleeve - Bottle sorting and recyclability",
+      "url": "https://www.recoup.org/wp-content/uploads/2025/01/Recyclability-of-Bottles-with-Sleeves-V8.pdf",
+      "supports": "Sleeves can interfere with bottle identification and recyclate quality, but the effect depends on sleeve material, colour, coverage, perforation, and the specific recycling stream; the sources do not establish that every sleeve is unrecyclable.",
+      "citation": "RECOUP, Recyclability of Bottles with Sleeves, Version 8, p. 2 and relevant discussion of detection, sleeve materials, and solutions. Secondary source: https://recyclass.eu/protocols-guidelines/design-for-recycling-guidelines/packaging/ (RecyClass current Packaging Design for Recycling Guidelines)",
+      "effective_date": null,
+      "compat": "conditional",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-PUMP-METAL",
+      "type": "technical",
+      "title": "Mono-material pump - Plastic spring/ball alternative",
+      "url": "https://recyclass.eu/news/apackaging-group-receives-a-recyclass-recyclability-approval-for-infinity-pump/",
+      "supports": "RecyClass reports that a specific fully plastic, polyolefin-based pump with a plastic spring and ball was tested as compatible with the HDPE recycling stream under a stated condition that the pump not exceed 26% of total packaging weight; this does not establish that every metal-spring pump makes a bottle unrecyclable.",
+      "citation": "RecyClass, Apackaging Group receives a RecyClass Recyclability Approval for Infinity Pump; stated HDPE-container evaluation protocol and pump weight condition. Secondary source: https://aptar.com/en-us/products/future-fully-recyclable-dispensing-pump (Aptar Beauty, Future - Fully Recyclable Dispensing Pump)",
+      "effective_date": null,
+      "compat": "conditional",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-PCR-AVAILABILITY",
+      "type": "technical",
+      "title": "PCR PET - Commercial availability for cosmetic bottles",
+      "url": "https://product-catalogue.alpla.com/product/500-ml-cosmetics-bottle-27-g",
+      "supports": "Supplier catalogues list PET cosmetics/personal-care bottles with PCR options; ALPLA lists a 500 mL cosmetics bottle configurable up to 100% rPET with an MOQ of 35,000 units, demonstrating an actual commercial offering but not universal availability, price, colour, odour, or formulation compatibility.",
+      "citation": "ALPLA Standard Products, 500 ml Cosmetics Bottle 27 g, product specification including PCR options and MOQ. Secondary source: https://packagingsolutions.amcor.com/en/product/product-item/250ml-european-pet-13823010 (Amcor Packaging Solutions, 250ml European PET)",
+      "effective_date": null,
+      "compat": "conditional",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-FLEX-POUCH",
+      "type": "technical",
+      "title": "Refill pouches - Flexible packaging recycling route",
+      "url": "https://guidelines.ceflex.eu/guidelines/design-principles/",
+      "supports": "CEFLEX guidance prefers mono-PE or mono-PP flexible structures over mixed-material structures for improved sortability and recycling performance, but this does not prove a universal EU collection and recycling route for every refill pouch.",
+      "citation": "CEFLEX D4ACE Guidelines, Design Principles and Design Choices. Secondary source: https://www.ellenmacarthurfoundation.org/tackling-flexible-plastic-packaging-waste (Ellen MacArthur Foundation, Tackling Flexible Plastic Packaging Waste)",
+      "effective_date": null,
+      "compat": "conditional",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-ALU-LINING",
+      "type": "technical",
+      "title": "Aluminium bottle - Internal lacquer and product compatibility",
+      "url": "https://news.ppg.com/Press-Releases/news-details/2025/PPG-launches-non-BPA-PPG-HOBA-coatings-for-aluminum-bottles-at-Paris-Packaging-Week/default.aspx",
+      "supports": "Supplier guidance describes internal linings for aluminium toiletry bottles and identifies formulation pH, fragrance/oils, alcohol, surfactant system, filling process, closure, and shelf life as compatibility considerations; it does not establish that every shampoo needs the same lacquer or that a coating is universally compatible with recycling.",
+      "citation": "PPG, PPG launches non-BPA PPG HOBA coatings for aluminum bottles at Paris Packaging Week (3 February 2025). Secondary source: https://blueskysolutionsuk.com/insight-resource/aluminium-packaging-for-toiletries/ (BlueSky Solutions, Aluminium Packaging for Toiletries, sections on internal lacquer/lining and compatibility)",
+      "effective_date": null,
+      "compat": "unknown",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-GLASS-TRANSPORT",
+      "type": "technical",
+      "title": "Glass versus plastic - Transport emissions for 250 mL shampoo",
+      "url": null,
+      "supports": "No reliable source was verified that quantifies the transport-only emissions difference between otherwise comparable 250 mL glass and plastic shampoo bottles under a defined EU distribution scenario.",
       "citation": null,
       "effective_date": null,
-      "compat": null
+      "compat": "unknown",
+      "status": "to_collect"
     },
-    
-    { "id": "TECH-RECYCLABILITY-RIGID-PLASTIC", "type": "technical", "title": "TO COLLECT: recyclability of HDPE/PP/PET rigid bottles in EU sorting streams (e.g. RecyClass guidance)", "url": null, "supports": "Recyclability evidence for mono-material rigid plastic bottles and the effect of labels/closures.", "status": "to_collect" },
-    { "id": "TECH-SLEEVE-LABEL", "type": "technical", "title": "TO COLLECT: effect of full-body shrink sleeves on sortability/recycling", "url": null, "supports": "Whether shrink sleeves interfere with sorting and recycling of bottles.", "status": "to_collect" },
-    { "id": "TECH-PUMP-METAL", "type": "technical", "title": "TO COLLECT: metal-spring pumps and recyclability", "url": null, "supports": "Impact of metal springs in dispensing pumps on recycling streams.", "status": "to_collect" },
-    { "id": "TECH-PCR-AVAILABILITY", "type": "technical", "title": "TO COLLECT: availability and suitability of post-consumer recycled resin for cosmetic bottles", "url": null, "supports": "PCR grades, colour/odour limits, supplier availability.", "status": "to_collect" },
-    { "id": "TECH-FLEX-POUCH", "type": "technical", "title": "TO COLLECT: recyclability of flexible refill pouches in the EU", "url": null, "supports": "Whether flexible/multilayer pouches have established recycling routes.", "status": "to_collect" },
-    { "id": "TECH-ALU-LINING", "type": "technical", "title": "TO COLLECT: aluminium containers for low-pH / surfactant products (internal lacquer requirements)", "url": null, "supports": "Corrosion risk and lining needs for aluminium packaging with cosmetic formulations.", "status": "to_collect" },
-    { "id": "TECH-GLASS-TRANSPORT", "type": "technical", "title": "TO COLLECT: glass packaging weight and transport trade-offs; recycling rates", "url": null, "supports": "Glass recyclability vs. weight/transport impact.", "status": "to_collect" },
-    { "id": "TECH-PLA-EOL", "type": "technical", "title": "TO COLLECT: end-of-life routes for PLA rigid containers in the EU", "url": null, "supports": "Availability of collection/recycling/composting routes for PLA bottles.", "status": "to_collect" },
-    { "id": "TECH-CARTON-REMOVAL", "type": "technical", "title": "TO COLLECT: secondary packaging minimisation and product-protection evidence", "url": null, "supports": "When outer cartons can be removed without raising damage rates.", "status": "to_collect" }
+    {
+      "id": "TECH-PLA-EOL",
+      "type": "technical",
+      "title": "Rigid PLA - EU sorting/recycling and end-of-life route",
+      "url": "https://www.cbe.europa.eu/achievements/sorting-out-future-bio-based-plastics-recycling",
+      "supports": "CBE JU reports industrial sorting trials involving PLA cups/trays and other bio-based plastic items, while the European Commission describes the wider end-of-life policy context; these sources indicate infrastructure and sorting considerations but do not prove that rigid PLA bottles are compostable-only or universally accepted in EU kerbside streams.",
+      "citation": "CBE JU, Sorting out the future of bio-based plastics recycling, published 21 August 2026, sections Testing under real-world conditions, Results at industrial scale, and What's next. Secondary source: https://environment.ec.europa.eu/topics/plastics/bio-based-biodegradable-and-compostable-plastics_en (European Commission, EU policy framework on biobased, biodegradable and compostable plastics)",
+      "effective_date": null,
+      "compat": "unknown",
+      "status": "verified"
+    },
+    {
+      "id": "TECH-RECYCLABILITY-RIGID-PLASTIC",
+      "type": "technical",
+      "title": "Rigid PET, HDPE and PP - Recyclability baseline",
+      "url": "https://recyclass.eu/protocols-guidelines/design-for-recycling-guidelines/packaging/",
+      "supports": "RecyClass maintains stream-specific design-for-recycling guidance for PET bottles and HDPE/PP containers; an individual package's recyclability depends on its full design, components, applicable stream, and relevant PPWR criteria rather than polymer identity alone.",
+      "citation": "RecyClass current Packaging Design for Recycling Guidelines. Secondary source: https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32025R0040 (PPWR Article 6(1)-(5) and Article 6(8), Recyclable packaging)",
+      "effective_date": null,
+      "compat": "conditional",
+      "status": "verified"
+    }
   ]
 }

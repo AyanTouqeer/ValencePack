@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sustainable Packaging Decision Advisor</title>
+<title>ValencePack</title>
 <style>
   :root { --bg:#f7f8f5; --card:#fff; --ink:#1d2a22; --muted:#5d6b62; --line:#dde3dc; --accent:#2f6b4f; --warn:#9a5b00; --bad:#a33a2a; }
   @media (prefers-color-scheme: dark) { :root { --bg:#141a16; --card:#1d251f; --ink:#e8efe9; --muted:#9fb0a4; --line:#2e3a31; --accent:#6fc79c; --warn:#e0a24a; --bad:#e07a68; } }
@@ -22,7 +22,7 @@
   button { font: inherit; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
   button.ghost { background: transparent; color: var(--accent); }
   button:disabled { opacity: .6; cursor: wait; }
-  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
   .pill { display:inline-block; font-size:.75rem; padding:2px 8px; border-radius:99px; border:1px solid var(--line); color:var(--muted); margin-right:6px; }
   .pill.low { color: var(--warn); border-color: var(--warn); }
   .bar { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; margin: 4px 0 10px; }
@@ -39,10 +39,19 @@
 </head>
 <body>
 <main>
-  <h1>ValencePack</h1>
+  <h1>Sustainable Packaging Decision Advisor</h1>
   <p class="sub">Assess an existing personal-care package for the EU market and get a ranked, evidence-linked shortlist of improvements.</p>
 
   <form id="f" class="card">
+    <!-- MULTIMODAL UPLOAD BUTTON -->
+    <div class="row" style="margin-bottom: 10px; padding-bottom: 15px; border-bottom: 1px solid var(--line);">
+      <label class="pill" style="cursor: pointer; background: var(--accent); color: white; padding: 6px 12px; font-size: 0.9rem;">
+        📄 Auto-fill from PDF/Image
+        <input type="file" id="spec-upload" accept="application/pdf, image/*" style="display: none;">
+      </label>
+      <span id="upload-status" class="muted"></span>
+    </div>
+
     <div class="grid">
       <label>Product name <input name="productName" required></label>
       <label>Destination market <select name="destination"><option value="EU">European Union</option></select></label>
@@ -93,6 +102,43 @@ function fill(d) {
   const c = d.current || {};
   ["bottleMaterial","closureType","labelType","hasCarton","fillMl","bottleG","closureG","labelG","cartonG","recycledContentPct"].forEach(n => set(n, c[n]));
 }
+
+// MULTIMODAL EXTRACTION EVENT LISTENER
+$("#spec-upload").onchange = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  const status = $("#upload-status");
+  status.textContent = "Gemini is reading the document...";
+  
+  const formData = new FormData();
+  formData.append("file", file);
+  
+  try {
+    const res = await fetch("/api/extract", { method: "POST", body: formData });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Extraction failed");
+    
+    // Map the extracted JSON directly into your form's structure
+    fill({
+      productName: data.productName,
+      current: {
+        bottleMaterial: data.bottleMaterial,
+        closureType: data.closureType,
+        hasCarton: data.hasCarton,
+        fillMl: data.fillMl
+      }
+    });
+    
+    status.textContent = "✅ Data extracted successfully!";
+    setTimeout(() => status.textContent = "", 4000);
+  } catch (err) {
+    status.textContent = "❌ Error: " + err.message;
+  } finally {
+    e.target.value = ""; // Reset input
+  }
+};
+
 function read() {
   const v = n => f.elements[n].value, b = n => f.elements[n].checked, num = n => v(n) === "" ? undefined : Number(v(n));
   return {
@@ -121,7 +167,7 @@ f.onsubmit = async (e) => {
 function render(d) {
   const out = $("#out"); out.replaceChildren();
 
-  // --- NEW: What We Understood Card ---
+  // What We Understood Card
   out.appendChild(el("h2", "", "What we understood"));
   const understoodCard = el("div", "card");
   const understoodItems = [
@@ -133,7 +179,6 @@ function render(d) {
   ];
   understoodCard.appendChild(list(understoodItems));
   out.appendChild(understoodCard);
-  // ------------------------------------
 
   const expl = d.explanation || {};
   const byId = Object.fromEntries((expl.options || []).map(o => [o.id, o]));

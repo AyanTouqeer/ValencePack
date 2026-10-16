@@ -13,7 +13,7 @@
       "massEffect": "remove:carton",
       "compatWarnings": [],
       "extraGaps": ["Transit damage and retailer shelf requirements not assessed."],
-      "sourceIds": ["EU-PPWR", "TECH-CARTON-REMOVAL"],
+      "sourceIds": ["PPWR-MINIMISATION", "PPWR-LABELLING", "PPWR-RECYCLABILITY", "TECH-CARTON-REMOVAL", "EU-COSMETICS", "EU-ECGT"],
       "nextSteps": ["Check retailer / e-commerce shipping requirements.", "Run a small transit-damage trial without the carton."]
     },
     {
@@ -28,7 +28,7 @@
       "massEffect": "unknown",
       "compatWarnings": [],
       "extraGaps": ["Label adhesive and ink compatibility with the bottle recycling stream not verified."],
-      "sourceIds": ["EU-PPWR", "TECH-SLEEVE-LABEL"],
+      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-SLEEVE-LABEL", "EU-COSMETICS"],
       "nextSteps": ["Ask the label supplier for a recyclability-tested label/adhesive spec.", "Check brand/legal text still fits the smaller label area."]
     },
     {
@@ -43,7 +43,7 @@
       "massEffect": "unknown",
       "compatWarnings": [],
       "extraGaps": ["Dispensing performance and supplier MOQ not verified."],
-      "sourceIds": ["EU-PPWR", "TECH-PUMP-METAL"],
+      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-PUMP-METAL"],
       "nextSteps": ["Request mono-material pump samples and test dosing/viscosity fit."]
     },
     {
@@ -60,7 +60,7 @@
         { "when": { "hasFragrance": true }, "text": "Fragranced products: PCR odour and stress-cracking behaviour need testing." }
       ],
       "extraGaps": ["Cosmetic-suitable PCR grade availability and recycled-content proof not verified."],
-      "sourceIds": ["EU-PPWR", "TECH-PCR-AVAILABILITY"],
+      "sourceIds": ["PPWR-RECYCLED-CONTENT", "PPWR-RECYCLABILITY", "TECH-PCR-AVAILABILITY", "EU-ECGT"],
       "nextSteps": ["Ask the bottle supplier for PCR grades and recycled-content documentation.", "Run compatibility / stability testing on PCR samples."]
     },
     {
@@ -77,7 +77,7 @@
         { "when": { "hasFragrance": true }, "text": "Fragrance/oil permeation through pouch film needs verification." }
       ],
       "extraGaps": ["EU recycling route for the specific pouch structure unverified.", "Consumer refill behaviour and hygiene not assessed."],
-      "sourceIds": ["EU-PPWR", "TECH-FLEX-POUCH"],
+      "sourceIds": ["PPWR-MINIMISATION", "PPWR-RECYCLABILITY", "TECH-FLEX-POUCH", "EU-ECGT"],
       "nextSteps": ["Get pouch structure and recyclability data from the supplier.", "Define the refill hygiene/dosing instructions."]
     },
     {
@@ -95,7 +95,7 @@
         { "when": { "hasSurfactants": true }, "text": "Surfactant/salt systems can corrode unlined aluminium: confirm lining spec with the supplier." }
       ],
       "extraGaps": ["Lining material recyclability and compatibility are unverified."],
-      "sourceIds": ["EU-PPWR", "TECH-ALU-LINING"],
+      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-ALU-LINING", "EU-ECGT"],
       "nextSteps": ["Request lined-aluminium specs and run compatibility testing before any commitment."]
     },
     {
@@ -110,7 +110,7 @@
       "massEffect": "unknown",
       "compatWarnings": [],
       "extraGaps": ["Transport-weight impact not quantified.", "Breakage risk in wet bathroom use not assessed."],
-      "sourceIds": ["EU-PPWR", "TECH-GLASS-TRANSPORT"],
+      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-RECYCLABILITY-RIGID-PLASTIC", "TECH-GLASS-TRANSPORT"],
       "nextSteps": ["Quantify added weight per unit and shipping cost.", "Review consumer-safety implications of glass in bathrooms."]
     },
     {
@@ -126,7 +126,7 @@
       "massEffect": "unknown",
       "compatWarnings": [],
       "extraGaps": [],
-      "sourceIds": [],
+      "sourceIds": ["PPWR-MINIMISATION"],
       "nextSteps": []
     },
     {
@@ -139,10 +139,10 @@
       "scores": { "reduction": 0, "recyclability": 0, "recycledContent": 0, "feasibility": 1 },
       "recyclabilityLevel": "none",
       "massEffect": "unknown",
-      "knownUnsuitable": "No established EU collection/recycling route identified for rigid PLA bottles (draft finding: needs source TECH-PLA-EOL).",
+      "knownUnsuitable": "Insufficient evidence to confirm a mainstream EU collection/recycling route for rigid PLA bottles; validation required before commitment.",
       "compatWarnings": [],
       "extraGaps": [],
-      "sourceIds": ["TECH-PLA-EOL"],
+      "sourceIds": ["PPWR-RECYCLABILITY", "TECH-PLA-EOL"],
       "nextSteps": []
     }
   ]

@@ -19,19 +19,59 @@ evidence.forEach(card => {
     assert(typeof card.effective_date === 'string' || card.effective_date === null, `effective_date must be string or null in ${card.id}`);
   }
   if ('compat' in card) {
-    const validCompat = [null, 'supported', 'conditional', 'unknown', 'known_concern'];
+    const validCompat = [null, 'not_applicable', 'supported', 'conditional', 'unknown', 'known_concern'];
     assert(validCompat.includes(card.compat), `Invalid compat value in ${card.id}`);
   }
 });
 console.log("Schema validation passed.");
 // ---------------------------------
 
+// --- OPTION B: CROSS-FILE INTEGRITY CHECKS ---
+console.log("Validating evidence <-> options links...");
+const DATA_DIR = path.join(__dirname, "..", "data");
+const optionsData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "options.json"), "utf8"));
+
+// 1. unique ids, allowed status values, url rule (null only when to_collect)
+const evidenceIds = new Set();
+evidence.forEach(card => {
+  assert(!evidenceIds.has(card.id), `duplicate evidence id ${card.id}`);
+  evidenceIds.add(card.id);
+  assert(['verified', 'verify', 'to_collect'].includes(card.status), `Invalid status in ${card.id}: ${card.status}`);
+  if (card.status === 'to_collect') {
+    assert(card.url === null, `${card.id}: to_collect cards must have url: null (no placeholder URLs)`);
+  } else {
+    assert(typeof card.url === 'string' && card.url.length > 0, `${card.id}: only to_collect cards may have url: null`);
+  }
+});
+
+// 2. every option sourceId resolves to a card
+const citedIds = new Set();
+optionsData.options.forEach(opt => {
+  (opt.sourceIds || []).forEach(id => {
+    assert(evidenceIds.has(id), `Option ${opt.id} cites unknown source id ${id}`);
+    citedIds.add(id);
+  });
+});
+
+// 3. orphan cards: warning only, so new rows can be pasted before they are mapped to an option
+evidenceIds.forEach(id => {
+  if (!citedIds.has(id)) console.warn(`WARNING: evidence card ${id} is not cited by any option`);
+});
+
+// 4. the old combined PPWR id must be gone from both data files
+["evidence.json", "options.json"].forEach(f => {
+  assert(!fs.readFileSync(path.join(DATA_DIR, f), "utf8").includes("EU-PPWR"), `old id EU-PPWR still present in ${f}`);
+});
+console.log("Evidence <-> options validation passed.");
+// ---------------------------------
+
 (async () => {
   const r = await assess(demo);
   
-  // Step 2: Trigger the database write
-  const docId = await saveReport(r);
-  console.log("Saved report to Firestore with ID:", docId);
+  // Step 2: Trigger the database write (Mocked for testing)
+  // const docId = await saveReport(r);
+  // console.log("Saved report to Firestore with ID:", docId);
+  console.log("Test environment: Skipped Firestore write.");
 
   console.log("Top 3:", r.ranked.map(x => `${x.name} (${x.score})`));
   console.log("Excluded:", r.screening.excluded.map(x => `${x.id}:${x.ruleId}`));

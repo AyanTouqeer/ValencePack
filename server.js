@@ -6,6 +6,11 @@ const { assess, evidenceById } = require("./lib/assess");
 const { saveReport, getReport } = require("./lib/store");
 const { handleChat } = require("./lib/chat");
 
+// --- MULTIMODAL EXTRACTION SETUP ---
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" }); 
+const { extractPackagingData } = require("./lib/gemini");
+
 const app = express();
 app.use(express.json({ limit: "100kb" }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -13,7 +18,23 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/api/health", (_req, res) => res.json({ ok: true, gemini: !!process.env.GEMINI_API_KEY, firestore: process.env.ENABLE_FIRESTORE === "true" }));
 app.get("/api/demo", (_req, res) => res.json(JSON.parse(fs.readFileSync(path.join(__dirname, "data", "demo-scenario.json"), "utf8"))));
 
-// The core assessment endpoint
+// --- 1. MULTIMODAL EXTRACTION ENDPOINT ---
+app.post("/api/extract", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+    
+    const extractedJson = await extractPackagingData(req.file.path, req.file.mimetype);
+    fs.unlinkSync(req.file.path); 
+    
+    res.json(extractedJson);
+  } catch (e) {
+    console.error("Extraction Error:", e);
+    if (req.file && fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
+    res.status(500).json({ error: ["Failed to extract data from document."] });
+  }
+});
+
+// --- 2. CORE ASSESSMENT ENDPOINT ---
 app.post("/api/assess", async (req, res) => {
   try {
     const result = await assess(req.body);
@@ -29,7 +50,7 @@ app.post("/api/assess", async (req, res) => {
   }
 });
 
-// The chat endpoint
+// --- 3. CHAT ENDPOINT ---
 app.post("/api/chat", async (req, res) => {
   try {
     const { question, contextData } = req.body;

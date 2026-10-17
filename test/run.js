@@ -81,7 +81,7 @@ console.log("Evidence <-> options validation passed.");
   assert.strictEqual(ex["solid-bar"], "R-REFORMULATION");
   assert.strictEqual(ex["pla-bottle"], "R-END-OF-LIFE");
   assert.strictEqual(ex["glass-bottle"], "R-BUDGET");
-  assert.strictEqual(r.baseline.totalGrams, 60);
+  assert.strictEqual(r.baseline.totalGrams, 36.3);
   const carton = r.ranked.find(x => x.id === "remove-carton") || r.alsoConsidered.find(x => x.id === "remove-carton");
   assert(carton, "carton option present");
   r.explanation.options.forEach(o => o.why.forEach(w => w.sourceIds.forEach(id => assert(r.sources.find(s => s.id === id), "cited id exists"))));

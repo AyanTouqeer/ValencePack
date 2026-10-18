@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ValencePack - Packaging sustainability workspace</title>
+<title>ValencePack - Packaging Sustainability Workspace</title>
 <link rel="icon" type="image/png" href="/logo.png">
 <link rel="shortcut icon" type="image/png" href="/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
@@ -49,22 +49,17 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .topbar>div:first-child{flex:1 1 auto;min-width:0}
 /* Valence packaging ornament: box anchor + 3 orbitals on tilted 3D planes */
 .atom{position:relative;width:68px;height:68px;display:inline-block;perspective:180px}
-.atom .box{position:absolute;top:50%;left:50%;width:22px;height:22px;margin:-11px;z-index:2;background:var(--green);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E") center/contain no-repeat}
+.atom .box{position:absolute;top:50%;left:50%;width:20px;height:20px;margin:-10px;z-index:2;background:var(--green);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E") center/contain no-repeat}
 .atom .orb{position:absolute;top:50%;left:50%;width:0;height:0;min-height:0;display:block;transform-style:preserve-3d}
 .atom .orb.s1{transform:rotateX(65deg)}
 .atom .orb.s2{transform:rotateX(65deg) rotateY(45deg)}
 .atom .orb.s3{transform:rotateY(65deg)}
 .atom .ring{position:absolute;top:50%;left:50%;border:1.5px solid rgba(46,123,230,.5);border-radius:50%;transform:translate(-50%,-50%);transform-style:preserve-3d;animation:orbit3d 6s linear infinite}
-.atom .orb.s1 .ring{width:46px;height:46px;animation-duration:3.6s}
-.atom .orb.s2 .ring{width:46px;height:46px;animation-duration:6s}
-.atom .orb.s3 .ring{width:46px;height:46px;animation-duration:9s}
-.atom .ring .electron{position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eafff4 0%,#5fe6a0 35%,#1f9d5f 72%,#0b5c39 100%);box-shadow:0 0 6px rgba(52,217,126,.55);transform-style:preserve-3d;animation:bill1 3.6s linear infinite}
-.atom .orb.s2 .ring .electron{animation-name:bill2;animation-duration:6s}
-.atom .orb.s3 .ring .electron{animation-name:bill3;animation-duration:9s}
+.atom .orb.s1 .ring{width:44px;height:44px;animation-duration:3.6s}
+.atom .orb.s2 .ring{width:44px;height:44px;animation-duration:6s}
+.atom .orb.s3 .ring{width:44px;height:44px;animation-duration:9s}
+.atom .ring .electron{position:absolute;top:-3.5px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:var(--brand-emerald);box-shadow:0 0 6px rgba(52,217,126,.9)}
 @keyframes orbit3d{to{transform:translate(-50%,-50%) rotateZ(360deg)}}
-@keyframes bill1{from{transform:rotateZ(0) rotateX(-65deg)}to{transform:rotateZ(-360deg) rotateX(-65deg)}}
-@keyframes bill2{from{transform:rotateZ(0) rotateY(-45deg) rotateX(-65deg)}to{transform:rotateZ(-360deg) rotateY(-45deg) rotateX(-65deg)}}
-@keyframes bill3{from{transform:rotateZ(0) rotateY(-65deg)}to{transform:rotateZ(-360deg) rotateY(-65deg)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .btn-primary{background:var(--live-green);color:#fff;border:1px solid var(--live-green-border);border-radius:10px;padding:10px 14px;font-weight:700;font-size:12px;white-space:nowrap;transition:.15s}
 .btn-primary:hover{background:var(--live-green-hover)}.btn-primary:disabled{opacity:.75;cursor:not-allowed;animation:pulse 1.1s ease-in-out infinite}
@@ -87,27 +82,21 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .ic-green{background:#dcefe0;color:#236c3e}.ic-cyan{background:#dceff8;color:#1c74a3}.ic-gold{background:#fbeecd;color:#8a5a12}.ic-blue{background:#e0e9f8;color:#2f5aa8}
 .stat .st-num{font-size:30px;font-weight:700;letter-spacing:-.05em;margin:12px 0 2px;line-height:1;color:var(--ink)}
 .stat .st-foot{font-size:11px;color:#718683}
-/* Top grid: form (left) + friendly pathway card (right) */
+/* Top grid: form (middle) + pathway (right) */
 .topgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.85fr);gap:16px;align-items:start;margin-bottom:20px}
-[hidden]{display:none!important}
 /* Minimized form: show a clipped snippet of the real fields (no empty space) */
 .intake{max-height:1000px;transition:max-height .4s ease}
 .intake::after{content:"";position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(180deg,rgba(16,35,43,0),var(--navy2));pointer-events:none;opacity:0;transition:opacity .3s ease}
 .intake.is-collapsed{max-height:232px;cursor:pointer}
 .intake.is-collapsed::after{opacity:1}
-.intake .intake-reset{background:var(--accent);color:#10251c;border:1px solid var(--accent-border);border-radius:10px;font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:background .25s ease,color .25s ease,border-color .25s ease}
+.intake .intake-reset{position:absolute;top:16px;right:16px;z-index:3;background:var(--accent);color:#10251c;border:1px solid var(--accent-border);border-radius:10px;font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;transition:background .25s ease,color .25s ease,border-color .25s ease}
 .intake .intake-reset:hover{background:var(--live-green);color:#fff;border-color:var(--live-green-border)}
 .pathcard{background:var(--sage);border:1px solid var(--line);border-radius:16px;padding:20px}
-.right-panel .pathcard{margin:0}
-.pc-intro-list{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-.pc-intro-list li{font-size:12px;color:#3d5a52;display:flex;gap:8px;align-items:baseline;line-height:1.4}
-.pc-intro-list li:before{content:"→";color:var(--green);font-weight:700}
 .pathcard .pc-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#688078;font-weight:700;margin:0}
 .pathcard h3{font-size:16px;font-weight:700;margin:4px 0 2px}
 .pathcard .pc-sub{font-size:12px;color:var(--muted);margin:0 0 18px}
 .pathcard .pc-foot{font-size:11px;color:#516e67;line-height:1.5;margin:20px 0 0}
-/* Pathway stepper (rendered at the top of the results column, aligned with "What we understood") */
-.pc-steps-title{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#688078;font-weight:700;margin:0 0 14px}
+/* Pathway stepper (compact, in right lane) */
 .pathcard .stepper{display:flex;align-items:flex-start;gap:0;margin:0;padding:0;background:transparent;border:0}
 .pathcard .step{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative}
 .pathcard .step-node{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#d6e8d6;color:#36664d;border:2px solid #a3d5a2;position:relative;z-index:1}
@@ -122,8 +111,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .results-grid.with-panel .right-panel{display:flex}
 /* Intake Panel — solid */
 .intake{background:var(--navy2);color:#fff;border-radius:16px;padding:24px;border:1px solid #264448;position:relative;overflow:hidden;margin-bottom:0;animation:slideDown .3s ease}
-.intake h2{font-size:19px;font-weight:700;margin:0;color:#f6fff7}
-.intake-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+.intake h2{font-size:19px;font-weight:700;margin:0 0 4px;color:#f6fff7;padding-right:132px}
 .intake p{font-size:13px;color:#b4cbca;margin:0 0 16px}
 .intake-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
 .intake .field label{display:block;color:#c8dbd4;font-size:11px;font-weight:600;margin-bottom:5px}
@@ -136,9 +124,7 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 .check-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding:12px 0;border-top:1px solid #264448}
 .check-row label{display:flex;align-items:center;gap:6px;font-size:12px;color:#c8dbd4;cursor:pointer}
 .check-row input{accent-color:var(--accent);width:14px;height:14px}
-.intake-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
-.more-toggle{background:transparent;border:0;color:var(--accent);font-weight:700;font-size:12px;cursor:pointer;padding:2px 0;margin:-4px 0 12px;text-align:left}
-.more-toggle:hover{color:var(--live-green)}
+.intake-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .intake-actions .btn-ghost{color:#b6f5ce;border-color:#476264}
 .intake-actions .btn-ghost:hover{background:#1c3636}
 /* Collapsed form bar — clickable */
@@ -262,9 +248,9 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 @media(max-width:900px){.about-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 /* Responsive */
-@media(max-width:1100px){.results-grid.with-panel{grid-template-columns:1fr}.results-grid.with-panel .right-panel{position:static;max-height:none}}
+@media(max-width:1100px){.results-grid.with-panel{grid-template-columns:1fr}.right-panel{position:static;max-height:none}}
 @media(max-width:1000px){.topgrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:900px){.sidebar{display:none}.content{padding:16px}.topbar{padding:16px}.chat-bar{margin-left:0}.results-grid.with-panel{grid-template-columns:1fr}.results-grid.with-panel .right-panel{position:static;max-height:none}.pathcard{position:static}}
+@media(max-width:900px){.sidebar{display:none}.content{padding:16px}.topbar{padding:16px}.chat-bar{margin-left:0}.results-grid.with-panel{grid-template-columns:1fr}.right-panel{position:static;max-height:none}}
 @media(max-width:600px){.intake-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}.chat-bar-inner{padding:10px 16px}}
 /* Print — clean formatted report */
 @media print{body:before,#mesh{display:none}.sidebar,.chat-bar,.topbar,.stats,.stats-head,.pathcard,#intake-section,#about,.form-collapsed,#confirm-area,.noprint,.whatif{display:none!important}.mainwrap{padding:0}.content{max-width:none;padding:0}.results-grid,.results-grid.with-panel{display:block}.right-panel{display:block!important;position:static;max-height:none;overflow:visible}.card{box-shadow:none;break-inside:avoid}body{background:#fff;color:#000}}
@@ -274,58 +260,54 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 <canvas id="mesh" aria-hidden="true"></canvas>
 <div class="shell">
   <aside class="sidebar">
-    <div class="brand"><img class="brand-logo" src="/logo.png" alt="ValencePack"><div class="brandword">VALENCE<span style="color:var(--accent)">PACK</span></div></div>
+    <div class="brand"><img class="brand-logo" src="/logo.png" alt="ValencePack"><div class="brandword">VALENCE<span style="color:var(--accent)">PACK</span><small>Decision workspace</small></div></div>
     <p class="navlabel">Workspace</p>
     <nav>
       <button class="navbtn active" data-target="overview">◫ Overview</button>
       <button class="navbtn" data-target="intake-section">⊕ New analysis</button>
       <button class="navbtn" data-target="evidence">⊞ Evidence library</button>
-      
+      <button class="navbtn" data-target="verify">◷ Regulatory updates</button>
       <button class="navbtn" data-target="about">ⓘ About</button>
     </nav>
-    
+    <div class="workspace"><div class="ws-av">VP</div><div class="ws-copy"><strong>Demo workspace</strong><br><small>Personal care · EU focus</small></div></div>
   </aside>
   <div class="mainwrap">
     <header class="topbar">
-      <div><h1>Find better packaging in minutes</h1><p class="subtitle">Evidence-linked recommendations for EU personal-care brands.</p></div>
+      <div><p class="eyebrow">Your packaging advisor</p><h1>Find better packaging in minutes</h1><p class="subtitle">Compare options, see the rules where you sell, and get a recommendation you can show buyers and auditors.</p></div>
       <div class="top-actions"><span class="atom" aria-hidden="true"><span class="orb s1"><span class="ring"><i class="electron"></i></span></span><span class="orb s2"><span class="ring"><i class="electron"></i></span></span><span class="orb s3"><span class="ring"><i class="electron"></i></span></span><span class="box"></span></span></div>
     </header>
     <main class="content" id="overview">
       <!-- Stat tiles -->
-      <div class="stats-head" hidden><span class="sh-title">Your review at a glance</span><span class="sh-sub">A quick status summary of this packaging analysis: what's being checked, what's ready, and what still needs you.</span></div>
-      <div class="stats" hidden>
-        <div class="stat"><div class="st-top"><span>Options being checked</span><span class="st-ic ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></span></div><div class="st-num" id="st-options">00</div><div class="st-foot">Screened against your inputs</div></div>
-        <div class="stat"><div class="st-top"><span>Ready to act</span><span class="st-ic ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span></div><div class="st-num" id="st-ready">00</div><div class="st-foot">Ranked recommendations</div></div>
-        <div class="stat"><div class="st-top"><span>Still to confirm</span><span class="st-ic ic-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span></div><div class="st-num" id="st-confirm">00</div><div class="st-foot">Open evidence gaps or warnings</div></div>
-        <div class="stat"><div class="st-top"><span>Rules to check</span><span class="st-ic ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span></div><div class="st-num" id="st-rules">00</div><div class="st-foot">EU regulations cited in your evidence</div></div>
+      <div class="stats-head"><span class="sh-title">Your review at a glance</span><span class="sh-sub">A quick status summary of this packaging analysis: what's being checked, what's ready, and what still needs you.</span></div>
+      <div class="stats">
+        <div class="stat"><div class="st-top"><span>Options being checked</span><span class="st-ic ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></span></div><div class="st-num">03</div><div class="st-foot">Packaging scenarios in progress</div></div>
+        <div class="stat"><div class="st-top"><span>Ready to act</span><span class="st-ic ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span></div><div class="st-num">01</div><div class="st-foot">A recommendation is available</div></div>
+        <div class="stat"><div class="st-top"><span>Still to confirm</span><span class="st-ic ic-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span></div><div class="st-num">03</div><div class="st-foot">Checks outstanding in this review</div></div>
+        <div class="stat"><div class="st-top"><span>Rules to check</span><span class="st-ic ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span></div><div class="st-num">01</div><div class="st-foot">Regulations that may apply</div></div>
       </div>
       <!-- Form (middle lane) + Analysis pathway (right lane) -->
       <div class="topgrid" id="topgrid">
         <section id="intake-section">
           <div class="intake" id="intake-panel">
-            <div class="intake-head">
-              <h2>Fill in what your product uses so we can find better options.</h2>
-              <button class="intake-reset" id="demo" type="button">Load demo scenario</button>
-            </div>
+            <h2>Fill in what your product uses so we can find better options.</h2>
+            <button class="intake-reset" id="reset-form" type="button">New analysis</button>
             <form id="f" novalidate>
               <div class="intake-grid">
                 <div class="field"><label>Product name</label><input name="productName" placeholder="e.g. Herbal Repair Shampoo" required></div>
                 <div class="field"><label>Destination market</label><select name="destination"><option value="EU">European Union</option></select></div>
-                <div class="field"><label>Fill volume (ml)</label><input name="fillMl" type="number" min="1" placeholder="250" required></div>
+                <div class="field"><label>Manufacturing country</label><input name="manufacturingCountry" placeholder="e.g. Pakistan"></div>
               </div>
-              <button class="more-toggle" id="more-toggle" type="button" aria-expanded="false">+ Add more details (material, weights, budget)</button>
-              <div id="more-details" hidden>
               <div class="intake-grid">
-                <div class="field"><label>Manufacturing country</label><input name="manufacturingCountry" placeholder="e.g. Germany"></div>
                 <div class="field"><label>Bottle material</label><select name="bottleMaterial"><option>HDPE</option><option>PET</option><option>PP</option><option>glass</option><option>other</option></select></div>
                 <div class="field"><label>Closure</label><select name="closureType"><option value="pump_metal_spring">Pump (metal spring)</option><option value="mono_pump">Mono-material pump</option><option value="screw_cap">Screw / flip cap</option></select></div>
                 <div class="field"><label>Label</label><select name="labelType"><option value="shrink_sleeve">Full-body shrink sleeve</option><option value="paper">Paper label</option><option value="film_label">Film label</option><option value="direct_print">Direct print</option></select></div>
+                <div class="field"><label>Fill volume (ml)</label><input name="fillMl" type="number" min="1" placeholder="500" required></div>
               </div>
               <div class="intake-grid">
-                <div class="field"><label>Bottle (g)</label><input name="bottleG" type="number" min="0" placeholder="30"></div>
-                <div class="field"><label>Closure (g)</label><input name="closureG" type="number" min="0" placeholder="5"></div>
-                <div class="field"><label>Label (g)</label><input name="labelG" type="number" min="0" placeholder="2"></div>
-                <div class="field"><label>Carton (g)</label><input name="cartonG" type="number" min="0" placeholder="12"></div>
+                <div class="field"><label>Bottle (g)</label><input name="bottleG" type="number" min="0" step="0.1" placeholder="22"></div>
+                <div class="field"><label>Closure (g)</label><input name="closureG" type="number" min="0" step="0.1" placeholder="8"></div>
+                <div class="field"><label>Label (g)</label><input name="labelG" type="number" min="0" step="0.1" placeholder="1.3"></div>
+                <div class="field"><label>Carton (g)</label><input name="cartonG" type="number" min="0" step="0.1" placeholder="5"></div>
                 <div class="field"><label>Recycled content (%)</label><input name="recycledContentPct" type="number" min="0" max="100" placeholder="0"></div>
               </div>
               <div class="intake-grid">
@@ -342,28 +324,25 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
                   <label><input type="checkbox" name="hasFragrance"> Contains fragrance / essential oils</label>
                   <label><input type="checkbox" name="hasCarton"> Has outer carton</label>
                 </div>
-              </div>
-              </div>
-              <div class="form-bottom">
                 <div class="intake-actions">
-                  <button class="btn-primary" id="go" type="submit">See my options</button>
-                  <button class="btn-ghost" id="reset-form" type="button">New analysis</button>
+                  <button class="btn-primary" id="go" type="submit">Analyse package ↗</button>
+                  <button class="btn-ghost" id="demo" type="button">Load demo scenario</button>
                 </div>
                 <div id="err" role="alert"></div>
               </div>
             </form>
           </div>
         </section>
-        <div class="pathcard" id="pathcard">
-          <div class="pc-intro">
-            <h3>Let Vpack help you</h3>
-            <p class="pc-sub">Fill in your product and we'll take it from there.</p>
-            <ul class="pc-intro-list">
-              <li>Screen options against live EU rules</li>
-              <li>Rank them by your priority and budget</li>
-              <li>Back every claim with evidence you can open</li>
-            </ul>
+        <div class="pathcard">
+          <h3>Analysis pathway</h3>
+          <p class="pc-sub">From a real package to a defensible direction.</p>
+          <div class="stepper">
+            <div class="step active" id="s1"><div class="step-node">01</div><div class="step-label">Package</div></div>
+            <div class="step" id="s2"><div class="step-node">02</div><div class="step-label">Options</div></div>
+            <div class="step" id="s3"><div class="step-node">03</div><div class="step-label">Evidence</div></div>
+            <div class="step" id="s4"><div class="step-node">04</div><div class="step-label">Decision</div></div>
           </div>
+          <p class="pc-foot">The connected path shows how product constraints, regional requirements, and environmental claims inform the decision.</p>
         </div>
       </div>
       <div id="confirm-area"></div>
@@ -391,7 +370,7 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
             <ul class="howto">
               <li><strong>Muhammad Ayan Toqeer</strong> &mdash; Team Lead &amp; Backend Developer</li>
               <li><strong>Mamuna Ahmad</strong> &mdash; Frontend Developer &amp; Product Coordinator</li>
-              <li><strong>Aleena Noor</strong> &mdash; Research, Documentation &amp; Domain Expert</li>
+              <li><strong>Aleena</strong> &mdash; Research, Documentation &amp; Domain Expert</li>
             </ul>
             <p class="muted"><strong>Repository:</strong> <a href="https://github.com/AyanTouqeer/ValencePack" target="_blank" rel="noopener">github.com/AyanTouqeer/ValencePack</a></p>
           </div>
@@ -418,7 +397,7 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
     </div>
     <div class="chat-input-row">
       <input type="text" id="chat-input" placeholder="Ask Vpack about your results..." autocomplete="off">
-      <button class="attach-btn" id="attach-btn" title="Upload file (coming soon)" aria-label="Attach file"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+      <button class="attach-btn" id="attach-btn" title="Upload packaging image or spec sheet" aria-label="Attach file"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
       <button class="chat-send" id="chat-send" type="button" aria-label="Send"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
     </div>
   </div>
@@ -438,21 +417,13 @@ function fill(d) {
 }
 function read() {
   const v=n=>{const e=f.elements[n];return e?e.value:"";}, b=n=>{const e=f.elements[n];return e?e.checked:false;}, num=n=>v(n)===""?undefined:Number(v(n));
-  return { productName:v("productName"), category:"personal_care", destination:v("destination"), manufacturingCountry:v("manufacturingCountry"),
+  return { productName:v("productName"), category:"shampoo", destination:v("destination"), manufacturingCountry:v("manufacturingCountry"),
     ph:num("ph"), hasSurfactants:b("hasSurfactants"), hasFragrance:b("hasFragrance"), ingredients:v("ingredients"),
     budgetBand:v("budgetBand"), priority:v("priority"),
     current:{ bottleMaterial:v("bottleMaterial"), closureType:v("closureType"), labelType:v("labelType"), hasCarton:b("hasCarton"),
       fillMl:num("fillMl"), bottleG:num("bottleG"), closureG:num("closureG"), labelG:num("labelG"), cartonG:num("cartonG"), recycledContentPct:num("recycledContentPct") } };
 }
-// Always land at the top on load — browsers otherwise restore the last scroll position
-if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-window.scrollTo(0, 0);
-// "Add more details" collapse — one boolean of state (maps to useState in React)
-const moreBox=document.getElementById("more-details"), moreBtn=document.getElementById("more-toggle");
-function setMore(open){ moreBox.hidden=!open; moreBtn.setAttribute("aria-expanded",String(open)); moreBtn.textContent = open?"− Hide extra details":"+ Add more details (material, weights, budget)"; }
-moreBtn.onclick=()=>setMore(moreBox.hidden);
-const detailsOpen=()=>!moreBox.hidden;
-$("#demo").onclick = async () => { fill(await (await fetch("/api/demo")).json()); setMore(true); };
+$("#demo").onclick = async () => { fill(await (await fetch("/api/demo")).json()); };
 
 let lastResult = null, lastInput = null, chatMessages = [];
 
@@ -464,12 +435,7 @@ function showConfirmation(input) {
   c.appendChild(el("h3","","What we understood"));
   const priorityMap = {recyclability:"maximize recyclability", material_reduction:"minimize material usage", recycled_content:"increase recycled content", cost:"reduce cost"};
   const p = el("p","understood-text");
-  if (!detailsOpen()) {
-    // Only the 3 basics were actually provided — never claim defaults the user never entered
-    p.innerHTML = `You have <strong>${input.productName||"a product"}</strong> sold in the <strong>${input.destination}</strong> in a <strong>${input.current.fillMl||"?"} ml</strong> pack. Vpack will use typical defaults for the rest — or <strong>Add more details</strong> for a sharper match.`;
-  } else {
-    p.innerHTML = `You have an existing <strong>${input.productName||"product"}</strong> in a <strong>${input.current.bottleMaterial} ${input.current.fillMl||"? "}ml</strong> bottle with a ${input.current.closureType?.replace(/_/g," ")||"standard"} closure and ${input.current.labelType?.replace(/_/g," ")||"standard"} label${input.current.hasCarton?", plus an outer carton":""}. Your destination market is <strong>${input.destination}</strong>${input.manufacturingCountry?", manufactured in "+input.manufacturingCountry:""}. You're looking to <strong>${priorityMap[input.priority]||"improve sustainability"}</strong> with a <strong>${input.budgetBand}</strong> budget.`;
-  }
+  p.innerHTML = `You have an existing <strong>${input.productName||"product"}</strong> in a <strong>${input.current.bottleMaterial} ${input.current.fillMl||"? "}ml</strong> bottle with a ${input.current.closureType?.replace(/_/g," ")||"standard"} closure and ${input.current.labelType?.replace(/_/g," ")||"standard"} label${input.current.hasCarton?", plus an outer carton":""}. Your destination market is <strong>${input.destination}</strong>${input.manufacturingCountry?", manufactured in "+input.manufacturingCountry:""}. You're looking to <strong>${priorityMap[input.priority]||"improve sustainability"}</strong> with a <strong>${input.budgetBand}</strong> budget.`;
   c.appendChild(p);
   const actions = el("div","confirm-actions");
   const proceedBtn = el("button","btn-primary","Yes, analyse my product →");
@@ -479,7 +445,7 @@ function showConfirmation(input) {
   c.appendChild(actions);
   area.appendChild(c);
   c.scrollIntoView({behavior:"smooth"});
-  editBtn.onclick = () => { area.replaceChildren(); expandForm(); setMore(true); scrollFormToTop(); };
+  editBtn.onclick = () => { area.replaceChildren(); expandForm(); scrollFormToTop(); };
   proceedBtn.onclick = () => { area.replaceChildren(); runAssessment(input); };
   chatBtn.onclick = () => { if(window.__openChat) window.__openChat(); };
 }
@@ -492,14 +458,16 @@ async function runAssessment(input) {
     if (!res.ok) throw new Error((data.error||["Request failed"]).join("; "));
     render(data, input);
   } catch(err) { $("#err").textContent = err.message; }
-  finally { btn.disabled = false; btn.textContent = "See my options"; }
+  finally { btn.disabled = false; btn.textContent = "Analyse package ↗"; }
 }
 
 function render(d, input) {
   lastResult = d; lastInput = input || read(); chatMessages = [];
   collapseForm();
-  renderResultsSection(d);
+  $("#s1").classList.remove("active"); $("#s1").classList.add("done");
+  $("#s2").classList.add("active"); $("#s3").classList.add("active");
   $("#results-grid").classList.add("with-panel");
+  renderResultsSection(d);
   $("#out").scrollIntoView({behavior:"smooth"});
 }
 
@@ -507,28 +475,6 @@ function renderResultsSection(d) {
   const out = $("#out"); out.replaceChildren();
   const rp = $("#right-panel"); rp.replaceChildren();
   const expl = d.explanation || {};
-
-  // Stats: real numbers, refreshed on every assessment AND every what-if re-run
-  const gaps = (d.ranked||[]).reduce((s,o)=>s+((o.evidenceGaps||[]).length+(o.warnings||[]).length),0);
-  const setStat=(id,n)=>{ const e=document.getElementById(id); if(e) e.textContent = String(n).padStart(2,"0"); };
-  setStat("st-options", (d.ranked||[]).length + ((d.screening&&d.screening.excluded)||[]).length);
-  setStat("st-ready", (d.ranked||[]).length);
-  setStat("st-confirm", gaps);
-  setStat("st-rules", (d.sources||[]).filter(s=>s.type==="regulation").length);
-  document.querySelectorAll(".stats,.stats-head").forEach(x=>{x.hidden=false;});
-
-  // Pathway stepper: first item of the results column, so it aligns with "What we understood"
-  const pw = el("div","pathcard");
-  pw.appendChild(el("p","pc-steps-title","Analysis pathway"));
-  const stepper = el("div","stepper");
-  [["s1","01","Package","done"],["s2","02","Options","active"],["s3","03","Evidence","done"],["s4","04","Decision","active"]].forEach(([id,n,lbl,cls])=>{
-    const step=el("div","step "+cls); step.id=id;
-    step.appendChild(el("div","step-node",n)); step.appendChild(el("div","step-label",lbl));
-    stepper.appendChild(step);
-  });
-  pw.appendChild(stepper);
-  pw.appendChild(el("p","pc-foot","The connected path shows how product constraints, regional requirements, and environmental claims inform the decision."));
-  rp.prepend(pw);
   const byId = Object.fromEntries((expl.options||[]).map(o=>[o.id,o]));
   const srcById = Object.fromEntries((d.sources||[]).map(s=>[s.id,s]));
 
@@ -541,7 +487,7 @@ function renderResultsSection(d) {
   // Summary
   out.appendChild(el("h2","section-title","Recommendation"));
   const sum = el("div","card");
-  const _hasResults = (d.ranked && d.ranked.length > 0); if (_hasResults) { sum.appendChild(el("p","muted",expl.summary||"Ranked options below.")); } else { sum.appendChild(el("h3","","No eligible options after screening")); sum.appendChild(el("p","muted","Every candidate pack was removed by a rule for your inputs. Adjust the budget or priority in the panel on the right to widen the search, or view the removal reasons below.")); }
+  sum.appendChild(el("p","muted",expl.summary||"No eligible options after screening."));
   if(d.baseline) sum.appendChild(el("p","muted",`Current packaging: ${d.baseline.totalGrams} g total, ${d.baseline.gramsPer100ml} g per 100 ml of product.`));
   if(expl.nextAction){const p=el("p");p.innerHTML=`<strong>Next action: </strong>${expl.nextAction}`;sum.appendChild(p);}
   sum.appendChild(el("span","pill","Explanations: "+(expl.generatedBy||"n/a")));
@@ -549,7 +495,7 @@ function renderResultsSection(d) {
 
   // Compliance
   out.appendChild(el("h2","section-title","Compliance screening ("+d.input.destination+")"));
-  const sc = el("div","card"); const mkt = d.screening.market; if (mkt && mkt.ok === true) { sc.appendChild(el("p","","Pack format is permitted in "+d.input.destination+". No market-level exclusions applied.")); } else if (mkt && mkt.ok === false) { sc.appendChild(el("p","warn","Pack format is not permitted in "+d.input.destination+". See rule hits below.")); } else { sc.appendChild(el("p","muted","Market screening completed. See rule hits below.")); }
+  const sc = el("div","card"); sc.appendChild(list(d.screening.market.notes));
   if(d.screening.excluded.length){
     sc.appendChild(el("h3","","Options removed by rules"));
     const tb=el("div","tablebox"); const t=el("table","matrix");
@@ -582,8 +528,10 @@ function renderResultsSection(d) {
   });
   if(d.alsoConsidered?.length) out.appendChild(el("p","muted","Also eligible, ranked lower: "+d.alsoConsidered.map(x=>`${x.name} (${x.score.toFixed(0)})`).join("; ")));
 
-  // Evidence matrix (flat tags, no pills)
-  out.appendChild(el("h2","section-title","Transparent evidence matrix"));
+  // Evidence matrix (flat tags, no pills) - Fixed ID for sidebar navigation
+  const evTitle = el("h2","section-title","Transparent evidence matrix");
+  evTitle.id = "evidence";
+  out.appendChild(evTitle);
   out.appendChild(el("p","muted","Source-tagged signals, not a single opaque score."));
   const mb=el("div","tablebox");const mt=el("table","matrix");
   const mhr=el("tr");["Option","Fit","Requirements","Evidence","Confidence","Risk"].forEach(h=>mhr.appendChild(el("th","",h)));mt.appendChild(mhr);
@@ -635,6 +583,8 @@ function renderResultsSection(d) {
   const rpt=el("div","card noprint");rpt.style.textAlign="center";
   const pbtn=el("button","btn-primary","Print / save as PDF");pbtn.onclick=()=>window.print();rpt.appendChild(pbtn);
   out.appendChild(rpt);
+
+  $("#s3").classList.remove("active");$("#s3").classList.add("done");$("#s4").classList.add("active");
 }
 
 // Form expand/collapse: minimized form shows a clipped snippet; click to expand; auto-minimize when scrolled above mid-screen
@@ -643,8 +593,8 @@ function expandForm(){ $("#intake-panel").classList.remove("is-collapsed"); }
 function scrollFormToTop(){ const s=document.getElementById("intake-section"); if(s) s.scrollIntoView({behavior:"smooth",block:"start"}); }
 function collapseFormIfExpanded(){ if(lastResult && !$("#intake-panel").classList.contains("is-collapsed")) collapseForm(); }
 $("#intake-panel").addEventListener("click",e=>{ if(e.target.closest("#reset-form")) return; if($("#intake-panel").classList.contains("is-collapsed")) expandForm(); });
-function doReset(){ $("#out").replaceChildren();$("#right-panel").replaceChildren();$("#confirm-area").replaceChildren();$("#results-grid").classList.remove("with-panel");expandForm();setMore(false);f.reset();lastResult=null;document.querySelectorAll(".stats,.stats-head").forEach(x=>{x.hidden=true;});scrollFormToTop(); }
-$("#reset-form").onclick=doReset;
+$("#reset-form").onclick=()=>{$("#out").replaceChildren();$("#right-panel").replaceChildren();$("#confirm-area").replaceChildren();expandForm();$("#results-grid").classList.remove("with-panel");f.reset();lastResult=null;scrollFormToTop();
+  $("#s1").classList.add("active");$("#s1").classList.remove("done");$("#s2").classList.remove("active","done");$("#s3").classList.remove("active","done");$("#s4").classList.remove("active","done");};
 
 // Chat: suggestions on focus, hide on blur, minimize on outside click
 const chatInput=$("#chat-input"),chatSug=$("#chat-suggestions"),chatHist=$("#chat-history");
@@ -673,7 +623,46 @@ async function sendChat(){
 }
 $("#chat-send").onclick=sendChat;
 chatInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}});
-$("#attach-btn").onclick=()=>{alert("File upload coming soon.");};
+
+// Multimodal extraction via /api/extract
+$("#attach-btn").onclick=()=>{
+  const inp=document.createElement("input");
+  inp.type="file";
+  inp.accept="image/*,application/pdf";
+  inp.onchange=async()=>{
+    if(!inp.files||!inp.files[0])return;
+    const file=inp.files[0];
+    const fd=new FormData();
+    fd.append("file",file);
+    const btn=$("#attach-btn");
+    btn.style.opacity="0.5";
+    btn.disabled=true;
+    try{
+      const res=await fetch("/api/extract",{method:"POST",body:fd});
+      const ext=await res.json();
+      if(res.ok&&!ext.error){
+        fill({productName:ext.productName,current:ext});
+        expandForm();
+        scrollFormToTop();
+        chatHist.classList.add("visible");
+        chatHist.appendChild(el("div","chat-bubble assistant",`Extracted packaging specs from "${file.name}" and populated the form.`));
+        chatHist.scrollTop=chatHist.scrollHeight;
+      }else{
+        chatHist.classList.add("visible");
+        chatHist.appendChild(el("div","chat-bubble assistant refusal","Could not extract packaging specs from that file."));
+        chatHist.scrollTop=chatHist.scrollHeight;
+      }
+    }catch(e){
+      chatHist.classList.add("visible");
+      chatHist.appendChild(el("div","chat-bubble assistant refusal","File upload failed."));
+      chatHist.scrollTop=chatHist.scrollHeight;
+    }finally{
+      btn.style.opacity="1";
+      btn.disabled=false;
+    }
+  };
+  inp.click();
+};
 
 function renderCitations(text){
   if(text.startsWith("missing:")){const id=text.replace("missing:","").trim();return`<strong>⚠️ Insufficient evidence.</strong> Source <span class="cite">${id}</span> not yet collected.`;}
@@ -693,8 +682,6 @@ window.addEventListener("scroll",()=>{
 // Sidebar nav
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");
-  // "New analysis" in the sidebar = full reset + jump to the form (not just a scroll)
-  if(b.dataset.target==="intake-section" && lastResult) doReset();
   const t=b.dataset.target;if(t)document.getElementById(t)?.scrollIntoView({behavior:"smooth"});
 }));
 

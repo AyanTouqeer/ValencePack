@@ -8,14 +8,22 @@ const { handleChat } = require("./lib/chat");
 
 // --- MULTIMODAL EXTRACTION SETUP ---
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" }); 
+const uploadDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+const upload = multer({ dest: uploadDir }); 
 const { extractPackagingData } = require("./lib/gemini");
 
 const app = express();
 app.use(express.json({ limit: "100kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/api/health", (_req, res) => res.json({ ok: true, gemini: !!process.env.GEMINI_API_KEY, firestore: process.env.ENABLE_FIRESTORE === "true" }));
+app.get("/api/health", (_req, res) => res.json({ 
+  ok: true, 
+  gemini: !!(process.env.GCP_PROJECT_ID || process.env.GEMINI_API_KEY), 
+  firestore: process.env.ENABLE_FIRESTORE === "true" 
+}));
 app.get("/api/demo", (_req, res) => res.json(JSON.parse(fs.readFileSync(path.join(__dirname, "data", "demo-scenario.json"), "utf8"))));
 
 // --- 1. MULTIMODAL EXTRACTION ENDPOINT ---
@@ -24,7 +32,7 @@ app.post("/api/extract", upload.single("file"), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "No file uploaded" });
     
     const extractedJson = await extractPackagingData(req.file.path, req.file.mimetype);
-    fs.unlinkSync(req.file.path); 
+    if (fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path); 
     
     res.json(extractedJson);
   } catch (e) {

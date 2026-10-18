@@ -17,6 +17,13 @@ const LABEL_PHRASE = {
   film_label: 'a film label',
   direct_print: 'direct printing',
 }
+// Same treatment for closures, so a split screw cap / flip-top cap reads correctly.
+const CLOSURE_PHRASE = {
+  pump_metal_spring: 'a metal-spring pump',
+  mono_pump: 'a mono-material pump',
+  screw_cap: 'a screw cap',
+  flip_cap: 'a flip-top cap',
+}
 
 export default function ConfirmationCard({ input, detailsOpen, onProceed, onEdit, busy }) {
   const c = input.current || {}
@@ -32,7 +39,8 @@ export default function ConfirmationCard({ input, detailsOpen, onProceed, onEdit
   const detailed = (
     <>
       You have an existing <strong>{input.productName || 'product'}</strong> in a{' '}
-      <strong>{c.bottleMaterial} {c.fillMl || '? '}ml</strong> bottle with a {pretty(c.closureType) || 'standard'} closure and{' '}
+      <strong>{c.bottleMaterial} {c.fillMl || '? '}ml</strong> bottle with{' '}
+      {CLOSURE_PHRASE[c.closureType] || `a ${pretty(c.closureType) || 'standard'} closure`} and{' '}
       {LABEL_PHRASE[c.labelType] || 'a standard label'}{c.hasCarton ? ', plus an outer carton' : ''}. Your destination market is{' '}
       <strong>{input.destination}</strong>{input.manufacturingCountry ? ', manufactured in ' + input.manufacturingCountry : ''}. You're
       looking to <strong>{PRIORITY_MAP[input.priority] || 'improve sustainability'}</strong> with a <strong>{input.budgetBand}</strong> budget.

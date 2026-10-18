@@ -10,13 +10,17 @@ function Check({ label, name, checked, onChange }) {
 
 export default function IntakeForm({
   values, setValue, detailsOpen, onToggleDetails,
-  onSubmit, onReset, onDemo, error, busy, collapsed, onPanelClick,
+  onSubmit, onReset, onDemo, onUpload, error, busy, collapsed, onPanelClick,
 }) {
   return (
     <div className={'intake' + (collapsed ? ' is-collapsed' : '')} id="intake-panel" onClick={onPanelClick}>
       <div className="intake-head">
         <h2>Fill in what your product uses so we can find better options.</h2>
-        <button className="intake-reset" id="demo" type="button" onClick={onDemo}>Load demo scenario</button>
+        <div className="intake-head-actions">
+          <button className="intake-upload" id="upload-spec" type="button" onClick={onUpload}
+            title="Upload a PDF spec sheet or product photo and we'll fill the form for you">Upload spec sheet</button>
+          <button className="intake-reset" id="demo" type="button" onClick={onDemo}>Load demo scenario</button>
+        </div>
       </div>
 
       <form id="f" noValidate onSubmit={(e) => { e.preventDefault(); onSubmit() }}>
@@ -51,8 +55,9 @@ export default function IntakeForm({
               </select>
             </Field>
             <Field label="Closure">
+              {/* Aleena: a screw cap and a flip-top cap are different closures — separate choices. */}
               <select name="closureType" value={values.closureType} onChange={(e) => setValue('closureType', e.target.value)}>
-                <option value="pump_metal_spring">Pump (metal spring)</option><option value="mono_pump">Mono-material pump</option><option value="screw_cap">Screw / flip cap</option>
+                <option value="pump_metal_spring">Pump (metal spring)</option><option value="mono_pump">Mono-material pump</option><option value="screw_cap">Screw cap</option><option value="flip_cap">Flip-top cap</option>
               </select>
             </Field>
             {/* Aleena #1: option text drops the word "label" — the field itself already says Label. */}
@@ -67,6 +72,22 @@ export default function IntakeForm({
             <Field label="Bottle (empty, g)"><input name="bottleG" type="number" min="0" step="0.1" placeholder="22" title="Weight of the empty bottle, without contents" value={values.bottleG} onChange={(e) => setValue('bottleG', e.target.value)} /></Field>
             <Field label="Closure (g)"><input name="closureG" type="number" min="0" step="0.1" placeholder="8" value={values.closureG} onChange={(e) => setValue('closureG', e.target.value)} /></Field>
             <Field label="Label (g)"><input name="labelG" type="number" min="0" step="0.1" placeholder="1.3" value={values.labelG} onChange={(e) => setValue('labelG', e.target.value)} /></Field>
+            {/* Aleena #4: the carton switch and its weight are one decision — adjacent cells of the
+                same grid, so they line up with every other field and the weight greys out when off. */}
+            <div className="field">
+              <label>Outer carton</label>
+              <label className="carton-check">
+                <input type="checkbox" name="hasCarton" checked={values.hasCarton}
+                  onChange={(e) => { setValue('hasCarton', e.target.checked); if (!e.target.checked) setValue('cartonG', '') }} />
+                Has outer carton
+              </label>
+            </div>
+            <Field label="Carton (g)">
+              <input name="cartonG" type="number" min="0" step="0.1" placeholder="5" value={values.cartonG}
+                disabled={!values.hasCarton} title={values.hasCarton ? 'Weight of the empty carton' : 'Turn on "Has outer carton" to enter this'}
+                className={values.hasCarton ? '' : 'is-blocked'}
+                onChange={(e) => setValue('cartonG', e.target.value)} />
+            </Field>
             <Field label="Recycled content (%)"><input name="recycledContentPct" type="number" min="0" max="100" placeholder="0" value={values.recycledContentPct} onChange={(e) => setValue('recycledContentPct', e.target.value)} /></Field>
           </div>
           <div className="intake-grid">
@@ -93,17 +114,6 @@ export default function IntakeForm({
             <div className="check-row">
               <Check label="Contains surfactants" name="hasSurfactants" checked={values.hasSurfactants} onChange={(v) => setValue('hasSurfactants', v)} />
               <Check label="Contains fragrance / essential oils" name="hasFragrance" checked={values.hasFragrance} onChange={(v) => setValue('hasFragrance', v)} />
-            </div>
-            {/* Aleena #4: the carton checkbox and its weight are one decision — kept side by side,
-                and the weight greys out (and clears) when there is no carton to weigh. */}
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', marginTop: '12px', flexWrap: 'wrap' }}>
-              <Check label="Has outer carton" name="hasCarton" checked={values.hasCarton} onChange={(v) => { setValue('hasCarton', v); if (!v) setValue('cartonG', '') }} />
-              <Field label="Carton (g)">
-                <input name="cartonG" type="number" min="0" step="0.1" placeholder="5" value={values.cartonG}
-                  disabled={!values.hasCarton} title={values.hasCarton ? 'Weight of the empty carton' : 'Turn on "Has outer carton" to enter this'}
-                  style={{ opacity: values.hasCarton ? 1 : 0.45, cursor: values.hasCarton ? 'auto' : 'not-allowed' }}
-                  onChange={(e) => setValue('cartonG', e.target.value)} />
-              </Field>
             </div>
           </div>
         </div>

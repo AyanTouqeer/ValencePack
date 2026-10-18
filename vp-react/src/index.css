@@ -87,6 +87,10 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .intake.is-collapsed::after{opacity:1}
 .intake .intake-reset{background:var(--accent);color:#10251c;border:1px solid var(--accent-border);border-radius:10px;font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:background .25s ease,color .25s ease,border-color .25s ease}
 .intake .intake-reset:hover{background:var(--live-green);color:#fff;border-color:var(--live-green-border)}
+/* Intake header actions: "Upload spec sheet" (secondary) beside "Load demo scenario" (primary) */
+.intake-head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.intake .intake-upload{background:transparent;color:#b6f5ce;border:1px solid #476264;border-radius:10px;font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:background .25s ease}
+.intake .intake-upload:hover{background:#1c3636}
 .pathcard{background:var(--sage);border:1px solid var(--line);border-radius:16px;padding:20px}
 .right-panel .pathcard{margin:0}
 .pc-intro-list{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
@@ -120,6 +124,10 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .intake .field input,.intake .field select,.intake .field textarea{width:100%;border:1px solid #476264;background:#162d35;color:#fff;border-radius:9px;padding:10px 11px;font-size:13px}
 .intake .field input::placeholder{color:#8ca5a3}
 .intake .field textarea{resize:vertical;min-height:40px}
+/* Carton switch — a checkbox styled as a field so it aligns with its weight input in the grid */
+.intake .field .carton-check{display:flex;align-items:center;gap:8px;box-sizing:border-box;width:100%;min-height:41px;padding:0 2px;font-size:13px;color:#c8dbd4;cursor:pointer}
+.intake .field .carton-check input{accent-color:var(--accent);width:14px;height:14px;flex:0 0 auto}
+.intake .field input.is-blocked{opacity:.45;cursor:not-allowed}
 input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 .form-bottom{margin-top:4px}
@@ -259,6 +267,9 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 .about .howto{margin:0;padding-left:18px}
 .about .howto li{margin:7px 0;font-size:13px;line-height:1.5;color:var(--ink)}
 .about .fill{color:var(--gold);font-style:italic}
+/* Maker contact links — same link treatment as the sources table */
+.about .maker-mail{color:var(--green);text-decoration:none;font-size:12.5px;font-weight:600}
+.about .maker-mail:hover{text-decoration:underline}
 @media(max-width:900px){.about-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 /* Responsive */

@@ -18,9 +18,18 @@ export default function About() {
           <h3>About the makers</h3>
           <p className="muted">ValencePack is a decision-support workspace for sustainable packaging in the EU market, built for AI Builder Cup 2026 by Team Valence Cache.</p>
           <ul className="howto">
-            <li><strong>Muhammad Ayan Toqeer</strong> — Team Lead &amp; Backend Developer</li>
-            <li><strong>Mamuna Ahmad</strong> — Frontend Developer &amp; Product Coordinator</li>
-            <li><strong>Aleena Noor</strong> — Research, Documentation &amp; Domain Expert</li>
+            <li>
+              <strong>Muhammad Ayan Toqeer</strong> — Team Lead &amp; Backend Developer<br />
+              <a className="maker-mail" href="mailto:ayan.ak862@gmail.com">ayan.ak862@gmail.com</a>
+            </li>
+            <li>
+              <strong>Mamuna Ahmad</strong> — Frontend Developer &amp; Product Coordinator<br />
+              <a className="maker-mail" href="mailto:meitrixvision@gmail.com">meitrixvision@gmail.com</a>
+            </li>
+            <li>
+              <strong>Aleena Noor</strong> — Research, Documentation &amp; Domain Expert<br />
+              <a className="maker-mail" href="mailto:nooraleena5@gmail.com">nooraleena5@gmail.com</a>
+            </li>
           </ul>
           <p className="muted">
             <strong>Repository:</strong>{' '}

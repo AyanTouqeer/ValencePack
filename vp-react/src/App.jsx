@@ -175,6 +175,7 @@ export default function App() {
                   values={values} setValue={setValue}
                   detailsOpen={detailsOpen} onToggleDetails={onToggleDetails}
                   onSubmit={onSubmit} onReset={onReset} onDemo={onDemo}
+                  onUpload={() => { if (chatRef.current) chatRef.current.attach() }}
                   error={error} busy={busy}
                   collapsed={collapsed} onPanelClick={() => setCollapsed(false)}
                 />

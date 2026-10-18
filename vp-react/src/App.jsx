@@ -45,6 +45,21 @@ export default function App() {
     } catch (e) { setError('Could not load the demo scenario.') }
   }
 
+  // Multimodal extraction result from the chat paperclip (Ayan's /api/extract) → fill the form.
+  // The endpoint returns flat keys: productName, bottleMaterial, closureType, hasCarton, fillMl.
+  function onExtracted(ext) {
+    setValues((v) => ({
+      ...v,
+      productName: ext.productName ?? v.productName,
+      bottleMaterial: ext.bottleMaterial ?? v.bottleMaterial,
+      closureType: ext.closureType ?? v.closureType,
+      fillMl: ext.fillMl != null ? String(ext.fillMl) : v.fillMl,
+      hasCarton: typeof ext.hasCarton === 'boolean' ? ext.hasCarton : v.hasCarton,
+    }))
+    setDetailsOpen(true)
+    document.getElementById('intake-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   function onSubmit() {
     setError('')
     const payload = buildPayload(values)
@@ -200,7 +215,7 @@ export default function App() {
           </main>
         </div>
       </div>
-      <ChatWidget ref={chatRef} contextData={lastResult} />
+      <ChatWidget ref={chatRef} contextData={lastResult} onExtracted={onExtracted} />
     </>
   )
 }

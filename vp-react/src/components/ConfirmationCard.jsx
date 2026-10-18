@@ -10,6 +10,14 @@ const PRIORITY_MAP = {
 }
 const pretty = (s) => (s ? s.replace(/_/g, ' ') : null)
 
+// Aleena #1: read the label choice back as a natural phrase — never "film label label".
+const LABEL_PHRASE = {
+  shrink_sleeve: 'a full-body shrink sleeve',
+  paper: 'a paper label',
+  film_label: 'a film label',
+  direct_print: 'direct printing',
+}
+
 export default function ConfirmationCard({ input, detailsOpen, onProceed, onEdit, busy }) {
   const c = input.current || {}
 
@@ -25,7 +33,7 @@ export default function ConfirmationCard({ input, detailsOpen, onProceed, onEdit
     <>
       You have an existing <strong>{input.productName || 'product'}</strong> in a{' '}
       <strong>{c.bottleMaterial} {c.fillMl || '? '}ml</strong> bottle with a {pretty(c.closureType) || 'standard'} closure and{' '}
-      {pretty(c.labelType) || 'standard'} label{c.hasCarton ? ', plus an outer carton' : ''}. Your destination market is{' '}
+      {LABEL_PHRASE[c.labelType] || 'a standard label'}{c.hasCarton ? ', plus an outer carton' : ''}. Your destination market is{' '}
       <strong>{input.destination}</strong>{input.manufacturingCountry ? ', manufactured in ' + input.manufacturingCountry : ''}. You're
       looking to <strong>{PRIORITY_MAP[input.priority] || 'improve sustainability'}</strong> with a <strong>{input.budgetBand}</strong> budget.
     </>

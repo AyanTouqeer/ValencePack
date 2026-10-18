@@ -4,7 +4,8 @@ import Atom from './Atom.jsx'
 // Bottom "Chat with AI" widget — ported from the vanilla chat-bar IIFE + sendChat().
 // Talks to POST /api/chat with the current assessment as contextData, renders source-id
 // citations as links, shows a typing indicator, and can be told (from the what-if panel)
-// to announce a change and open itself.
+// to announce a change and open itself. The paperclip does multimodal spec extraction
+// via POST /api/extract (Ayan's feature) and hands the result up to App to fill the form.
 
 const SUGGESTIONS = [
   'Why was glass excluded?',
@@ -28,11 +29,12 @@ function renderCitations(answer, srcById) {
   })
 }
 
-const ChatWidget = forwardRef(function ChatWidget({ contextData }, ref) {
+const ChatWidget = forwardRef(function ChatWidget({ contextData, onExtracted }, ref) {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([]) // {role, html?} — assistant html is pre-rendered citations
   const [input, setInput] = useState('')
   const [sending, setSending] = useState(false)
+  const [extracting, setExtracting] = useState(false)
   const [sugVisible, setSugVisible] = useState(false)
   const histRef = useRef(null)
   const inputRef = useRef(null)
@@ -65,6 +67,40 @@ const ChatWidget = forwardRef(function ChatWidget({ contextData }, ref) {
     } finally {
       setSending(false)
     }
+  }
+
+  const say = (text, refusal) =>
+    setMessages((m) => [...m, { role: 'assistant', cls: 'chat-bubble assistant' + (refusal ? ' refusal' : ''), text }])
+
+  // Multimodal extraction: image / spec-sheet → /api/extract → App fills the intake form.
+  function onAttach() {
+    if (extracting) return
+    const picker = document.createElement('input')
+    picker.type = 'file'
+    picker.accept = 'image/*,application/pdf'
+    picker.onchange = async () => {
+      const file = picker.files && picker.files[0]
+      if (!file) return
+      setExtracting(true)
+      setOpen(true)
+      try {
+        const fd = new FormData()
+        fd.append('file', file)
+        const res = await fetch('/api/extract', { method: 'POST', body: fd })
+        const ext = await res.json().catch(() => ({}))
+        if (res.ok && !ext.error) {
+          if (onExtracted) onExtracted(ext)
+          say(`Extracted packaging specs from "${file.name}" and populated the form.`)
+        } else {
+          say('Could not extract packaging specs from that file.', true)
+        }
+      } catch (err) {
+        say('File upload failed.', true)
+      } finally {
+        setExtracting(false)
+      }
+    }
+    picker.click()
   }
 
   // Imperative API used by the what-if panel to announce changes and open the chat.
@@ -119,7 +155,8 @@ const ChatWidget = forwardRef(function ChatWidget({ contextData }, ref) {
             onBlur={() => setTimeout(() => setSugVisible(false), 200)}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat() } }}
           />
-          <button className="attach-btn" id="attach-btn" type="button" title="Upload file (coming soon)" aria-label="Attach file" onClick={() => alert('File upload coming soon.')}>
+          <button className="attach-btn" id="attach-btn" type="button" title="Upload packaging image or spec sheet" aria-label="Attach file"
+            disabled={extracting} style={extracting ? { opacity: 0.5 } : undefined} onClick={onAttach}>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
           </button>
           <button className={'chat-send' + (sending ? ' loading' : '')} id="chat-send" type="button" aria-label="Send" disabled={sending} onClick={() => sendChat()}>

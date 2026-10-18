@@ -31,7 +31,7 @@ export default function IntakeForm({
             </select>
           </Field>
           <Field label="Fill volume (ml)">
-            <input name="fillMl" type="number" min="1" placeholder="250" required
+            <input name="fillMl" type="number" min="1" placeholder="500" required
               value={values.fillMl} onChange={(e) => setValue('fillMl', e.target.value)} />
           </Field>
         </div>
@@ -43,7 +43,7 @@ export default function IntakeForm({
         <div id="more-details" hidden={!detailsOpen}>
           <div className="intake-grid">
             <Field label="Manufacturing country">
-              <input name="manufacturingCountry" placeholder="e.g. Germany" value={values.manufacturingCountry} onChange={(e) => setValue('manufacturingCountry', e.target.value)} />
+              <input name="manufacturingCountry" placeholder="e.g. Pakistan" value={values.manufacturingCountry} onChange={(e) => setValue('manufacturingCountry', e.target.value)} />
             </Field>
             <Field label="Bottle material">
               <select name="bottleMaterial" value={values.bottleMaterial} onChange={(e) => setValue('bottleMaterial', e.target.value)}>
@@ -55,17 +55,18 @@ export default function IntakeForm({
                 <option value="pump_metal_spring">Pump (metal spring)</option><option value="mono_pump">Mono-material pump</option><option value="screw_cap">Screw / flip cap</option>
               </select>
             </Field>
+            {/* Aleena #1: option text drops the word "label" — the field itself already says Label. */}
             <Field label="Label">
               <select name="labelType" value={values.labelType} onChange={(e) => setValue('labelType', e.target.value)}>
-                <option value="shrink_sleeve">Full-body shrink sleeve</option><option value="paper">Paper label</option><option value="film_label">Film label</option><option value="direct_print">Direct print</option>
+                <option value="shrink_sleeve">Full-body shrink sleeve</option><option value="paper">Paper</option><option value="film_label">Film</option><option value="direct_print">Direct print</option>
               </select>
             </Field>
           </div>
           <div className="intake-grid">
-            <Field label="Bottle (g)"><input name="bottleG" type="number" min="0" placeholder="30" value={values.bottleG} onChange={(e) => setValue('bottleG', e.target.value)} /></Field>
-            <Field label="Closure (g)"><input name="closureG" type="number" min="0" placeholder="5" value={values.closureG} onChange={(e) => setValue('closureG', e.target.value)} /></Field>
-            <Field label="Label (g)"><input name="labelG" type="number" min="0" placeholder="2" value={values.labelG} onChange={(e) => setValue('labelG', e.target.value)} /></Field>
-            <Field label="Carton (g)"><input name="cartonG" type="number" min="0" placeholder="12" value={values.cartonG} onChange={(e) => setValue('cartonG', e.target.value)} /></Field>
+            {/* Aleena #2: weights are of the EMPTY pack — say so on the bottle field. Placeholders follow the 500 ml baseline. */}
+            <Field label="Bottle (empty, g)"><input name="bottleG" type="number" min="0" step="0.1" placeholder="22" title="Weight of the empty bottle, without contents" value={values.bottleG} onChange={(e) => setValue('bottleG', e.target.value)} /></Field>
+            <Field label="Closure (g)"><input name="closureG" type="number" min="0" step="0.1" placeholder="8" value={values.closureG} onChange={(e) => setValue('closureG', e.target.value)} /></Field>
+            <Field label="Label (g)"><input name="labelG" type="number" min="0" step="0.1" placeholder="1.3" value={values.labelG} onChange={(e) => setValue('labelG', e.target.value)} /></Field>
             <Field label="Recycled content (%)"><input name="recycledContentPct" type="number" min="0" max="100" placeholder="0" value={values.recycledContentPct} onChange={(e) => setValue('recycledContentPct', e.target.value)} /></Field>
           </div>
           <div className="intake-grid">
@@ -92,7 +93,17 @@ export default function IntakeForm({
             <div className="check-row">
               <Check label="Contains surfactants" name="hasSurfactants" checked={values.hasSurfactants} onChange={(v) => setValue('hasSurfactants', v)} />
               <Check label="Contains fragrance / essential oils" name="hasFragrance" checked={values.hasFragrance} onChange={(v) => setValue('hasFragrance', v)} />
-              <Check label="Has outer carton" name="hasCarton" checked={values.hasCarton} onChange={(v) => setValue('hasCarton', v)} />
+            </div>
+            {/* Aleena #4: the carton checkbox and its weight are one decision — kept side by side,
+                and the weight greys out (and clears) when there is no carton to weigh. */}
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', marginTop: '12px', flexWrap: 'wrap' }}>
+              <Check label="Has outer carton" name="hasCarton" checked={values.hasCarton} onChange={(v) => { setValue('hasCarton', v); if (!v) setValue('cartonG', '') }} />
+              <Field label="Carton (g)">
+                <input name="cartonG" type="number" min="0" step="0.1" placeholder="5" value={values.cartonG}
+                  disabled={!values.hasCarton} title={values.hasCarton ? 'Weight of the empty carton' : 'Turn on "Has outer carton" to enter this'}
+                  style={{ opacity: values.hasCarton ? 1 : 0.45, cursor: values.hasCarton ? 'auto' : 'not-allowed' }}
+                  onChange={(e) => setValue('cartonG', e.target.value)} />
+              </Field>
             </div>
           </div>
         </div>

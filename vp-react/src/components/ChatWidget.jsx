@@ -104,7 +104,7 @@ const ChatWidget = forwardRef(function ChatWidget({ contextData, onExtracted }, 
   }
 
   // Imperative API used by the what-if panel to announce changes and open the chat.
-  // `attach` is also called from the intake form's "Upload spec sheet" button, so the
+  // `attach` is also called from the intake form's "Upload a PDF" button, so the
   // file picker is reachable without hunting for the paperclip inside a collapsed chat.
   useImperativeHandle(ref, () => ({
     open() { setOpen(true) },

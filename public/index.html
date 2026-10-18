@@ -266,7 +266,7 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 <canvas id="mesh" aria-hidden="true"></canvas>
 <div class="shell">
   <aside class="sidebar">
-    <div class="brand"><img class="brand-logo" src="/logo.png" alt="ValencePack"><div class="brandword">VALENCE<span style="color:var(--accent)">PACK</span><small>Decision workspace</small></div></div>
+    <div class="brand"><img class="brand-logo" src="/logo.png" alt="ValencePack"><div class="brandword">VALENCE<span style="color:var(--accent)">PACK</span></div></div>
     <p class="navlabel">Workspace</p>
     <nav>
       <button class="navbtn active" data-target="overview">◫ Overview</button>
@@ -279,7 +279,7 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
   </aside>
   <div class="mainwrap">
     <header class="topbar">
-      <div><p class="eyebrow">Your packaging advisor</p><h1>Find better packaging in minutes</h1><p class="subtitle">Evidence-linked recommendations for EU personal-care brands.</p></div>
+      <div><h1>Find better packaging in minutes</h1><p class="subtitle">Evidence-linked recommendations for EU personal-care brands.</p></div>
       <div class="top-actions"><span class="atom" aria-hidden="true"><span class="orb s1"><span class="ring"><i class="electron"></i></span></span><span class="orb s2"><span class="ring"><i class="electron"></i></span></span><span class="orb s3"><span class="ring"><i class="electron"></i></span></span><span class="box"></span></span></div>
     </header>
     <main class="content" id="overview">
@@ -431,6 +431,9 @@ function read() {
     current:{ bottleMaterial:v("bottleMaterial"), closureType:v("closureType"), labelType:v("labelType"), hasCarton:b("hasCarton"),
       fillMl:num("fillMl"), bottleG:num("bottleG"), closureG:num("closureG"), labelG:num("labelG"), cartonG:num("cartonG"), recycledContentPct:num("recycledContentPct") } };
 }
+// Always land at the top on load — browsers otherwise restore the last scroll position
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
 $("#demo").onclick = async () => { fill(await (await fetch("/api/demo")).json()); };
 
 let lastResult = null, lastInput = null, chatMessages = [];

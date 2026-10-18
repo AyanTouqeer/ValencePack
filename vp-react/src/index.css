@@ -87,10 +87,6 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .intake.is-collapsed::after{opacity:1}
 .intake .intake-reset{background:var(--accent);color:#10251c;border:1px solid var(--accent-border);border-radius:10px;font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:background .25s ease,color .25s ease,border-color .25s ease}
 .intake .intake-reset:hover{background:var(--live-green);color:#fff;border-color:var(--live-green-border)}
-/* Intake header actions: "Upload spec sheet" (secondary) beside "Load demo scenario" (primary) */
-.intake-head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.intake .intake-upload{background:transparent;color:#b6f5ce;border:1px solid #476264;border-radius:10px;font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:background .25s ease}
-.intake .intake-upload:hover{background:#1c3636}
 .pathcard{background:var(--sage);border:1px solid var(--line);border-radius:16px;padding:20px}
 .right-panel .pathcard{margin:0}
 .pc-intro-list{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}

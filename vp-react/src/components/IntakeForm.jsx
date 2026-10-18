@@ -16,11 +16,7 @@ export default function IntakeForm({
     <div className={'intake' + (collapsed ? ' is-collapsed' : '')} id="intake-panel" onClick={onPanelClick}>
       <div className="intake-head">
         <h2>Fill in what your product uses so we can find better options.</h2>
-        <div className="intake-head-actions">
-          <button className="intake-upload" id="upload-spec" type="button" onClick={onUpload}
-            title="Upload a PDF spec sheet or product photo and we'll fill the form for you">Upload spec sheet</button>
-          <button className="intake-reset" id="demo" type="button" onClick={onDemo}>Load demo scenario</button>
-        </div>
+        <button className="intake-reset" id="demo" type="button" onClick={onDemo}>Load demo scenario</button>
       </div>
 
       <form id="f" noValidate onSubmit={(e) => { e.preventDefault(); onSubmit() }}>
@@ -122,6 +118,8 @@ export default function IntakeForm({
           <div className="intake-actions">
             <button className="btn-primary" id="go" type="submit" disabled={busy}>{busy ? 'Assessing…' : 'See my options'}</button>
             <button className="btn-ghost" id="reset-form" type="button" onClick={onReset}>New analysis</button>
+            <button className="btn-ghost" id="upload-spec" type="button" onClick={onUpload}
+              title="Upload a PDF spec sheet or product photo and we'll fill the form for you">Upload a PDF</button>
           </div>
           <div id="err" role="alert">{error}</div>
         </div>

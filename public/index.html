@@ -87,8 +87,9 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .ic-green{background:#dcefe0;color:#236c3e}.ic-cyan{background:#dceff8;color:#1c74a3}.ic-gold{background:#fbeecd;color:#8a5a12}.ic-blue{background:#e0e9f8;color:#2f5aa8}
 .stat .st-num{font-size:30px;font-weight:700;letter-spacing:-.05em;margin:12px 0 2px;line-height:1;color:var(--ink)}
 .stat .st-foot{font-size:11px;color:#718683}
-/* Top grid: form (middle) + pathway (right) */
+/* Top grid: form (left) + friendly pathway card (right) */
 .topgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.85fr);gap:16px;align-items:start;margin-bottom:20px}
+[hidden]{display:none!important}
 /* Minimized form: show a clipped snippet of the real fields (no empty space) */
 .intake{max-height:1000px;transition:max-height .4s ease}
 .intake::after{content:"";position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(180deg,rgba(16,35,43,0),var(--navy2));pointer-events:none;opacity:0;transition:opacity .3s ease}
@@ -97,11 +98,16 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .intake .intake-reset{background:var(--accent);color:#10251c;border:1px solid var(--accent-border);border-radius:10px;font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:background .25s ease,color .25s ease,border-color .25s ease}
 .intake .intake-reset:hover{background:var(--live-green);color:#fff;border-color:var(--live-green-border)}
 .pathcard{background:var(--sage);border:1px solid var(--line);border-radius:16px;padding:20px}
+.right-panel .pathcard{margin:0}
+.pc-intro-list{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.pc-intro-list li{font-size:12px;color:#3d5a52;display:flex;gap:8px;align-items:baseline;line-height:1.4}
+.pc-intro-list li:before{content:"→";color:var(--green);font-weight:700}
 .pathcard .pc-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#688078;font-weight:700;margin:0}
 .pathcard h3{font-size:16px;font-weight:700;margin:4px 0 2px}
 .pathcard .pc-sub{font-size:12px;color:var(--muted);margin:0 0 18px}
 .pathcard .pc-foot{font-size:11px;color:#516e67;line-height:1.5;margin:20px 0 0}
-/* Pathway stepper (compact, in right lane) */
+/* Pathway stepper (rendered at the top of the results column, aligned with "What we understood") */
+.pc-steps-title{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#688078;font-weight:700;margin:0 0 14px}
 .pathcard .stepper{display:flex;align-items:flex-start;gap:0;margin:0;padding:0;background:transparent;border:0}
 .pathcard .step{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative}
 .pathcard .step-node{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#d6e8d6;color:#36664d;border:2px solid #a3d5a2;position:relative;z-index:1}
@@ -131,6 +137,8 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 .check-row label{display:flex;align-items:center;gap:6px;font-size:12px;color:#c8dbd4;cursor:pointer}
 .check-row input{accent-color:var(--accent);width:14px;height:14px}
 .intake-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.more-toggle{background:transparent;border:0;color:var(--accent);font-weight:700;font-size:12px;cursor:pointer;padding:2px 0;margin:-4px 0 12px;text-align:left}
+.more-toggle:hover{color:var(--live-green)}
 .intake-actions .btn-ghost{color:#b6f5ce;border-color:#476264}
 .intake-actions .btn-ghost:hover{background:#1c3636}
 /* Collapsed form bar — clickable */
@@ -254,9 +262,9 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
 @media(max-width:900px){.about-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 /* Responsive */
-@media(max-width:1100px){.results-grid.with-panel{grid-template-columns:1fr}.right-panel{position:static;max-height:none}}
+@media(max-width:1100px){.results-grid.with-panel{grid-template-columns:1fr}.results-grid.with-panel .right-panel{position:static;max-height:none}}
 @media(max-width:1000px){.topgrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:900px){.sidebar{display:none}.content{padding:16px}.topbar{padding:16px}.chat-bar{margin-left:0}.results-grid.with-panel{grid-template-columns:1fr}.right-panel{position:static;max-height:none}}
+@media(max-width:900px){.sidebar{display:none}.content{padding:16px}.topbar{padding:16px}.chat-bar{margin-left:0}.results-grid.with-panel{grid-template-columns:1fr}.results-grid.with-panel .right-panel{position:static;max-height:none}.pathcard{position:static}}
 @media(max-width:600px){.intake-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}.chat-bar-inner{padding:10px 16px}}
 /* Print — clean formatted report */
 @media print{body:before,#mesh{display:none}.sidebar,.chat-bar,.topbar,.stats,.stats-head,.pathcard,#intake-section,#about,.form-collapsed,#confirm-area,.noprint,.whatif{display:none!important}.mainwrap{padding:0}.content{max-width:none;padding:0}.results-grid,.results-grid.with-panel{display:block}.right-panel{display:block!important;position:static;max-height:none;overflow:visible}.card{box-shadow:none;break-inside:avoid}body{background:#fff;color:#000}}
@@ -284,12 +292,12 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
     </header>
     <main class="content" id="overview">
       <!-- Stat tiles -->
-      <div class="stats-head"><span class="sh-title">Your review at a glance</span><span class="sh-sub">A quick status summary of this packaging analysis: what's being checked, what's ready, and what still needs you.</span></div>
-      <div class="stats">
-        <div class="stat"><div class="st-top"><span>Options being checked</span><span class="st-ic ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></span></div><div class="st-num">03</div><div class="st-foot">Packaging scenarios in progress</div></div>
-        <div class="stat"><div class="st-top"><span>Ready to act</span><span class="st-ic ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span></div><div class="st-num">01</div><div class="st-foot">A recommendation is available</div></div>
-        <div class="stat"><div class="st-top"><span>Still to confirm</span><span class="st-ic ic-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span></div><div class="st-num">03</div><div class="st-foot">Checks outstanding in this review</div></div>
-        <div class="stat"><div class="st-top"><span>Rules to check</span><span class="st-ic ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span></div><div class="st-num">01</div><div class="st-foot">Regulations that may apply</div></div>
+      <div class="stats-head" hidden><span class="sh-title">Your review at a glance</span><span class="sh-sub">A quick status summary of this packaging analysis: what's being checked, what's ready, and what still needs you.</span></div>
+      <div class="stats" hidden>
+        <div class="stat"><div class="st-top"><span>Options being checked</span><span class="st-ic ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></span></div><div class="st-num" id="st-options">00</div><div class="st-foot">Screened against your inputs</div></div>
+        <div class="stat"><div class="st-top"><span>Ready to act</span><span class="st-ic ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span></div><div class="st-num" id="st-ready">00</div><div class="st-foot">Ranked recommendations</div></div>
+        <div class="stat"><div class="st-top"><span>Still to confirm</span><span class="st-ic ic-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span></div><div class="st-num" id="st-confirm">00</div><div class="st-foot">Open evidence gaps or warnings</div></div>
+        <div class="stat"><div class="st-top"><span>Rules to check</span><span class="st-ic ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span></div><div class="st-num" id="st-rules">00</div><div class="st-foot">EU regulations cited in your evidence</div></div>
       </div>
       <!-- Form (middle lane) + Analysis pathway (right lane) -->
       <div class="topgrid" id="topgrid">
@@ -303,13 +311,15 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
               <div class="intake-grid">
                 <div class="field"><label>Product name</label><input name="productName" placeholder="e.g. Herbal Repair Shampoo" required></div>
                 <div class="field"><label>Destination market</label><select name="destination"><option value="EU">European Union</option></select></div>
-                <div class="field"><label>Manufacturing country</label><input name="manufacturingCountry" placeholder="e.g. Germany"></div>
+                <div class="field"><label>Fill volume (ml)</label><input name="fillMl" type="number" min="1" placeholder="250" required></div>
               </div>
+              <button class="more-toggle" id="more-toggle" type="button" aria-expanded="false">+ Add more details (material, weights, budget)</button>
+              <div id="more-details" hidden>
               <div class="intake-grid">
+                <div class="field"><label>Manufacturing country</label><input name="manufacturingCountry" placeholder="e.g. Germany"></div>
                 <div class="field"><label>Bottle material</label><select name="bottleMaterial"><option>HDPE</option><option>PET</option><option>PP</option><option>glass</option><option>other</option></select></div>
                 <div class="field"><label>Closure</label><select name="closureType"><option value="pump_metal_spring">Pump (metal spring)</option><option value="mono_pump">Mono-material pump</option><option value="screw_cap">Screw / flip cap</option></select></div>
                 <div class="field"><label>Label</label><select name="labelType"><option value="shrink_sleeve">Full-body shrink sleeve</option><option value="paper">Paper label</option><option value="film_label">Film label</option><option value="direct_print">Direct print</option></select></div>
-                <div class="field"><label>Fill volume (ml)</label><input name="fillMl" type="number" min="1" placeholder="250" required></div>
               </div>
               <div class="intake-grid">
                 <div class="field"><label>Bottle (g)</label><input name="bottleG" type="number" min="0" placeholder="30"></div>
@@ -332,6 +342,9 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
                   <label><input type="checkbox" name="hasFragrance"> Contains fragrance / essential oils</label>
                   <label><input type="checkbox" name="hasCarton"> Has outer carton</label>
                 </div>
+              </div>
+              </div>
+              <div class="form-bottom">
                 <div class="intake-actions">
                   <button class="btn-primary" id="go" type="submit">See my options</button>
                   <button class="btn-ghost" id="reset-form" type="button">New analysis</button>
@@ -341,16 +354,16 @@ input[type="number"]{-moz-appearance:textfield;appearance:textfield}
             </form>
           </div>
         </section>
-        <div class="pathcard">
-          <h3>Analysis pathway</h3>
-          <p class="pc-sub">From a real package to a defensible direction.</p>
-          <div class="stepper">
-            <div class="step active" id="s1"><div class="step-node">01</div><div class="step-label">Package</div></div>
-            <div class="step" id="s2"><div class="step-node">02</div><div class="step-label">Options</div></div>
-            <div class="step" id="s3"><div class="step-node">03</div><div class="step-label">Evidence</div></div>
-            <div class="step" id="s4"><div class="step-node">04</div><div class="step-label">Decision</div></div>
+        <div class="pathcard" id="pathcard">
+          <div class="pc-intro">
+            <h3>Let Vpack help you</h3>
+            <p class="pc-sub">Fill in your product and we'll take it from there.</p>
+            <ul class="pc-intro-list">
+              <li>Screen options against live EU rules</li>
+              <li>Rank them by your priority and budget</li>
+              <li>Back every claim with evidence you can open</li>
+            </ul>
           </div>
-          <p class="pc-foot">The connected path shows how product constraints, regional requirements, and environmental claims inform the decision.</p>
         </div>
       </div>
       <div id="confirm-area"></div>
@@ -434,7 +447,12 @@ function read() {
 // Always land at the top on load — browsers otherwise restore the last scroll position
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 window.scrollTo(0, 0);
-$("#demo").onclick = async () => { fill(await (await fetch("/api/demo")).json()); };
+// "Add more details" collapse — one boolean of state (maps to useState in React)
+const moreBox=document.getElementById("more-details"), moreBtn=document.getElementById("more-toggle");
+function setMore(open){ moreBox.hidden=!open; moreBtn.setAttribute("aria-expanded",String(open)); moreBtn.textContent = open?"− Hide extra details":"+ Add more details (material, weights, budget)"; }
+moreBtn.onclick=()=>setMore(moreBox.hidden);
+const detailsOpen=()=>!moreBox.hidden;
+$("#demo").onclick = async () => { fill(await (await fetch("/api/demo")).json()); setMore(true); };
 
 let lastResult = null, lastInput = null, chatMessages = [];
 
@@ -446,7 +464,12 @@ function showConfirmation(input) {
   c.appendChild(el("h3","","What we understood"));
   const priorityMap = {recyclability:"maximize recyclability", material_reduction:"minimize material usage", recycled_content:"increase recycled content", cost:"reduce cost"};
   const p = el("p","understood-text");
-  p.innerHTML = `You have an existing <strong>${input.productName||"product"}</strong> in a <strong>${input.current.bottleMaterial} ${input.current.fillMl||"? "}ml</strong> bottle with a ${input.current.closureType?.replace(/_/g," ")||"standard"} closure and ${input.current.labelType?.replace(/_/g," ")||"standard"} label${input.current.hasCarton?", plus an outer carton":""}. Your destination market is <strong>${input.destination}</strong>${input.manufacturingCountry?", manufactured in "+input.manufacturingCountry:""}. You're looking to <strong>${priorityMap[input.priority]||"improve sustainability"}</strong> with a <strong>${input.budgetBand}</strong> budget.`;
+  if (!detailsOpen()) {
+    // Only the 3 basics were actually provided — never claim defaults the user never entered
+    p.innerHTML = `You have <strong>${input.productName||"a product"}</strong> sold in the <strong>${input.destination}</strong> in a <strong>${input.current.fillMl||"?"} ml</strong> pack. Vpack will use typical defaults for the rest — or <strong>Add more details</strong> for a sharper match.`;
+  } else {
+    p.innerHTML = `You have an existing <strong>${input.productName||"product"}</strong> in a <strong>${input.current.bottleMaterial} ${input.current.fillMl||"? "}ml</strong> bottle with a ${input.current.closureType?.replace(/_/g," ")||"standard"} closure and ${input.current.labelType?.replace(/_/g," ")||"standard"} label${input.current.hasCarton?", plus an outer carton":""}. Your destination market is <strong>${input.destination}</strong>${input.manufacturingCountry?", manufactured in "+input.manufacturingCountry:""}. You're looking to <strong>${priorityMap[input.priority]||"improve sustainability"}</strong> with a <strong>${input.budgetBand}</strong> budget.`;
+  }
   c.appendChild(p);
   const actions = el("div","confirm-actions");
   const proceedBtn = el("button","btn-primary","Yes, analyse my product →");
@@ -456,7 +479,7 @@ function showConfirmation(input) {
   c.appendChild(actions);
   area.appendChild(c);
   c.scrollIntoView({behavior:"smooth"});
-  editBtn.onclick = () => { area.replaceChildren(); expandForm(); scrollFormToTop(); };
+  editBtn.onclick = () => { area.replaceChildren(); expandForm(); setMore(true); scrollFormToTop(); };
   proceedBtn.onclick = () => { area.replaceChildren(); runAssessment(input); };
   chatBtn.onclick = () => { if(window.__openChat) window.__openChat(); };
 }
@@ -475,10 +498,8 @@ async function runAssessment(input) {
 function render(d, input) {
   lastResult = d; lastInput = input || read(); chatMessages = [];
   collapseForm();
-  $("#s1").classList.remove("active"); $("#s1").classList.add("done");
-  $("#s2").classList.add("active"); $("#s3").classList.add("active");
-  $("#results-grid").classList.add("with-panel");
   renderResultsSection(d);
+  $("#results-grid").classList.add("with-panel");
   $("#out").scrollIntoView({behavior:"smooth"});
 }
 
@@ -486,6 +507,28 @@ function renderResultsSection(d) {
   const out = $("#out"); out.replaceChildren();
   const rp = $("#right-panel"); rp.replaceChildren();
   const expl = d.explanation || {};
+
+  // Stats: real numbers, refreshed on every assessment AND every what-if re-run
+  const gaps = (d.ranked||[]).reduce((s,o)=>s+((o.evidenceGaps||[]).length+(o.warnings||[]).length),0);
+  const setStat=(id,n)=>{ const e=document.getElementById(id); if(e) e.textContent = String(n).padStart(2,"0"); };
+  setStat("st-options", (d.ranked||[]).length + ((d.screening&&d.screening.excluded)||[]).length);
+  setStat("st-ready", (d.ranked||[]).length);
+  setStat("st-confirm", gaps);
+  setStat("st-rules", (d.sources||[]).filter(s=>s.type==="regulation").length);
+  document.querySelectorAll(".stats,.stats-head").forEach(x=>{x.hidden=false;});
+
+  // Pathway stepper: first item of the results column, so it aligns with "What we understood"
+  const pw = el("div","pathcard");
+  pw.appendChild(el("p","pc-steps-title","Analysis pathway"));
+  const stepper = el("div","stepper");
+  [["s1","01","Package","done"],["s2","02","Options","active"],["s3","03","Evidence","done"],["s4","04","Decision","active"]].forEach(([id,n,lbl,cls])=>{
+    const step=el("div","step "+cls); step.id=id;
+    step.appendChild(el("div","step-node",n)); step.appendChild(el("div","step-label",lbl));
+    stepper.appendChild(step);
+  });
+  pw.appendChild(stepper);
+  pw.appendChild(el("p","pc-foot","The connected path shows how product constraints, regional requirements, and environmental claims inform the decision."));
+  rp.prepend(pw);
   const byId = Object.fromEntries((expl.options||[]).map(o=>[o.id,o]));
   const srcById = Object.fromEntries((d.sources||[]).map(s=>[s.id,s]));
 
@@ -592,8 +635,6 @@ function renderResultsSection(d) {
   const rpt=el("div","card noprint");rpt.style.textAlign="center";
   const pbtn=el("button","btn-primary","Print / save as PDF");pbtn.onclick=()=>window.print();rpt.appendChild(pbtn);
   out.appendChild(rpt);
-
-  $("#s3").classList.remove("active");$("#s3").classList.add("done");$("#s4").classList.add("active");
 }
 
 // Form expand/collapse: minimized form shows a clipped snippet; click to expand; auto-minimize when scrolled above mid-screen
@@ -602,8 +643,8 @@ function expandForm(){ $("#intake-panel").classList.remove("is-collapsed"); }
 function scrollFormToTop(){ const s=document.getElementById("intake-section"); if(s) s.scrollIntoView({behavior:"smooth",block:"start"}); }
 function collapseFormIfExpanded(){ if(lastResult && !$("#intake-panel").classList.contains("is-collapsed")) collapseForm(); }
 $("#intake-panel").addEventListener("click",e=>{ if(e.target.closest("#reset-form")) return; if($("#intake-panel").classList.contains("is-collapsed")) expandForm(); });
-$("#reset-form").onclick=()=>{$("#out").replaceChildren();$("#right-panel").replaceChildren();$("#confirm-area").replaceChildren();expandForm();$("#results-grid").classList.remove("with-panel");f.reset();lastResult=null;scrollFormToTop();
-  $("#s1").classList.add("active");$("#s1").classList.remove("done");$("#s2").classList.remove("active","done");$("#s3").classList.remove("active","done");$("#s4").classList.remove("active","done");};
+function doReset(){ $("#out").replaceChildren();$("#right-panel").replaceChildren();$("#confirm-area").replaceChildren();$("#results-grid").classList.remove("with-panel");expandForm();setMore(false);f.reset();lastResult=null;document.querySelectorAll(".stats,.stats-head").forEach(x=>{x.hidden=true;});scrollFormToTop(); }
+$("#reset-form").onclick=doReset;
 
 // Chat: suggestions on focus, hide on blur, minimize on outside click
 const chatInput=$("#chat-input"),chatSug=$("#chat-suggestions"),chatHist=$("#chat-history");
@@ -652,6 +693,8 @@ window.addEventListener("scroll",()=>{
 // Sidebar nav
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+  // "New analysis" in the sidebar = full reset + jump to the form (not just a scroll)
+  if(b.dataset.target==="intake-section" && lastResult) doReset();
   const t=b.dataset.target;if(t)document.getElementById(t)?.scrollIntoView({behavior:"smooth"});
 }));
 

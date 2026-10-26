@@ -9,7 +9,9 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/api': 'http://localhost:8788',
+      // 8080 = the server.js default and the port documented in the README.
+      // Set PORT=... when the backend is started elsewhere; this must match it.
+      '/api': 'http://localhost:8080',
     },
   },
   build: {

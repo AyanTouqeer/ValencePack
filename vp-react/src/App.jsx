@@ -28,6 +28,8 @@ export default function App() {
   const [lastResult, setLastResult] = useState(null)     // assessment response
   const [lastInput, setLastInput] = useState(null)       // payload that produced lastResult (for what-if re-runs)
   const [collapsed, setCollapsed] = useState(false)      // form clips to a snippet once results are shown
+  const [page, setPage] = useState('home')               // 'home' | 'sources' | 'about' as real pages, not scroll anchors
+  const [menuOpen, setMenuOpen] = useState(false)        // phone: the same sidebar, as a slide-in drawer
   const wiTimer = useRef(0)
   const chatRef = useRef(null)
 
@@ -57,7 +59,8 @@ export default function App() {
       hasCarton: typeof ext.hasCarton === 'boolean' ? ext.hasCarton : v.hasCarton,
     }))
     setDetailsOpen(true)
-    document.getElementById('intake-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setPage('home')
+    setTimeout(() => document.getElementById('intake-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 0)
   }
 
   function onSubmit() {
@@ -152,10 +155,11 @@ export default function App() {
     <>
       <MeshCanvas />
       <div className="shell">
-        <Sidebar onNewAnalysis={onNewAnalysis} />
+        <Sidebar onNewAnalysis={onNewAnalysis} page={page} onNavigate={setPage} open={menuOpen} onClose={() => setMenuOpen(false)} />
         <div className="mainwrap">
-          <Topbar />
+          <Topbar onMenu={() => setMenuOpen((o) => !o)} />
           <main className="content" id="overview">
+            {page === 'home' && (<>
             {/* Stat tiles — hidden until an assessment runs */}
             <div className="stats-head" hidden={!lastResult}>
               <span className="sh-title">Your review at a glance</span>
@@ -210,9 +214,11 @@ export default function App() {
               <div className="right-panel" id="right-panel">{lastResult && <ResultsPanel result={lastResult} input={lastInput} onWhatIf={onWhatIf} busy={busy} />}</div>
             </div>
 
-            <Sources />
+            </>)}
 
-            <About />
+            {page === 'sources' && <Sources />}
+
+            {page === 'about' && <About />}
           </main>
         </div>
       </div>

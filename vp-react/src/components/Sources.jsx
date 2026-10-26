@@ -37,7 +37,7 @@ export default function Sources() {
                   </td>
                   <td>{s.type === 'regulation' ? 'Regulation' : 'Technical'}</td>
                   <td>{s.supports || ''}</td>
-                  <td className="src-none">{s.effective_date || '—'}</td>
+                  <td className="src-none">{s.effective_date || (s.type === 'regulation' ? 'Date pending' : 'n/a - not a dated rule')}</td>
                   <td>
                     <span className={'src-status ' + (s.status === 'verified' ? 'ok' : 'pending')}>
                       {s.status === 'verified' ? 'Verified' : 'Source pending'}

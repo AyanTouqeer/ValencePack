@@ -1,8 +1,10 @@
+import { useEffect, useRef } from 'react'
+
 // Presentational intake panel. All state is owned by App (values, detailsOpen) so the
 // confirmation/results/reset flow can read and mutate the same source of truth.
 
-function Field({ label, children }) {
-  return <div className="field"><label>{label}</label>{children}</div>
+function Field({ label, children, full }) {
+  return <div className={"field" + (full ? " field-full" : "")}><label>{label}</label>{children}</div>
 }
 function Check({ label, name, checked, onChange }) {
   return <label><input type="checkbox" name={name} checked={checked} onChange={(e) => onChange(e.target.checked)} /> {label}</label>
@@ -12,6 +14,17 @@ export default function IntakeForm({
   values, setValue, detailsOpen, onToggleDetails,
   onSubmit, onReset, onDemo, onUpload, error, busy, collapsed, onPanelClick,
 }) {
+  // The INCI box used to be a fixed 2-row textarea with its own scrollbar. It now spans
+  // the full form width and grows to fit whatever is typed or demo-filled, instead of
+  // scrolling inside a tiny fixed box.
+  const ingredientsRef = useRef(null)
+  useEffect(() => {
+    const el = ingredientsRef.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = el.scrollHeight + 'px'
+  }, [values.ingredients, detailsOpen])
+
   return (
     <div className={'intake' + (collapsed ? ' is-collapsed' : '')} id="intake-panel" onClick={onPanelClick}>
       <div className="intake-head">
@@ -100,10 +113,8 @@ export default function IntakeForm({
             <Field label="Formulation pH"><input name="ph" type="number" step="0.1" placeholder="5.5" value={values.ph} onChange={(e) => setValue('ph', e.target.value)} /></Field>
           </div>
           <div className="intake-grid">
-            <Field label="Ingredients (INCI list, optional)">
-              <div style={{ gridColumn: '1 / -1' }}>
-                <textarea name="ingredients" rows="2" placeholder="Aqua, Sodium Laureth Sulfate, ..." value={values.ingredients} onChange={(e) => setValue('ingredients', e.target.value)} style={{ width: '100%', border: '1px solid #476264', background: '#162d35', color: '#fff', borderRadius: '9px', padding: '10px 11px', fontSize: '13px' }} />
-              </div>
+            <Field label="Ingredients (INCI list, optional)" full>
+              <textarea ref={ingredientsRef} name="ingredients" rows="1" placeholder="Aqua, Sodium Laureth Sulfate, ..." value={values.ingredients} onChange={(e) => setValue('ingredients', e.target.value)} />
             </Field>
           </div>
           <div className="form-bottom">

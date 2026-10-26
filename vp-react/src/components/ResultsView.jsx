@@ -1,5 +1,25 @@
+import { useEffect, useState } from 'react'
+
 // Results view — the React port of the vanilla renderResultsSection().
 // Exports the main column (<ResultsMain/>, into #out) and the right panel (<ResultsPanel/>, into #right-panel).
+
+const PRIORITY_LABEL = { recyclability: 'Recyclability', material_reduction: 'Material reduction', recycled_content: 'Recycled content', cost: 'Cost' }
+const BUDGET_LABEL = { low: 'Low', medium: 'Medium', high: 'High' }
+
+// The 'What to verify next' checklist used to be a bare, forgettable checkbox. State now persists
+// locally per step text, and the section shows a live progress count. This does NOT feed back
+// into the engine (by design) - it's the user's own working checklist, not an input.
+function useVerifyState(steps) {
+  const [checked, setChecked] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('vp-verify') || '{}') } catch { return {} }
+  })
+  useEffect(() => {
+    try { localStorage.setItem('vp-verify', JSON.stringify(checked)) } catch { /* storage unavailable, ignore */ }
+  }, [checked])
+  const toggle = (text) => setChecked((c) => ({ ...c, [text]: !c[text] }))
+  const doneCount = steps.filter((s) => checked[s]).length
+  return { checked, toggle, doneCount }
+}
 
 const Pill = ({ children, tone }) => <span className={'pill' + (tone ? ' ' + tone : '')}>{children}</span>
 const SectionTitle = ({ children }) => <h2 className="section-title">{children}</h2>
@@ -14,8 +34,8 @@ function EvidenceChips({ sourceIds, srcById }) {
         return (
           <div key={id} className={'chip-item' + (pending ? ' pending' : '')}>
             {s && s.url
-              ? <a href={s.url} target="_blank" rel="noopener">{id}</a>
-              : <span>{id}</span>}
+              ? <a href={s.url} target="_blank" rel="noopener" title={id}>{s.title || id}</a>
+              : <span title={id}>{s.title || id}</span>}
             {pending && <span>(source pending)</span>}
             {s && s.status === 'verified' && <span>✓</span>}
           </div>
@@ -41,8 +61,8 @@ export function ResultsMain({ result: d, input }) {
             `Product: ${d.input.productName || '?'}`,
             `Material: ${d.input.current?.bottleMaterial || '?'}`,
             `Market: ${d.input.destination}`,
-            `Budget: ${d.input.budgetBand}`,
-            `Priority: ${d.input.priority}`,
+            `Budget: ${BUDGET_LABEL[d.input.budgetBand] || d.input.budgetBand}`,
+            `Priority: ${PRIORITY_LABEL[d.input.priority] || d.input.priority}`,
           ].map((t) => <Pill key={t}>{t}</Pill>)}
         </div>
       </Card>
@@ -61,29 +81,6 @@ export function ResultsMain({ result: d, input }) {
         <Pill>Explanations: {expl.generatedBy || 'n/a'}</Pill>
       </Card>
 
-      {/* Compliance screening */}
-      <SectionTitle>Compliance screening ({d.input.destination})</SectionTitle>
-      <Card>
-        {d.screening?.market?.ok === true
-          ? <p>Pack format is permitted in {d.input.destination}. No market-level exclusions applied.</p>
-          : d.screening?.market?.ok === false
-            ? <p className="warn">Pack format is not permitted in {d.input.destination}. See rule hits below.</p>
-            : <p className="muted">Market screening completed. See rule hits below.</p>}
-        {d.screening?.excluded?.length > 0 && (
-          <>
-            <h3>Options removed by rules</h3>
-            <div className="tablebox">
-              <table className="matrix">
-                <thead><tr><th>Option</th><th>Rule</th><th>Reason</th></tr></thead>
-                <tbody>
-                  {d.screening.excluded.map((x, i) => <tr key={i}><td>{x.name}</td><td>{x.ruleId}</td><td>{x.reason}</td></tr>)}
-                </tbody>
-              </table>
-            </div>
-          </>
-        )}
-      </Card>
-
       {/* Ranked options */}
       <SectionTitle>Ranked options</SectionTitle>
       {(d.ranked || []).map((r, i) => {
@@ -100,7 +97,7 @@ export function ResultsMain({ result: d, input }) {
             <p className="muted">{r.summary}</p>
             {(r.breakdown || []).map((b, j) => (
               <div key={j}>
-                <div className="muted">{b.label} (weight {Math.round(b.weight * 100)}%): {b.score}/3</div>
+                <div className="muted">{b.label} - importance {Math.round(b.weight * 100)}% - score {b.score} of 3</div>
                 <div className="bar"><span style={{ width: (b.score / 3 * 100) + '%' }} /></div>
               </div>
             ))}
@@ -134,12 +131,35 @@ export function ResultsMain({ result: d, input }) {
         <p className="muted">Also eligible, ranked lower: {d.alsoConsidered.map((x) => `${x.name} (${x.score.toFixed(0)})`).join('; ')}</p>
       )}
 
+      {/* Compliance screening */}
+      <SectionTitle>Compliance screening ({d.input.destination})</SectionTitle>
+      <Card>
+        {d.screening?.market?.ok === true
+          ? <p>Pack format is permitted in {d.input.destination}. No market-level exclusions applied.</p>
+          : d.screening?.market?.ok === false
+            ? <p className="warn">Pack format is not permitted in {d.input.destination}. See rule hits below.</p>
+            : <p className="muted">Market screening completed. See rule hits below.</p>}
+        {d.screening?.excluded?.length > 0 && (
+          <>
+            <h3>Options removed by rules</h3>
+            <div className="tablebox">
+              <table className="matrix">
+                <thead><tr><th>Option</th><th>Rule</th><th>Reason</th></tr></thead>
+                <tbody>
+                  {d.screening.excluded.map((x, i) => <tr key={i}><td>{x.name}</td><td>{x.ruleId}</td><td>{x.reason}</td></tr>)}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </Card>
+
       {/* Transparent evidence matrix */}
       <SectionTitle>Transparent evidence matrix</SectionTitle>
       <p className="muted">Source-tagged signals, not a single opaque score.</p>
       <div className="tablebox">
         <table className="matrix">
-          <thead><tr><th>Option</th><th>Fit</th><th>Requirements</th><th>Evidence</th><th>Confidence</th><th>Risk</th></tr></thead>
+          <thead><tr><th>Option</th><th>What changes</th><th>EU rules it checks</th><th>Technical evidence</th><th>How sure</th><th>Watch out for</th></tr></thead>
           <tbody>
             {(d.ranked || []).map((r, i) => {
               const e = byId[r.id]
@@ -152,8 +172,8 @@ export function ResultsMain({ result: d, input }) {
                 <tr key={r.id || i}>
                   <td>{r.name}</td>
                   <td>{r.changeType}</td>
-                  <td>{reqTags.length ? reqTags.map((t) => <span key={t} className="flat-tag">{t}</span>) : '-'}</td>
-                  <td>{evTags.length ? evTags.map((t) => <span key={t} className="flat-tag">{t}</span>) : '-'}</td>
+                  <td>{reqTags.length ? reqTags.map((t) => <span key={t} className="flat-tag" title={t}>{srcById[t]?.title || t}</span>) : '-'}</td>
+                  <td>{evTags.length ? evTags.map((t) => <span key={t} className="flat-tag" title={t}>{srcById[t]?.title || t}</span>) : '-'}</td>
                   <td>{r.confidence}</td>
                   <td className="risk">{(e?.uncertainties || [])[0] || '-'}</td>
                 </tr>
@@ -174,6 +194,7 @@ export function ResultsMain({ result: d, input }) {
 export function ResultsPanel({ result: d, input, onWhatIf, busy }) {
   const expl = d.explanation || {}
   const steps = expl.verificationSteps || []
+  const { checked, toggle, doneCount } = useVerifyState(steps)
 
   return (
     <>
@@ -215,9 +236,9 @@ export function ResultsPanel({ result: d, input, onWhatIf, busy }) {
       {steps.length > 0 && (
         <div className="verify" id="verify">
           <h3>What to verify next</h3>
-          <p>Resolve these before acting on the ranking.</p>
+          <p>{doneCount} of {steps.length} checked off - resolve these before acting on the ranking. This list is yours to work through; ticking it does not change the score.</p>
           <ul className="verify-list">
-            {steps.map((s, i) => <li key={i}><label><input type="checkbox" /> <span>{s}</span></label></li>)}
+            {steps.map((s, i) => <li key={i}><label><input type="checkbox" checked={!!checked[s]} onChange={() => toggle(s)} /> <span>{s}</span></label></li>)}
           </ul>
         </div>
       )}

@@ -16,6 +16,7 @@
     "dotenv": "^18.0.7",
     "express": "^4.22.3",
     "firebase-admin": "^14.5.0",
+    "js-yaml": "^5.5.0",
     "multer": "^2.4.0",
     "xlsx": "^0.18.5"
   }

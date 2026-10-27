@@ -2,7 +2,7 @@
 // Mirrors the vanilla read()/fill() exactly so the /api contract is unchanged.
 
 export const DEFAULTS = {
-  productName: '', destination: 'EU', fillMl: '',
+  productName: '', category: '', destination: 'EU', fillMl: '',
   manufacturingCountry: '', ph: '', ingredients: '',
   bottleMaterial: 'HDPE', closureType: 'pump_metal_spring', labelType: 'shrink_sleeve',
   bottleG: '', closureG: '', labelG: '', cartonG: '', recycledContentPct: '',
@@ -16,7 +16,7 @@ const num = (x) => (x === '' || x == null ? undefined : Number(x))
 export function buildPayload(v) {
   return {
     productName: v.productName,
-    category: 'personal_care',
+    category: v.category || undefined,
     destination: v.destination,
     manufacturingCountry: v.manufacturingCountry,
     ph: num(v.ph),
@@ -46,6 +46,7 @@ export function demoToValues(d) {
   const s = (val, fallback) => (val == null ? fallback : String(val))
   return {
     productName: s(d.productName, DEFAULTS.productName),
+    category: s(d.category, DEFAULTS.category),
     destination: s(d.destination, DEFAULTS.destination),
     manufacturingCountry: s(d.manufacturingCountry, DEFAULTS.manufacturingCountry),
     ph: s(d.ph, DEFAULTS.ph),

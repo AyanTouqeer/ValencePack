@@ -6,6 +6,15 @@ import { useEffect, useState } from 'react'
 const PRIORITY_LABEL = { recyclability: 'Recyclability', material_reduction: 'Material reduction', recycled_content: 'Recycled content', cost: 'Cost' }
 const BUDGET_LABEL = { low: 'Low', medium: 'Medium', high: 'High' }
 
+// Grams come out of raw arithmetic (31.299999999999997). One decimal is all a reader needs.
+const g1 = (n) => (n == null ? n : Number(n).toFixed(1))
+
+// The engine returns machine tokens; a reader should never see them raw. Display-only -
+// unknown tokens fall through to the original string rather than disappearing.
+const CHANGE_TYPE_LABEL = { eliminate: 'Eliminate a component', 'design-for-recycling': 'Design for recycling', 'recycled-content': 'Recycled content', format: 'Change pack format', 'material-swap': 'Swap material' }
+const CONFIDENCE_LABEL = { low: 'Low', medium: 'Medium', high: 'High' }
+const RULE_LABEL = { 'R-NOT-APPLICABLE': 'Not applicable', 'R-BUDGET': 'Over budget', 'R-REFORMULATION': 'Needs reformulation', 'R-END-OF-LIFE': 'End-of-life risk' }
+
 // The 'What to verify next' checklist used to be a bare, forgettable checkbox. State now persists
 // locally per step text, and the section shows a live progress count. This does NOT feed back
 // into the engine (by design) - it's the user's own working checklist, not an input.
@@ -35,7 +44,7 @@ function EvidenceChips({ sourceIds, srcById }) {
           <div key={id} className={'chip-item' + (pending ? ' pending' : '')}>
             {s && s.url
               ? <a href={s.url} target="_blank" rel="noopener" title={id}>{s.title || id}</a>
-              : <span title={id}>{s.title || id}</span>}
+              : <span title={id}>{s?.title || id}</span>}
             {pending && <span>(source pending)</span>}
             {s && s.status === 'verified' && <span>✓</span>}
           </div>
@@ -76,7 +85,7 @@ export function ResultsMain({ result: d, input }) {
             <h3>No eligible options after screening</h3>
             <p className="muted">Every candidate pack was removed by a rule for your inputs. Adjust the budget or priority in the panel on the right to widen the search, or view the removal reasons below.</p>
           </>}
-        {d.baseline && <p className="muted">Current packaging: {d.baseline.totalGrams} g total, {d.baseline.gramsPer100ml} g per 100 ml of product.</p>}
+        {d.baseline && <p className="muted">Current packaging: {g1(d.baseline.totalGrams)} g total, {g1(d.baseline.gramsPer100ml)} g per 100 ml of product.</p>}
         {expl.nextAction && <p><strong>Next action: </strong>{expl.nextAction}</p>}
         <Pill>Explanations: {expl.generatedBy || 'n/a'}</Pill>
       </Card>
@@ -90,9 +99,9 @@ export function ResultsMain({ result: d, input }) {
             <span className="score-num">{r.score.toFixed(0)}/100</span>
             <h3>{i + 1}. {r.name}</h3>
             <div style={{ marginBottom: '8px' }}>
-              <Pill>{r.changeType}</Pill>
+              <Pill>{CHANGE_TYPE_LABEL[r.changeType] || r.changeType}</Pill>
               <Pill>cost band {r.costBand}</Pill>
-              <Pill tone="warn">confidence: {r.confidence}</Pill>
+              <Pill tone="warn">confidence: {CONFIDENCE_LABEL[r.confidence] || r.confidence}</Pill>
             </div>
             <p className="muted">{r.summary}</p>
             {(r.breakdown || []).map((b, j) => (
@@ -103,7 +112,7 @@ export function ResultsMain({ result: d, input }) {
             ))}
             {r.massImpact && (
               <p className="muted">
-                Mass: {r.massImpact.newGramsPer100ml ? `${r.massImpact.newTotalGrams} g total, ${r.massImpact.newGramsPer100ml} g per 100 ml. ` : ''}{r.massImpact.basis}
+                Mass: {r.massImpact.newGramsPer100ml ? `${g1(r.massImpact.newTotalGrams)} g total, ${g1(r.massImpact.newGramsPer100ml)} g per 100 ml. ` : ''}{r.massImpact.basis}
               </p>
             )}
             {e && (
@@ -146,7 +155,7 @@ export function ResultsMain({ result: d, input }) {
               <table className="matrix">
                 <thead><tr><th>Option</th><th>Rule</th><th>Reason</th></tr></thead>
                 <tbody>
-                  {d.screening.excluded.map((x, i) => <tr key={i}><td>{x.name}</td><td>{x.ruleId}</td><td>{x.reason}</td></tr>)}
+                  {d.screening.excluded.map((x, i) => <tr key={i}><td>{x.name}</td><td>{RULE_LABEL[x.ruleId] || x.ruleId}</td><td>{x.reason}</td></tr>)}
                 </tbody>
               </table>
             </div>
@@ -171,10 +180,10 @@ export function ResultsMain({ result: d, input }) {
               return (
                 <tr key={r.id || i}>
                   <td>{r.name}</td>
-                  <td>{r.changeType}</td>
+                  <td>{CHANGE_TYPE_LABEL[r.changeType] || r.changeType}</td>
                   <td>{reqTags.length ? reqTags.map((t) => <span key={t} className="flat-tag" title={t}>{srcById[t]?.title || t}</span>) : '-'}</td>
                   <td>{evTags.length ? evTags.map((t) => <span key={t} className="flat-tag" title={t}>{srcById[t]?.title || t}</span>) : '-'}</td>
-                  <td>{r.confidence}</td>
+                  <td>{CONFIDENCE_LABEL[r.confidence] || r.confidence}</td>
                   <td className="risk">{(e?.uncertainties || [])[0] || '-'}</td>
                 </tr>
               )

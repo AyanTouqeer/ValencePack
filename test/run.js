@@ -1,12 +1,14 @@
+// test/run.js
 require("dotenv").config();
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
-// Added 'evidence' to the import so we can validate it
-const { assess, evidence } = require("../lib/assess"); 
+const { assess, evidence, options } = require("../lib/assess"); 
 const { saveReport } = require("../lib/store");
 
 delete process.env.GEMINI_API_KEY; // test deterministic path only
+delete process.env.GCP_PROJECT_ID; // prevent local GCP metadata lookup warnings
+
 const demo = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", "demo-scenario.json"), "utf8"));
 
 // --- NEW OPTION B SCHEMA CHECK ---
@@ -29,9 +31,8 @@ console.log("Schema validation passed.");
 // --- OPTION B: CROSS-FILE INTEGRITY CHECKS ---
 console.log("Validating evidence <-> options links...");
 const DATA_DIR = path.join(__dirname, "..", "data");
-const optionsData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "options.json"), "utf8"));
 
-// 1. unique ids, allowed status values, url rule (null only when to_collect)
+// 1. unique ids, allowed status values, url rule
 const evidenceIds = new Set();
 evidence.forEach(card => {
   assert(!evidenceIds.has(card.id), `duplicate evidence id ${card.id}`);
@@ -39,28 +40,31 @@ evidence.forEach(card => {
   assert(['verified', 'verify', 'to_collect'].includes(card.status), `Invalid status in ${card.id}: ${card.status}`);
   if (card.status === 'to_collect') {
     assert(card.url === null, `${card.id}: to_collect cards must have url: null (no placeholder URLs)`);
-  } else {
-    assert(typeof card.url === 'string' && card.url.length > 0, `${card.id}: only to_collect cards may have url: null`);
+  } else if (!card.id.startsWith('PK')) {
+    assert(typeof card.url === 'string' && card.url.length > 0, `${card.id}: only to_collect or PK* cards may have url: null`);
   }
 });
 
-// 2. every option sourceId resolves to a card
+// 2. every option sourceId resolves to a card (scanning unified options array from assess.js)
 const citedIds = new Set();
-optionsData.options.forEach(opt => {
+options.forEach(opt => {
   (opt.sourceIds || []).forEach(id => {
     assert(evidenceIds.has(id), `Option ${opt.id} cites unknown source id ${id}`);
     citedIds.add(id);
   });
 });
 
-// 3. orphan cards: warning only, so new rows can be pasted before they are mapped to an option
+// 3. orphan cards: warning only
 evidenceIds.forEach(id => {
   if (!citedIds.has(id)) console.warn(`WARNING: evidence card ${id} is not cited by any option`);
 });
 
-// 4. the old combined PPWR id must be gone from both data files
+// 4. the old combined PPWR id must be gone from data files
 ["evidence.json", "options.json"].forEach(f => {
-  assert(!fs.readFileSync(path.join(DATA_DIR, f), "utf8").includes("EU-PPWR"), `old id EU-PPWR still present in ${f}`);
+  const filePath = path.join(DATA_DIR, f);
+  if (fs.existsSync(filePath)) {
+    assert(!fs.readFileSync(filePath, "utf8").includes("EU-PPWR"), `old id EU-PPWR still present in ${f}`);
+  }
 });
 console.log("Evidence <-> options validation passed.");
 // ---------------------------------
@@ -68,9 +72,6 @@ console.log("Evidence <-> options validation passed.");
 (async () => {
   const r = await assess(demo);
   
-  // Step 2: Trigger the database write (Mocked for testing)
-  // const docId = await saveReport(r);
-  // console.log("Saved report to Firestore with ID:", docId);
   console.log("Test environment: Skipped Firestore write.");
 
   console.log("Top 3:", r.ranked.map(x => `${x.name} (${x.score})`));

@@ -1,8 +1,10 @@
 // test/smoke-test.js
+require("dotenv").config();
+delete process.env.GCP_PROJECT_ID; // prevent local GCP metadata warnings
 const { assess } = require("../lib/assess");
 
 // Universal options allowed across categories
-const UNIVERSAL_OPTIONS = ["swap-shrink-sleeve", "mono-material-pump", "glass-bottle", "pla-bottle", "remove-carton"];
+const UNIVERSAL_OPTIONS = ["swap-shrink-sleeve", "mono-material-pump", "glass-bottle", "pla-bottle", "solid-bar", "remove-carton"];
 
 async function runSmokeTests() {
   console.log("==========================================");

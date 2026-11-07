@@ -30,14 +30,15 @@ function loadSourcesJson() {
 }
 
 function generateEvidence() {
-  console.log("Reading detailed knowledge, regulatory YAML, and Option B sources.json files...");
+  console.log("Merging packaging-knowledge, regulatory YAML, and Option B sources.json...");
 
   const pkData = parseYamlFile(pkPath);
   const regData = parseYamlFile(regPath);
   const optionBSources = loadSourcesJson();
 
+  // Combine optionBSources first so that verified URLs from sources.json take precedence over null PK placeholders
   const combinedSources = [...optionBSources, ...pkData, ...regData];
-  console.log(`Found ${combinedSources.length} source entries to wire.`);
+  console.log(`Found ${combinedSources.length} total source entries to merge.`);
 
   const evidenceMap = {};
   for (const source of combinedSources) {
@@ -46,25 +47,30 @@ function generateEvidence() {
 
     const summaryText = source.summary || source.supports || source.description || source.details || "Derived from packaging knowledge repository.";
     const effDate = source.effectiveDate || source.effective_date || null;
+    const urlVal = source.url ?? null;
+    const statusVal = urlVal ? "verified" : (source.status || "verified");
 
-    evidenceMap[id] = {
-      id: id,
-      title: source.title || source.name || id,
-      type: source.type || (String(source.category).toLowerCase() === "regulatory" ? "regulation" : "technical"),
-      category: source.category || (source.type === "regulation" ? "Regulatory" : "Technical"),
-      status: source.status || "verified",
-      url: source.url ?? null,
-      summary: summaryText,
-      supports: source.supports || summaryText,
-      citation: source.citation ?? null,
-      effectiveDate: effDate,
-      effective_date: effDate,
-      compat: source.compat ?? "not_applicable"
-    };
+    // If already exists and has a URL, keep it; otherwise update
+    if (!evidenceMap[id] || (!evidenceMap[id].url && urlVal)) {
+      evidenceMap[id] = {
+        id: id,
+        title: source.title || source.name || id,
+        type: source.type || (String(source.category).toLowerCase() === "regulatory" ? "regulation" : "technical"),
+        category: source.category || (source.type === "regulation" ? "Regulatory" : "Technical"),
+        status: statusVal,
+        url: urlVal,
+        summary: summaryText,
+        supports: source.supports || summaryText,
+        citation: source.citation ?? null,
+        effectiveDate: effDate,
+        effective_date: effDate,
+        compat: source.compat ?? "not_applicable"
+      };
+    }
   }
 
   fs.writeFileSync(evidencePath, JSON.stringify(evidenceMap, null, 2), 'utf8');
-  console.log(`Successfully updated ${evidencePath} with ${Object.keys(evidenceMap).length} source cards!`);
+  console.log(`Successfully merged and updated ${evidencePath} with ${Object.keys(evidenceMap).length} unified source cards!`);
 }
 
 generateEvidence();

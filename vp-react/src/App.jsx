@@ -253,11 +253,19 @@ function StatTile({ title, foot, icon, tone, value }) {
 function computeStats(d) {
   if (!d) return { options: 0, ready: 0, confirm: 0, rules: 0 }
   const ranked = d.ranked || []
+  const also = d.alsoConsidered || []
+  const excluded = (d.screening && d.screening.excluded) || []
   const gaps = ranked.reduce((s, o) => s + ((o.evidenceGaps || []).length + (o.warnings || []).length), 0)
   return {
-    options: ranked.length + ((d.screening && d.screening.excluded) || []).length,
+    // "Being checked" is every candidate that reached screening, not only the ones that survived
+    // it. The old total left out alsoConsidered, so the tile promised 21 options while the list
+    // underneath showed 23 - the first number a reviewer reads, disagreeing with the first table.
+    options: ranked.length + also.length + excluded.length,
     ready: ranked.length,
     confirm: gaps,
-    rules: (d.sources || []).filter((s) => s.type === 'regulation').length,
+    // This tile counts the EU regulations we cite. Live source cards tag themselves
+    // type:"regulation"; the evidence file in the repo uses category:"Regulatory" and no type at
+    // all. Reading one field only reported zero rules against a page full of them.
+    rules: (d.sources || []).filter((s) => /^regulat/i.test(String(s.type || s.category || ''))).length,
   }
 }

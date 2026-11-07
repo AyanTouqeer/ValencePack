@@ -3,12 +3,25 @@ import { useEffect, useRef } from 'react'
 // Presentational intake panel. All state is owned by App (values, detailsOpen) so the
 // confirmation/results/reset flow can read and mutate the same source of truth.
 
-function Field({ label, children, full }) {
-  return <div className={"field" + (full ? " field-full" : "")}><label>{label}</label>{children}</div>
+function Field({ label, children, full, hint }) {
+  return <div className={"field" + (full ? " field-full" : "")}><label>{label}</label>{children}{hint && <p className="field-hint">{hint}</p>}</div>
 }
 function Check({ label, name, checked, onChange }) {
   return <label><input type="checkbox" name={name} checked={checked} onChange={(e) => onChange(e.target.checked)} /> {label}</label>
 }
+
+// Product type is the one field the engine actually filters options with, and the form never
+// asked for it. lib/screen.js falls back to reading the category out of the product name, so a
+// brand name like "Daily Glow No.7" matched nothing and silently dropped every product-specific
+// pack from the results. The values below are the exact tokens the catalogue uses; display labels
+// are free to read like human products.
+const CATEGORIES = [
+  ['shampoo', 'Shampoo'],
+  ['body wash', 'Body wash'],
+  ['moisturizer', 'Moisturizer / lotion'],
+  ['dishwash', 'Dish soap'],
+  ['surface cleaner', 'Surface cleaner'],
+]
 
 export default function IntakeForm({
   values, setValue, detailsOpen, onToggleDetails,
@@ -38,12 +51,23 @@ export default function IntakeForm({
             <input name="productName" placeholder="e.g. Herbal Repair Shampoo" required
               value={values.productName} onChange={(e) => setValue('productName', e.target.value)} />
           </Field>
+          <Field label="Product type">
+            {/* Empty value means "work it out from the product name", which is what used to happen
+                every single time. Kept on purpose so nobody loses a name that says it for them. */}
+            <select name="category" value={values.category} onChange={(e) => setValue('category', e.target.value)}>
+              {CATEGORIES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+              <option value="">Not listed - read it from the name</option>
+            </select>
+          </Field>
           <Field label="Destination market">
             <select name="destination" value={values.destination} onChange={(e) => setValue('destination', e.target.value)}>
               <option value="EU">European Union</option>
             </select>
           </Field>
-          <Field label="Fill volume (ml)">
+          <Field
+            label="Fill volume (ml)"
+            hint="Type any volume. Our research covers packs made at 100, 200, 250, 500 and 750 mL, so when an option was only ever measured at a different size its card now says so."
+          >
             <input name="fillMl" type="number" min="1" placeholder="500" required
               value={values.fillMl} onChange={(e) => setValue('fillMl', e.target.value)} />
           </Field>

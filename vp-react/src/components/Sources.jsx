@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react'
 
 // Sources library — fetches the static reference list and renders it as a table.
 // Ported from the vanilla renderSources(); status is honest (verified vs pending).
+// The API's evidence cards call a regulation category:"Regulatory" and date it with
+// effectiveDate; the static list here calls it type:"regulation" and effective_date. Same research,
+// two spellings, and this page only understood one of them - so the moment the two lists are joined
+// up, seven regulations would silently relabel themselves as technical evidence. Read either.
+const isRegulation = (s) => /^regulat/i.test(String(s.type || s.category || ''))
+const effectiveDate = (s) => s.effective_date || s.effectiveDate || ''
+
 export default function Sources() {
   const [rows, setRows] = useState(null) // null = loading, [] = none, array = loaded
   const [failed, setFailed] = useState(false)
@@ -35,12 +42,12 @@ export default function Sources() {
                       : <span>{s.title}</span>}
                     <div className="src-id">{s.id}</div>
                   </td>
-                  <td>{s.type === 'regulation' ? 'Regulation' : 'Technical'}</td>
+                  <td>{isRegulation(s) ? 'Regulation' : 'Technical'}</td>
                   <td>{s.supports || ''}</td>
-                  <td className="src-none">{s.effective_date || (s.type === 'regulation' ? 'Date pending' : 'n/a - not a dated rule')}</td>
+                  <td className="src-none">{effectiveDate(s) || (isRegulation(s) ? 'Date pending' : 'n/a - not a dated rule')}</td>
                   <td>
                     <span className={'src-status ' + (s.status === 'verified' ? 'ok' : 'pending')}>
-                      {s.status === 'verified' ? 'Verified' : 'Source pending'}
+                      {s.status === 'verified' ? (s.url ? 'Verified' : 'Verified, link pending') : 'Source pending'}
                     </span>
                   </td>
                 </tr>

@@ -27,10 +27,13 @@ const CLOSURE_PHRASE = {
 
 export default function ConfirmationCard({ input, detailsOpen, onProceed, onEdit, busy }) {
   const c = input.current || {}
+  // Read the product type back too. It is now the field that decides which researched packs apply,
+  // so a reader has to be able to see that we got it right before spending an analysis on it.
+  const typeNote = input.category ? ` (${input.category})` : ''
 
   const simple = (
     <>
-      You have <strong>{input.productName || 'a product'}</strong> sold in the <strong>{input.destination}</strong> in a{' '}
+      You have <strong>{input.productName || 'a product'}</strong>{typeNote} sold in the <strong>{input.destination}</strong> in a{' '}
       <strong>{c.fillMl || '?'} ml</strong> pack. Vpack will use typical defaults for the rest — or{' '}
       <strong>Add more details</strong> for a sharper match.
     </>
@@ -38,7 +41,7 @@ export default function ConfirmationCard({ input, detailsOpen, onProceed, onEdit
 
   const detailed = (
     <>
-      You have an existing <strong>{input.productName || 'product'}</strong> in a{' '}
+      You have an existing <strong>{input.productName || 'product'}</strong>{typeNote} in a{' '}
       <strong>{c.bottleMaterial} {c.fillMl || '? '}ml</strong> bottle with{' '}
       {CLOSURE_PHRASE[c.closureType] || `a ${pretty(c.closureType) || 'standard'} closure`} and{' '}
       {LABEL_PHRASE[c.labelType] || 'a standard label'}{c.hasCarton ? ', plus an outer carton' : ''}. Your destination market is{' '}

@@ -143,7 +143,9 @@ const ChatWidget = forwardRef(function ChatWidget({ contextData, onExtracted }, 
           )}
         </div>
 
-        <div className={'chat-suggestions' + (sugVisible && !messages.length ? ' visible' : '')} id="chat-suggestions">
+        {/* The suggestion chips used to disappear for good the moment the first reply arrived,
+            which is exactly when a reader wants a follow-up. They now stay reachable. */}
+        <div className={'chat-suggestions' + (sugVisible ? ' visible' : '')} id="chat-suggestions">
           {SUGGESTIONS.map((q, i) => (
             <span key={i} className="sug" data-q={q} onMouseDown={(e) => { e.preventDefault(); sendChat(q) }}>{q}</span>
           ))}
@@ -154,7 +156,7 @@ const ChatWidget = forwardRef(function ChatWidget({ contextData, onExtracted }, 
             type="text" id="chat-input" ref={inputRef} placeholder="Ask Vpack about your results..." autoComplete="off"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onFocus={() => { if (!messages.length) setSugVisible(true) }}
+            onFocus={() => setSugVisible(true)}
             onBlur={() => setTimeout(() => setSugVisible(false), 200)}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat() } }}
           />

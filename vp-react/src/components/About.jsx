@@ -9,7 +9,7 @@
 
 const MAKERS = [
   {
-    name: 'Muhammad Ayan Toqeer',
+    name: 'Muhammad Ayan',
     role: 'Team Lead & Backend Developer',
     email: 'ayan.ak862@gmail.com',
     photo: '/makers/ayan.jpg',

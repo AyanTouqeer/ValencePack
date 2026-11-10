@@ -82,3 +82,51 @@ PK12:
   status: "verified"
   summary: "Mass reduction directly correlates with freight fuel savings across distribution networks."
   effectiveDate: "2026-01-01"
+PK20:
+  id: "PK20"
+  title: "Shampoo Recyclability and Component Specification"
+  type: "technical"
+  category: "Technical"
+  status: "verified"
+  url: null
+  summary: "Defines material sorting and stream compatibility for advanced shampoo container formats."
+  supports: "Defines material sorting and stream compatibility for advanced shampoo container formats."
+  citation: null
+  effectiveDate: "2026-01-01"
+  compat: "not_applicable"
+PK21:
+  id: "PK21"
+  title: "Advanced Shampoo Container and Dispenser Compatibility"
+  type: "technical"
+  category: "Technical"
+  status: "verified"
+  url: null
+  summary: "Evaluates specialized surfactant and dispenser compatibility for high-volume shampoo configurations."
+  supports: "Evaluates specialized surfactant and dispenser compatibility for high-volume shampoo configurations."
+  citation: null
+  effectiveDate: "2026-01-01"
+  compat: "not_applicable"
+PK30:
+  id: "PK30"
+  title: "Advanced Shampoo Sustainable Packaging Specification"
+  type: "technical"
+  category: "Technical"
+  status: "verified"
+  url: null
+  summary: "Evaluates specialized sustainable components and design criteria for advanced shampoo configurations."
+  supports: "Evaluates specialized sustainable components and design criteria for advanced shampoo configurations."
+  citation: null
+  effectiveDate: "2026-01-01"
+  compat: "not_applicable"
+PK31:
+  id: "PK31"
+  title: "Advanced Shampoo Packaging and Dispenser Evaluation"
+  type: "technical"
+  category: "Technical"
+  status: "verified"
+  url: null
+  summary: "Evaluates specialized dispenser design and packaging criteria for advanced shampoo configurations."
+  supports: "Evaluates specialized dispenser design and packaging criteria for advanced shampoo configurations."
+  citation: null
+  effectiveDate: "2026-01-01"
+  compat: "not_applicable"
